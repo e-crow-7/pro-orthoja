@@ -1,0 +1,1 @@
+export const Configuration = require('./Configuration').default;

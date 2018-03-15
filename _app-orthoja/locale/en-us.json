@@ -1,0 +1,101 @@
+{
+    "title" : {
+        "title": "Orthoja",
+        "subtitle": "Orthopedic Journaling Application"
+    },
+    "screens" : {
+        "login": "Login",
+        "language": "Select Language",
+        "home": "Home",
+        "adjustment": "Adjustment",
+        "pain": "Pain",
+        "exercise": "Exercise"
+    },
+    "login" : {
+        "username"     : "Username",
+        "password"     : "Password",
+        "login"        : "Login",
+        "processing"   : "Logging in",
+        "instruction"  : "Use the login information provided by your doctor"
+    },
+    "logout" : {
+        "logout" : "Logout",
+        "confirm" : "Are you sure you want to logout?"
+    },
+    "form" : {
+        "submit" : "Submit",
+        "submitting" : "Submitting",
+        "inputs" : {
+            "strut" : "Strut",
+            "scale" : "Scale",
+            "pain" : "Pain",
+            "walking" : "Walking",
+            "time" : "Time"
+        }
+    },
+    "modal" : {
+        "okay" : "Okay",
+        "yes" : "Yes",
+        "cancel" : "Cancel"
+    },
+    "file" : {
+        "save" : "Save",
+        "saving" : "Saving"
+    },
+    "home" : {
+        "home" : "Home"
+    },
+    "dailies" : {
+        "current" : "Current date",
+        "previous" : "Previous date",
+        "today" : "Today",
+        "yesterday" : "Yesterday",
+        "tomorrow" : "Tomorrow",
+        "category_inputs" : "Daily inputs"
+    },
+    "daily" : {
+        "adjustment" : {
+            "tibia-fibia" : "Shinbone Adjustment",
+            "fumur": "Femur Adjustment",
+            "input" : {
+                "strut" : "Strut"
+            }
+        },
+        "pain" : {
+            "overall" : "Pain Scale",
+            "input" : {
+                "overall" : "Overall",
+                "leg" : "Leg",
+                "arm" : "Arm"
+            }
+        },
+        "exercise" : {
+            "walking" : "Walking",
+            "input" :{
+                "time" : "Time"
+            }
+        }
+    },
+    "position" : {
+        "left" : "Left",
+        "right" : "Right",
+        "front" : "Front",
+        "back" : "Back",
+        "front-left" : "Front-left",
+        "front-right" : "Front-right",
+        "back-left" : "Back-left",
+        "back-right" : "Back-right"
+    },
+    "error": {
+        "1000" : "Unknown batching error",
+        "1001" : "Network connection error",
+        "1002" : "No response from server",
+        "2000" : "Unknown user error",
+        "2001" : "Invalid credentials",
+        "3000" : "Unknown dailies error",
+        "3001" : "Failed to update",
+        "invalid_credentials": "Login credentials were invalid",
+        "network_generic": "Network error: No response from server",
+        "network_timeout": "Server connection timedout"
+    }
+}

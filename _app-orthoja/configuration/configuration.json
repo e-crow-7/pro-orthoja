@@ -1,0 +1,10 @@
+{
+    "session" : {
+        "id" : null
+    },
+    "server" : {
+        "host" : "http://localhost",
+        "port" : 3012,
+        "timeout" : 20000
+    }
+}

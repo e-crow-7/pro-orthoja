@@ -1,0 +1,16 @@
+{
+    "title": {
+        "title": "Orthoja",
+        "subtitle": "Hi. I'm from the UK and this is the Orthopedic Journaling App"
+    },
+    "screens": {
+        "login": "Login",
+        "language": "Select Language"
+    },
+    "login": {
+        "username"    : "Username",
+        "password"    : "Password",
+        "login"       : "Login",
+        "instruction" : "Use the login information provided by your doctor."
+    }
+}

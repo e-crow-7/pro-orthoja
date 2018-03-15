@@ -33,6 +33,7 @@
             "**/.hg": true,
             "**/CVS": true,
             "**/.DS_Store": true,
+            "**/node_modules": true,
             "_api-orthoja": true,
             "_app-orthoja": true,
             "_web-orthoja": true,
