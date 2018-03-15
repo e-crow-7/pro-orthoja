@@ -1,0 +1,56 @@
+{
+    "folders": [
+        {
+            "name": "Orthoja",
+            "path": "."
+        },
+        {
+            "name": "API Server",
+            "path": "./_api-orthoja"
+        },
+        {
+            "name": "Phone Application",
+            "path": "./_app-orthoja"
+        },
+        {
+            "name": "Website",
+            "path": "./_web-orthoja"
+        },
+        {
+            "name": "Web Server",
+            "path": "./_wsv-orthoja"
+        },
+    ],
+    "settings": {
+        // Editor
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false,
+        // Files.
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "_api-orthoja": true,
+            "_app-orthoja": true,
+            "_web-orthoja": true,
+            "_wsv-orthoja": true
+        },
+        // Spellchecker
+        "spellchecker.ignoreWordsList": [
+            // Brand Names
+            "Orthoja", "Photoshop",
+            // People
+            "Crowell", "Pili",
+            // Other
+            "schemas", "JSON"
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "swyphcosmo.spellchecker"
+        ]
+    }
+}
