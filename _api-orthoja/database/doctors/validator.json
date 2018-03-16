@@ -1,0 +1,12 @@
+{
+    "bsonType": "object",
+    "properties": {
+
+    },
+    "required": [
+        "username",
+        "password",
+        "doctorId"
+    ],
+    "additionalProperties": false
+}

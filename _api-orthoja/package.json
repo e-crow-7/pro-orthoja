@@ -1,0 +1,21 @@
+{
+  "name": "api-orthoja",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API service for the Orthoja project",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "database": "babel-node database/initialize.js"
+  },
+  "author": "Eric Crowell",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^3.0.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0"
+  }
+}

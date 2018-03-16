@@ -1,0 +1,158 @@
+{
+    "bsonType": "object",
+    "properties": {
+        "username": {
+            "bsonType": "string",
+            "description": "Username for login. Follows pattern: 'patient<doctor_name><#>'"
+        },
+        "password": {
+            "bsonType": "string",
+            "description": "Encrypted password."
+        },
+        "sessions": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string",
+                        "description": "The device ID."
+                    },
+                    "sessionId": {
+                        "type": "string",
+                        "description": "Generated session ID."
+                    }
+                },
+                "required": [
+                    "deviceId",
+                    "sessionId"
+                ],
+                "additionalProperties": false,
+                "description": "Session for a device."
+            },
+            "description": "Sessions per connecting device."
+        },
+        "doctorId": {
+            "bsonType": "objectId",
+            "description": "The doctor this patient is associated to."
+        },
+        "sex": {
+            "bsonType": "string",
+            "pattern": "^[mf]$",
+            "description": "The sex of the patient. Only 'm' or 'f'."
+        },
+        "race": {
+            "bsonType": "string",
+            "enum": [
+                "American Indian",
+                "Asian",
+                "Black",
+                "Hispanic",
+                "Pacific Islander",
+                "White"
+            ],
+            "description": "The race of the patient. Restricted to an enumerated list."
+        },
+        "birthdate": {
+            "bsonType": "string",
+            "pattern": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+Z",
+            "description": "The race of the patient. Restricted to an enumerated list."
+        },
+        "dailies": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "object",
+                "properties": {
+                    "name": {
+                        "bsonType": "string",
+                        "description": "Name for the daily. Allows translatable strings."
+                    },
+                    "type": {
+                        "bsonType": "string",
+                        "enum": [
+                            "adjustment",
+                            "pain",
+                            "exercise",
+                            "medication"
+                        ],
+                        "description": "Type of daily."
+                    },
+                    "inputs": {
+                        "bsonType": "array",
+                        "items": {
+                            "bsonType": "object",
+                            "properties": {
+                                "name": {
+                                    "bsonType": "string",
+                                    "description": "Name for the input. Allows translatable strings."
+                                },
+                                "type": {
+                                    "bsonType": "string",
+                                    "enum": [
+                                        "spin",
+                                        "time",
+                                        "slider",
+                                        "strut",
+                                        "pain",
+                                        "pills"
+                                    ],
+                                    "description": "Type of input for the UI to display."
+                                },
+                                "unit": {
+                                    "bsonType": "string",
+                                    "description": "The name of the unit applied to the input."
+                                },
+                                "increment": {
+                                    "bsonType": "double",
+                                    "description": "How much to increment the value (numeric only)"
+                                },
+                                "min": {
+                                    "bsonType": "double",
+                                    "description": "Minimum value (numeric only)"
+                                },
+                                "max": {
+                                    "bsonType": "double",
+                                    "description": "Maximum value (numeric only)"
+                                },
+                                "default": {
+                                    "bsonType": [
+                                        "double",
+                                        "string"
+                                    ],
+                                    "description": "The default value for the input."
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "type"
+                            ],
+                            "additionalProperties": false
+                        },
+                        "required": [
+                            "name",
+                            "type"
+                        ],
+                        "additionalProperties": false
+                    },
+                    "data" : {
+                        "bsonType" : "array",
+                        "description": "Array of input data."
+                    }
+                },
+                "description": "A daily item object.",
+                "required": [
+                    "name",
+                    "type"
+                ],
+                "additionalProperties": false
+            },
+            "description": "The type of data for a paitent to input on a daily basis."
+        }
+    },
+    "required": [
+        "username",
+        "password",
+        "doctorId"
+    ],
+    "additionalProperties": false
+}
