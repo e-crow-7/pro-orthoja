@@ -1,0 +1,18 @@
+{
+    "plugins": [],
+    "recurseDepth": 10,
+    "source": {
+        "exclude": ["node_modules", "logs", "database"],
+        "includePattern": ".+\\.js$",
+        "excludePattern": ""
+    },
+    "sourceType": "module",
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc","closure"]
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}

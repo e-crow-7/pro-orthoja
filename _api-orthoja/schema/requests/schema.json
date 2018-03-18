@@ -1,0 +1,48 @@
+{
+    "$id": "http://orthoja.com/requests/schema.json",
+    "$async": true,
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "credentials": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "session": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "apiKey"
+            ]
+        },
+        "REQUEST/Patient_Create": {
+            "$ref": "patients.json#/definitions/create"
+        },
+        "REQUEST/Patient_Delete": {
+            "$ref": "patients.json#/definitions/delete"
+        }
+    },
+    "oneOf": [
+        {
+            "required": [
+                "REQUEST/Patient_Login"
+            ]
+        },
+        {
+            "required": [
+                "credentials",
+                "REQUEST/Patient_Create"
+            ]
+        },
+        {
+            "required": [
+                "credentials",
+                "REQUEST/Patient_Delete"
+            ]
+        }
+    ]
+}

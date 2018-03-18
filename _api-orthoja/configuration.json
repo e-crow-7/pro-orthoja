@@ -1,0 +1,12 @@
+{
+    "application": {
+        "port": 3100
+    },
+    "database": {
+        "url": "mongodb://localhost:27017",
+        "timeout": 10000,
+        "orthoja": {
+            
+        }
+    }
+}

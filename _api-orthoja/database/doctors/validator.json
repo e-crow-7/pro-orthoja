@@ -1,12 +1,57 @@
 {
     "bsonType": "object",
     "properties": {
-
+        "firstname" : {
+            "bsonType": "string",
+            "description": "Doctor's firstname"
+        },
+        "lastname" : {
+            "bsonType": "string",
+            "description": "Doctor's lastname"
+        },
+        "username": {
+            "bsonType": "string",
+            "description": "Username for login. Follows pattern: 'Dr<lastname><{4}_id>'"
+        },
+        "password": {
+            "bsonType": "string",
+            "description": "Encrypted password."
+        },
+        "email": {
+            "bsonType": "string",
+            "pattern": "^.+@.+\\..+$",
+            "description": "Email address."
+        },
+        "sessions": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "object",
+                "properties": {
+                    "deviceId": {
+                        "type": "string",
+                        "description": "The device ID."
+                    },
+                    "sessionId": {
+                        "type": "string",
+                        "description": "Generated session ID."
+                    }
+                },
+                "required": [
+                    "deviceId",
+                    "sessionId"
+                ],
+                "additionalProperties": false,
+                "description": "Session for a device."
+            },
+            "description": "Sessions per connecting device."
+        }
     },
     "required": [
+        "firstname",
+        "lastname",
         "username",
         "password",
-        "doctorId"
+        "email"
     ],
     "additionalProperties": false
 }

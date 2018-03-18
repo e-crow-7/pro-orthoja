@@ -56,4 +56,8 @@ buck-out/
 *.swp
 
 # Ignore log files
+logs/
 *.log
+
+# Ignore generated documentation.
+documentation/

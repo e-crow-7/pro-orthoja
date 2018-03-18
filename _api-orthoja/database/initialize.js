@@ -1,5 +1,6 @@
 /**
- * Configures a mongo database for Orthoja
+ * Configures a mongo database for Orthoja.
+ * Should only be run once, or whenever a clean database is needed.
  * Example: npm run database initialize.js localhost:27017
  */
 
@@ -10,19 +11,27 @@ const assert = require('assert');
 const url = 'mongodb://' + process.argv[2];
 
 // Collection name constants.
+const COLLECTION_DOCTORS = 'doctors';
 const COLLECTION_PATIENTS = 'patients';
 
 // Setup the database.
 function setupDatabase(client) {
     const db = client.db('orthoja');
 
-    db.createCollection(COLLECTION_PATIENTS, {
-        "validator" : {
-            "$jsonSchema": require('./patients/validator.json')
-        }
-    }, (error, collection) => {
-        assert.equal(null, error);
-
+    Promise.all([
+        db.createCollection(COLLECTION_DOCTORS, {
+            "validator" : {
+                "$jsonSchema": require('./doctors/validator.json')
+            }
+        }),
+        db.createCollection(COLLECTION_PATIENTS, {
+            "validator" : {
+                "$jsonSchema": require('./patients/validator.json')
+            }
+        })
+    ]).then(() => {
+        client.close();
+    }).catch((error) => {
         client.close();
     });
 
