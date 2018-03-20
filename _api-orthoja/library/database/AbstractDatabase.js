@@ -1,13 +1,15 @@
+import Mongo from 'mongodb';
 import { CommonError } from '../error';
 
 /**
  * Abstract definition of a database wrapper for Mongo `Db` objects.
- * The instance of derived classes should be contained within a [DatabaseManager]{@link DatabaseManager}.
+ * The instance of derived classes should be contained within a [DatabaseManager]{@link DatabaseManager}
+ * @memberof module:Database
  */
-export default class Database {
+class AbstractDatabase {
+    
     /**
      * Creates a wrapper of a Mongo Db instance.
-     * @constructor
      * @param {Object} database The Mongo Db instance.
      * @throws {DatabaseError}
      */
@@ -31,3 +33,8 @@ class DatabaseError extends CommonError {
         this.name = DatabaseError.name;
     }
 }
+
+// ================================================================================
+// Exports
+// ------------------------------------------------------------
+module.exports.default = AbstractDatabase;

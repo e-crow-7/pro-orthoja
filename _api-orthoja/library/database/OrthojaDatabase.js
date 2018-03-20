@@ -1,9 +1,20 @@
 import { CommonError } from '../error';
-import Database from './Database';
+import AbstractDatabase from './AbstractDatabase';
 /**
  * Creates a wrapper for the Orthoja database.
  * The instance of this class should be contained within a [DatabaseManager]{@link DatabaseManager}.
+ * @class OrthojaDatabase
+ * @memberof module:Database
  */
-export class OrthojaDatabase extends Database {
+class OrthojaDatabase extends AbstractDatabase {
+
+    constructor(database) {
+        super(database);
+    }
     
 }
+
+// ================================================================================
+// Exports
+// ------------------------------------------------------------
+module.exports.default = OrthojaDatabase;

@@ -2,6 +2,11 @@
     "application": {
         "port": 3100
     },
+    "ssl": {
+        "cert": "./ssl/certs/orthoja.crt",
+        "csr": "./ssl/csrs/orthoja.csr",
+        "key": "./ssl/keys/private.key"
+    },
     "database": {
         "url": "mongodb://localhost:27017",
         "timeout": 10000,

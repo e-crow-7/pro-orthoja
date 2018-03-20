@@ -3,12 +3,13 @@ import { CommonError } from '../error';
 
 /**
  * An "static class" for managing databases asycronously.
- * It manages [Database]{@link Database} instances.
+ * It manages [AbstractDatabase]{@link AbstractDatabase} instances.
  * The `connect()` method must be used first before any other operation can be performed.
  * 
  * @class DatabaseManager
+ * @memberof module:Database
  */
-export default (function () {
+const DatabaseManager = (function () {
 
     var clientInstance = null;
     var databases = {};
@@ -29,7 +30,7 @@ export default (function () {
         /**
          * Asycronously establishes a MongoClient instance.
          * @function connect
-         * @memberof DatabaseManager
+         * @memberof module:Database.DatabaseManager
          * @access public
          * @param {string} url A reference name for the database.
          * @return {Promise.<Object, Object>} Promise object.
@@ -61,3 +62,8 @@ class DatabaseManagerError extends CommonError {
         this.name = DatabaseManagerError.name;
     }
 }
+
+// ================================================================================
+// Exports
+// ------------------------------------------------------------
+module.exports.default = DatabaseManager;

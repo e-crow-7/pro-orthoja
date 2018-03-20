@@ -2,16 +2,26 @@
 import express from 'express';
 // Express.js middleware.
 import helmet from 'helmet'; // Protects against common header attacks.
-import bodyParser from 'body-parser'; // Parses json objects out of HTTP messages
+import bodyParser from 'body-parser'; // Helps parse the body of HTTP messages.
+import forceSsl from "express-force-ssl"; // Forcess express to use HTTPS
 
 import { CommonError } from './library/error';
 import { sleep } from './library/common';
-import DatabaseManager from './library/database/DatabaseManager';
+import { DatabaseManager } from './library/database';
 import { Logger } from './library/logger';
-import { request } from 'https';
+
+// File system
+import fileSystem from 'fs';
+
+// For http to https redirection.
+import http from 'http';
+import https from 'https';
 
 // Get the configuration details
 const CONFIG = require('./configuration.json');
+
+// Utilities.
+const UTIL = require('util');
 
 // Get the logger instance.
 const LOG = Logger.get();
@@ -27,19 +37,33 @@ export default (function () {
 
     /**
      * Primary initialization function. Boots up the service.
+     * @memberof Application
+     * @access private
      */
     function _initialize() {
         // Create the application as an express application.
         _application = express();
         // Apply middleware to the application
+        _application.use(forceSsl);
         _application.use(helmet());
         _application.use(bodyParser.json());
 
         // Setup listeners.
-        _application.post('/', _apiListener);
+        _application.post('/', _apiPostListener);
+        _application.get('/', _apiGetListener);
 
         // First establish connection to the database.
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
+            LOG.info('Connected to Database Service: %s', CONFIG.database.url);
+
+            // Before listening, SSL data needs to be read.
+            /*const ssl = _readSslFilesSync();
+            listenOptions = {
+                key: ssl.key,
+                cert: ssl.cert,
+                ca: ca
+            }*/
+
             return _beginListening(CONFIG.application.port);
         }).then(() => {
             LOG.info("==========================================================================================");
@@ -50,7 +74,9 @@ export default (function () {
     }
 
     /**
-     * initializeDatabaseServiceConnection
+     * Establishes connetion to the Database Service.
+     * @memberof Application
+     * @access private
      * @param {string} url The url for the database connection.
      * @param {number} timeout Amount of time, in milliseconds, to reconnect to the database upon connection failure.
      * @return {Promise} Promises that the database will connect.
@@ -74,7 +100,26 @@ export default (function () {
     }
 
     /**
+     * Begins reading files for an SSL connection.
+     * @memberof Application
+     * @access private
+     * @return {Object} Object containing the read SSL data.
+     */
+    function _readSslFilesSync() {
+        const cert = fileSystem.readFileSync(CONFIG.ssl.cert);
+        const csr = fileSystem.readFileSync(CONFIG.ssl.csr);
+        const key = fileSystem.readFileSync(CONFIG.ssl.key);
+        return({
+            cert: cert,
+            csr: csr,
+            key: key
+        });
+    }
+
+    /**
      * Begin listening for restful requests.
+     * @memberof Application
+     * @access private
      * @param {number} port The port number for the application to listen to.
      * @return {Promise} Promises to begin listening.
      */
@@ -85,11 +130,33 @@ export default (function () {
     }
 
     /**
-     * The primary API listener for Express.js.
+     * The primary API listener for Express.js (POST Requests).
+     * @memberof Application
+     * @access private
      * @param {Object} request The requesting HTTP message.
      * @param {Object} response The response object.
      */
-    function _apiListener(request, response) {
+    function _apiPostListener(request, response) {
+        
+        // Extract the head and body portions from the request.
+        const { headers, body } = request;
+        LOG.info('Received request with HEADERS: %o', headers);
+
+        response.send(JSON.stringify({message: 'received'}));
+
+    }
+
+    /**
+     * The primary API listener for Express.js (GET Requests).
+     * @memberof Application
+     * @access private
+     * @param {Object} request The requesting HTTP message.
+     * @param {Object} response The response object.
+     */
+    function _apiGetListener(request, response) {
+
+        // There's nothing to be done for GET requests. Simply send an HTML response.
+        response.send('<html><body><p>Orthoja API</p></body></html>');
 
     }
 
