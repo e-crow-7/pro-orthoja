@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Title } from "../components";
+import { Title, LoginForm } from "../components";
 
 class LoginPage extends Component {
 
@@ -8,6 +8,7 @@ class LoginPage extends Component {
         return(
             <div>
                 <Title text={'Orthoja'} />
+                <LoginForm />
             </div>
         )
     }

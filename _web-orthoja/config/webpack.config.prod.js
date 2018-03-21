@@ -212,6 +212,31 @@ module.exports = {
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
+          // "SCSS" loader allows the use of scss file for easier and cleaner styling.
+          {
+            test: /\.scss$/,
+            use: [
+                {
+                    loader: require.resolve('style-loader'),
+                },
+                {
+                    loader: require.resolve('css-loader'),
+                    options: {
+                        modules: true,
+                        localIdentName: '[name]_[local]_[hash:base64:8]',
+                        importLoaders: 1,
+                        sourceMap: true,
+                        minimize: true,
+                    },
+                 },
+                 {
+                     loader: require.resolve("sass-loader"),
+                     options: {
+                        sourceMap: true,
+                     }
+                 },
+            ]
+          },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.
           // This loader doesn't use a "test" so it will catch all modules
