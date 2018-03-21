@@ -1,0 +1,19 @@
+{
+    "name": "Orthoja",
+    "short_name": "Orthoja",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png?v=xQzjWWNoRd",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/android-chrome-512x512.png?v=xQzjWWNoRd",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#146bbe",
+    "background_color": "#146bbe",
+    "display": "standalone"
+}
