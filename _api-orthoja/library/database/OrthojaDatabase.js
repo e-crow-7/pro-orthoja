@@ -17,4 +17,4 @@ class OrthojaDatabase extends AbstractDatabase {
 // ================================================================================
 // Exports
 // ------------------------------------------------------------
-module.exports.default = OrthojaDatabase;
+export default OrthojaDatabase

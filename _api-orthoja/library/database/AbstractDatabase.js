@@ -37,4 +37,4 @@ class DatabaseError extends CommonError {
 // ================================================================================
 // Exports
 // ------------------------------------------------------------
-module.exports.default = AbstractDatabase;
+export default AbstractDatabase

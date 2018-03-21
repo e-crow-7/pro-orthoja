@@ -66,4 +66,4 @@ class DatabaseManagerError extends CommonError {
 // ================================================================================
 // Exports
 // ------------------------------------------------------------
-module.exports.default = DatabaseManager;
+export default DatabaseManager;

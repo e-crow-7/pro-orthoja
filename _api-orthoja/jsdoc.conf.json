@@ -12,7 +12,14 @@
         "dictionaries": ["jsdoc","closure"]
     },
     "templates": {
-        "cleverLinks": false,
-        "monospaceLinks": false
+        "referenceTitle": "My SDK Name",
+        "disableSort": false
+    },
+    "opts": {
+        "destination": "./documentation/",
+        "readme": "./README.md",
+        "encoding": "utf8",
+        "private": true,
+        "recurse": true
     }
 }

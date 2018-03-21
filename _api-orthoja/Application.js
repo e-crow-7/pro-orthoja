@@ -3,7 +3,6 @@ import express from 'express';
 // Express.js middleware.
 import helmet from 'helmet'; // Protects against common header attacks.
 import bodyParser from 'body-parser'; // Helps parse the body of HTTP messages.
-import forceSsl from "express-force-ssl"; // Forcess express to use HTTPS
 
 import { CommonError } from './library/error';
 import { sleep } from './library/common';
@@ -12,10 +11,6 @@ import { Logger } from './library/logger';
 
 // File system
 import fileSystem from 'fs';
-
-// For http to https redirection.
-import http from 'http';
-import https from 'https';
 
 // Get the configuration details
 const CONFIG = require('./configuration.json');
@@ -44,7 +39,6 @@ export default (function () {
         // Create the application as an express application.
         _application = express();
         // Apply middleware to the application
-        _application.use(forceSsl);
         _application.use(helmet());
         _application.use(bodyParser.json());
 
@@ -55,14 +49,6 @@ export default (function () {
         // First establish connection to the database.
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
             LOG.info('Connected to Database Service: %s', CONFIG.database.url);
-
-            // Before listening, SSL data needs to be read.
-            /*const ssl = _readSslFilesSync();
-            listenOptions = {
-                key: ssl.key,
-                cert: ssl.cert,
-                ca: ca
-            }*/
 
             return _beginListening(CONFIG.application.port);
         }).then(() => {
@@ -96,23 +82,6 @@ export default (function () {
                 );
             }
             attemptToConnect();
-        });
-    }
-
-    /**
-     * Begins reading files for an SSL connection.
-     * @memberof Application
-     * @access private
-     * @return {Object} Object containing the read SSL data.
-     */
-    function _readSslFilesSync() {
-        const cert = fileSystem.readFileSync(CONFIG.ssl.cert);
-        const csr = fileSystem.readFileSync(CONFIG.ssl.csr);
-        const key = fileSystem.readFileSync(CONFIG.ssl.key);
-        return({
-            cert: cert,
-            csr: csr,
-            key: key
         });
     }
 
