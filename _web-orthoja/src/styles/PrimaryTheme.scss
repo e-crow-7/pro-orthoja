@@ -1,0 +1,61 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+1.0 Configurations
+2.0 Elements
+3.0 Panel
+4.0 Content
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+1.0 Configurations
+--------------------------------------------------------------*/
+$size-xs: 768px;
+$size-sm: 768px;
+$size-md: 992px;
+$size-lg: 1200px;
+
+$base-color: #146bbe;
+$base-color-text-color: #ffffff;
+
+$title-font-family: 'Qwigley', cursive;
+$head-font-family: 'Lato', sans-serif;
+$body-font-family: 'Roboto', sans-serif;
+
+/*--------------------------------------------------------------
+2.0 Elements
+--------------------------------------------------------------*/
+html, body {
+    background-color: $base-color;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+
+    div {
+        position: relative; /* Add dividers are positional. */
+        display: inline-block; /* Format dividers as if they were inline, but also apply dimensional traits. */
+        box-sizing: border-box; /* So our dividers include margins and padding with width/height dimensions. */
+        
+        text-align: center;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        font-size: 2.5em;
+    }
+
+    h3 {
+        font-size: 2em;
+    }
+
+    h4 {
+        font-size: 1.5em;
+    }
+}

@@ -1,0 +1,1 @@
+export const Title = require('./Title').default;
