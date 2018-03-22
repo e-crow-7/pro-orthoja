@@ -4,6 +4,21 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
+        "CORE": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string"
+                },
+                "form": {
+                    "type": "string",
+                    "pattern": "REQUEST"
+                },
+                "payload": {
+                    "type": ["object", "array"]
+                }
+            }
+        },
         "credentials": {
             "type": "object",
             "properties": {
@@ -19,8 +34,26 @@
                 "apiKey"
             ]
         },
+        "REQUEST/Batch": {
+            "type": "object",
+            "properties": {
+                "timing": {
+                    "type": "string",
+                    "enum": [
+                        "sync",
+                        "async"
+                    ]
+                },
+                "requests": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                }
+            }
+        },
         "REQUEST/Doctor_Login": {
-            "$ref": "doctors.json#/definitions/create"
+            "$ref": "doctors.json#/definitions/login"
         },
         "REQUEST/Doctor_Create": {
             "$ref": "doctors.json#/definitions/create"
@@ -39,6 +72,16 @@
         }
     },
     "oneOf": [
+        {
+            "required": [
+                "CORE"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Batch"
+            ]
+        },
         {
             "required": [
                 "REQUEST/Doctor_Login"

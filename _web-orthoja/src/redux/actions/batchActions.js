@@ -26,8 +26,9 @@ export function sendBatchRequests(requests) {
 
     // Batch a single user request.
     const requestBody = {
-        type: 'Batch/REQUEST',
-        requests: requests
+        type: 'Batch',
+        form: 'REQUEST',
+        payload: requests
     };
 
     return ({

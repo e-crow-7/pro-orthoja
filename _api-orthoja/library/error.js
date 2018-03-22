@@ -17,3 +17,8 @@ export class CommonError extends Error {
         this.message = util.format(message, ...parameters);
     }
 }
+
+export const CODE = {
+    BAD_MESSAGE_FORMAT: 0,
+    BAD_MESSAGE_TYPE: 1,
+}

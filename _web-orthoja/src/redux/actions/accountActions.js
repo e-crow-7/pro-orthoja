@@ -15,6 +15,7 @@ export function doctorLoginRequest(username, password) {
      const requests = [
         {
             type: TYPE.DOCTOR_LOGIN,
+            form: 'REQUEST',
             payload: {
                 username: username,
                 password: password

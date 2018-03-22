@@ -4,6 +4,25 @@
     "type": "object",
     "additionalProperties": false,
     "properties": {
+        "RESPONSE/Status": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "success",
+                        "fail"
+                    ]
+                },
+                "code": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        },
         "RESPONSE/Doctor_Login": {
             "$ref": "doctors.json#/definitions/status"
         },

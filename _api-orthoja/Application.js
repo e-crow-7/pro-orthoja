@@ -4,13 +4,16 @@ import express from 'express';
 import helmet from 'helmet'; // Protects against common header attacks.
 import bodyParser from 'body-parser'; // Helps parse the body of HTTP messages.
 
+import Ajv from 'ajv';
+
 import { CommonError } from './library/error';
 import { sleep } from './library/common';
 import { DatabaseManager } from './library/database';
 import { Logger } from './library/logger';
+import { OrthojaRouter, SetupDoctorRoutes } from './library/routing';
 
 // File system
-import fileSystem from 'fs';
+import fileSystem, { readdir, readdirSync } from 'fs';
 
 // Get the configuration details
 const CONFIG = require('./configuration.json');
@@ -21,6 +24,12 @@ const UTIL = require('util');
 // Get the logger instance.
 const LOG = Logger.get();
 
+// Provides more information on unhandles promises.
+process.on('unhandledRejection', (reason, p) => {
+    console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+    // application specific logging, throwing an error, or other logic here
+});
+
 /**
  * Main application for the Orthoja API service.
  * 
@@ -29,6 +38,10 @@ const LOG = Logger.get();
 export default (function () {
 
     var _application = null;
+    var _validator = {
+        request: null,
+        response: null
+    }
 
     /**
      * Primary initialization function. Boots up the service.
@@ -50,13 +63,29 @@ export default (function () {
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
             LOG.info('Connected to Database Service: %s', CONFIG.database.url);
 
-            return _beginListening(CONFIG.application.port);
-        }).then(() => {
-            LOG.info("==========================================================================================");
-            LOG.info(" ORTHOJA - API SERVICE");
-            LOG.info(" Listening on port %d.", CONFIG.application.port);
-            LOG.info("==========================================================================================");
-        });
+            return _initializeSchema('./schema/requests/', './schema/responses/');
+        }).then((requestValidator, responseValidator) => {
+            _validator.request = requestValidator;
+            _validator.response = responseValidator;
+
+            // Set the router to use the request validator.
+            OrthojaRouter.setValidator(_validator.request);
+            // Adds doctor routes to the Orthoja Router.
+            SetupDoctorRoutes(OrthojaRouter);
+
+            LOG.info('Loaded validation schemas.');
+
+            _beginListening(CONFIG.application.port).then(() => {
+                LOG.info("==========================================================================================");
+                LOG.info(" ORTHOJA - API SERVICE");
+                LOG.info(" Listening on port %d.", CONFIG.application.port);
+                LOG.info("==========================================================================================");
+            });
+        },
+            (error) => {
+                LOG.error(error);
+                return null;
+            });
     }
 
     /**
@@ -69,7 +98,7 @@ export default (function () {
      */
     function _initializeDatabaseServiceConnection(url, timeout) {
         return new Promise((resolve, reject) => {
-            const attemptToConnect = function() {
+            const attemptToConnect = function () {
                 DatabaseManager.connect(url).then(
                     resolve,
                     // Upon Error, attempt to 
@@ -82,6 +111,52 @@ export default (function () {
                 );
             }
             attemptToConnect();
+        });
+    }
+
+    /**
+     * Loads and creates the schema validators.
+     * @memberof Application
+     * @access private
+     * @param {string} requestSchemaFolder Path to folder containing all request schema files.
+     * @param {string} responseSchemaFolder Path to folder containing all response schema files.
+     * @return {Promise<Validator, Validator>} Promises that the schema will load.
+     */
+    function _initializeSchema(requestSchemaFolder, responseSchemaFolder) {
+        return new Promise((resolve, reject) => {
+            try {
+                // Define schema arrays.
+                const requestSchemas = [];
+                const responseSchemas = [];
+
+                // Load response schemas
+                fileSystem.readdirSync(requestSchemaFolder).forEach((item) => {
+                    requestSchemas.push(
+                        JSON.parse(
+                            fileSystem.readFileSync(requestSchemaFolder + item)
+                        )
+                    );
+                });
+
+                // Load request schemas
+                fileSystem.readdirSync(responseSchemaFolder).forEach((item) => {
+                    responseSchemas.push(
+                        JSON.parse(
+                            fileSystem.readFileSync(responseSchemaFolder + item)
+                        )
+                    );
+                });
+
+                const requestAjv = new Ajv({ schemas: requestSchemas, allErrors: true });
+                const responseAjv = new Ajv({ schemas: responseSchemas, allErrors: true });
+
+                const requestValidator = requestAjv.getSchema('http://orthoja.com/requests/schema.json');
+                const responseValidator = responseAjv.getSchema('http://orthoja.com/responses/schema.json');
+
+                resolve(requestValidator, responseValidator);
+            } catch (error) {
+                reject(error);
+            }
         });
     }
 
@@ -99,6 +174,17 @@ export default (function () {
     }
 
     /**
+     * Reads API messages
+     * @memberof Application
+     * @access private
+     * @param {Object} message The message object for API processing.
+     * @return {Object} Returns a message.
+     */
+    function _readApiMessages(message, callback) {
+        OrthojaRouter.route(message).then(callback);
+    }
+
+    /**
      * The primary API listener for Express.js (POST Requests).
      * @memberof Application
      * @access private
@@ -106,13 +192,14 @@ export default (function () {
      * @param {Object} response The response object.
      */
     function _apiPostListener(request, response) {
-        
+
         // Extract the head and body portions from the request.
         const { headers, body } = request;
-        LOG.info('Received request with HEADERS: %o', headers);
-        LOG.info('Received request with BODY: %o', body);
-        
-        response.send(JSON.stringify({message: 'received'}));
+
+        // Send a response based on the request body.
+        _readApiMessages(body, (message) => {
+            response.send(JSON.stringify(message));
+        })
 
     }
 

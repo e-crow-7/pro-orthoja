@@ -13,7 +13,13 @@ export const Logger = (function () {
     const errorObjectFormat = Winston.format((information, options) => {
         if(information instanceof Error) {
             const error = information;
-            information.message = `${error.stack}`;
+            if(error.stack) {
+                information.message = `${error.stack}`;
+            } else {
+                information.message = JSON.stringify(error, null, 2);
+            }
+        } else if (Array.isArray(information)) {
+            
         }
         return information;
     });

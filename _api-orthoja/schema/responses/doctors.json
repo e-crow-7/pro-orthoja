@@ -1,5 +1,5 @@
 {
-    "$id": "http://orthoja.com/requests/doctors.json",
+    "$id": "http://orthoja.com/responses/doctors.json",
     "definitions": {
         "status": {
             "properties": {

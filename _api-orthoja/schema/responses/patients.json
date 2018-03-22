@@ -1,43 +1,21 @@
 {
-    "$id": "http://orthoja.com/requests/patients.json",
+    "$id": "http://orthoja.com/responses/patients.json",
     "definitions": {
-        "login": {
+        "status": {
             "properties": {
-                "username": {
-                    "type": "string"
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "success",
+                        "fail"
+                    ]
                 },
-                "password": {
-                    "type": "string"
+                "code": {
+                    "type": "number"
                 }
             },
             "required": [
-                "username",
-                "password"
-            ],
-            "additionalProperties": false
-        },
-        "create": {
-            "properties": {
-                "username": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "username"
-            ],
-            "additionalProperties": false
-        },
-        "delete": {
-            "properties": {
-                "id": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
+                "type"
             ],
             "additionalProperties": false
         }
