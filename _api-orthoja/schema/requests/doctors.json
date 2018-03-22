@@ -1,0 +1,45 @@
+{
+    "$id": "http://orthoja.com/requests/doctors.json",
+    "definitions": {
+        "login": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "username",
+                "password"
+            ],
+            "additionalProperties": false
+        },
+        "create": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "username"
+            ],
+            "additionalProperties": false
+        },
+        "delete": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

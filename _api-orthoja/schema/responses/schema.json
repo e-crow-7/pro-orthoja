@@ -1,0 +1,58 @@
+{
+    "$id": "http://orthoja.com/responses/schema.json",
+    "$async": true,
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+        "RESPONSE/Doctor_Login": {
+            "$ref": "doctors.json#/definitions/status"
+        },
+        "RESPONSE/Doctor_Create": {
+            "$ref": "doctors.json#/definitions/status"
+        },
+        "RESPONSE/Doctor_Delete": {
+            "$ref": "doctors.json#/definitions/status"
+        },
+        "RESPONSE/Patient_Login": {
+            "$ref": "patients.json#/definitions/status"
+        },
+        "RESPONSE/Patient_Create": {
+            "$ref": "patients.json#/definitions/status"
+        },
+        "RESPONSE/Patient_Delete": {
+            "$ref": "patients.json#/definitions/status"
+        }
+    },
+    "oneOf": [
+        {
+            "required": [
+                "RESPONSE/Doctor_Login"
+            ]
+        },
+        {
+            "required": [
+                "RESPONSE/Doctor_Create"
+            ]
+        },
+        {
+            "required": [
+                "RESPONSE/Doctor_Delete"
+            ]
+        },
+        {
+            "required": [
+                "RESPONSE/Patient_Login"
+            ]
+        },
+        {
+            "required": [
+                "RESPONSE/Patient_Create"
+            ]
+        },
+        {
+            "required": [
+                "RESPONSE/Patient_Delete"
+            ]
+        }
+    ]
+}

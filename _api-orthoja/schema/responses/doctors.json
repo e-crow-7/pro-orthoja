@@ -1,0 +1,23 @@
+{
+    "$id": "http://orthoja.com/requests/doctors.json",
+    "definitions": {
+        "status": {
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "success",
+                        "fail"
+                    ]
+                },
+                "code": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

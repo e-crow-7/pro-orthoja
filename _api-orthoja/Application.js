@@ -110,7 +110,8 @@ export default (function () {
         // Extract the head and body portions from the request.
         const { headers, body } = request;
         LOG.info('Received request with HEADERS: %o', headers);
-
+        LOG.info('Received request with BODY: %o', body);
+        
         response.send(JSON.stringify({message: 'received'}));
 
     }

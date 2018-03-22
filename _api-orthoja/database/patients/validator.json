@@ -9,6 +9,10 @@
             "bsonType": "string",
             "description": "Encrypted password."
         },
+        "nickname": {
+            "bsonType": "string",
+            "description": "Nickname given to the patient."
+        },
         "sessions": {
             "bsonType": "array",
             "items": {
@@ -56,7 +60,7 @@
         "birthdate": {
             "bsonType": "string",
             "pattern": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+Z",
-            "description": "The race of the patient. Restricted to an enumerated list."
+            "description": "Patient's birthday. ISO date"
         },
         "dailies": {
             "bsonType": "array",

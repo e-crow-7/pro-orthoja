@@ -19,6 +19,18 @@
                 "apiKey"
             ]
         },
+        "REQUEST/Doctor_Login": {
+            "$ref": "doctors.json#/definitions/create"
+        },
+        "REQUEST/Doctor_Create": {
+            "$ref": "doctors.json#/definitions/create"
+        },
+        "REQUEST/Doctor_Delete": {
+            "$ref": "doctors.json#/definitions/delete"
+        },
+        "REQUEST/Patient_Login": {
+            "$ref": "patients.json#/definitions/create"
+        },
         "REQUEST/Patient_Create": {
             "$ref": "patients.json#/definitions/create"
         },
@@ -27,6 +39,21 @@
         }
     },
     "oneOf": [
+        {
+            "required": [
+                "REQUEST/Doctor_Login"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Create"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Delete"
+            ]
+        },
         {
             "required": [
                 "REQUEST/Patient_Login"

@@ -11,7 +11,7 @@
         },
         "username": {
             "bsonType": "string",
-            "description": "Username for login. Follows pattern: 'Dr<lastname><{4}_id>'"
+            "description": "Username for login. Follows pattern: 'Dr<lastname>-<{4}_id>'"
         },
         "password": {
             "bsonType": "string",
@@ -21,6 +21,14 @@
             "bsonType": "string",
             "pattern": "^.+@.+\\..+$",
             "description": "Email address."
+        },
+        "patients": {
+            "bsonType": "array",
+            "items": {
+                "bsonType": "objectId",
+                "description": "Patient ID."
+            },
+            "description": "Array of patients ids attached to this doctor. Synchronization with Patient Collection required."
         },
         "sessions": {
             "bsonType": "array",
