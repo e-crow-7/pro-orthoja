@@ -1,0 +1,14 @@
+{
+    "form": {
+        "login": {
+            "title": "Login with your Credentials",
+            "doctor-type": "Doctor's Account",
+            "patient-type": "Patient's Account",
+            "username": "Username",
+            "password": "Password",
+            "email": "Email",
+            "user-or-email": "Username or Email",
+            "signin": "Sign In"
+        }
+    }
+}

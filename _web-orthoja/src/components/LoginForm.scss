@@ -1,5 +1,6 @@
 @import '../styles/PrimaryTheme.scss';
 
-.container {
-    max-width: $size-sm;
+.fieldLabel {
+    vertical-align: middle;
+    padding-top: 0.5em;
 }

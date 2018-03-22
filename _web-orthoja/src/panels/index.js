@@ -1,0 +1,1 @@
+export const LoginPanel = require('./LoginPanel').default;
