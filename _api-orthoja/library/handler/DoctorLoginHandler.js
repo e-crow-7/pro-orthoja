@@ -9,15 +9,16 @@ class DoctorLoginHandler extends Handler {
     /**
      * Handles the given parcel data and returns a response message.
      * @param {Object} parcel The object containing details of the recieved request package.
-     * @return {Object} The message object.
+     * @return {Promise<message>} Resolve: message object.
      */
     handle(parcel) {
-        // Get the payload out of the parcel's message.
-        const { payload } = parcel.message;
+        return new Promise((resolve) => {
 
-        return {
-            message: "Hit the batch handler."
-        };
+            resolve({
+                message: "Hit the doctor login handler."
+            });
+
+        });
     }
 
 }

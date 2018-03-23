@@ -28,7 +28,10 @@ export function sendBatchRequests(requests) {
     const requestBody = {
         type: 'Batch',
         form: 'REQUEST',
-        payload: requests
+        payload: {
+            timing: 'sync',
+            requests: requests
+        }
     };
 
     return ({

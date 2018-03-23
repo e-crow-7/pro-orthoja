@@ -48,10 +48,8 @@ const OrthojaRouter = (function () {
                 _validator({ "CORE": parcel.message }).then(
                     (data) => {
                         const message = data["CORE"];
-                        resolve(
-                            // Resolve with the hanlder's returned response object.
-                            _routes[message.type].start(parcel)
-                        );
+                        // Resolve with the hanlder's returned resolved promise.
+                        _routes[message.type].start(parcel, _validator).then(resolve);
                     },
                     // MESSAGE INVALID
                     (error) => {

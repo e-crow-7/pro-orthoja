@@ -6,6 +6,7 @@
     "properties": {
         "CORE": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "type": {
                     "type": "string"
@@ -21,6 +22,7 @@
         },
         "credentials": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "id": {
                     "type": "string"
@@ -36,6 +38,7 @@
         },
         "REQUEST/Batch": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "timing": {
                     "type": "string",
