@@ -27,14 +27,14 @@ const OrthojaRouter = (function () {
          * @function route
          * @memberof module:Routing.OrthojaRouter
          * @access public
-         * @param {Object} message
+         * @param {Object} parcel The parcel object containing the message.
          * @throws {OrthojaRouterError}
          * @return {Promise.<Object, Error>} Promise resolves with a message object.
          */
-        route: function (message) {
+        route: function (parcel) {
             return new Promise((resolve, reject) => {
 
-                if (typeof (message) !== 'object') {
+                if (typeof (parcel.message) !== 'object') {
                     resolve(
                         response('Status', {
                             type: 'fail',
@@ -45,12 +45,12 @@ const OrthojaRouter = (function () {
                 }
 
                 // Validate the CORE Response message.
-                _validator({ "CORE": message }).then(
+                _validator({ "CORE": parcel.message }).then(
                     (data) => {
                         const message = data["CORE"];
                         resolve(
                             // Resolve with the hanlder's returned response object.
-                            _routes[message.type](message.type, message.payload)
+                            _routes[message.type].start(parcel)
                         );
                     },
                     // MESSAGE INVALID
@@ -75,22 +75,17 @@ const OrthojaRouter = (function () {
          * @memberof module:Routing.OrthojaRouter
          * @access public
          * @param {string} messageType The name of the message.
-         * @param {function} method The method to call.
+         * @param {function} handler The handler to use.
          * @throws {OrthojaRouterError}
          */
-        add: function (messageType, method) {
+        add: function (messageType, handler) {
             if (typeof (messageType) !== 'string') {
                 throw new OrthojaRouterError('Failed to add. Message type is not a string.');
                 return;
             }
 
-            if (typeof (method) !== 'function') {
-                throw new OrthojaRouterError('Failed to add. Method is not a function.');
-                return;
-            }
-
             // Assign the message type of as key, and the method as a value.
-            _routes[messageType] = method;
+            _routes[messageType] = handler.instance();
         },
 
         /**
@@ -122,7 +117,7 @@ const OrthojaRouter = (function () {
 class OrthojaRouterError extends CommonError {
     constructor(...parameters) {
         super(...parameters);
-        this.name = DatabaseManagerError.name;
+        this.name = OrthojaRouterError.name;
     }
 }
 

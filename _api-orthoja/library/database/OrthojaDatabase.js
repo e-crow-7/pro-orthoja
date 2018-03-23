@@ -1,5 +1,6 @@
 import { CommonError } from '../error';
 import AbstractDatabase from './AbstractDatabase';
+
 /**
  * Creates a wrapper for the Orthoja database.
  * The instance of this class should be contained within a [DatabaseManager]{@link DatabaseManager}.

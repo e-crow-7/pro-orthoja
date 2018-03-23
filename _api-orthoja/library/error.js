@@ -21,4 +21,8 @@ export class CommonError extends Error {
 export const CODE = {
     BAD_MESSAGE_FORMAT: 0,
     BAD_MESSAGE_TYPE: 1,
+    BAD_MESSAGE_FORM: 2,
+    BAD_MESSAGE_PAYLOAD: 3,
+    INVALID: 4,
+    NO_HANDLER: 5
 }

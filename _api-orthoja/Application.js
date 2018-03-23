@@ -177,11 +177,11 @@ export default (function () {
      * Reads API messages
      * @memberof Application
      * @access private
-     * @param {Object} message The message object for API processing.
+     * @param {Object} parcel The parcel object for API processing.
      * @return {Object} Returns a message.
      */
-    function _readApiMessages(message, callback) {
-        OrthojaRouter.route(message).then(callback);
+    function _readApiMessages(parcel, callback) {
+        OrthojaRouter.route(parcel).then(callback);
     }
 
     /**
@@ -197,7 +197,7 @@ export default (function () {
         const { headers, body } = request;
 
         // Send a response based on the request body.
-        _readApiMessages(body, (message) => {
+        _readApiMessages({message: body}, (message) => {
             response.send(JSON.stringify(message));
         })
 
