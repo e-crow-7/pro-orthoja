@@ -3,7 +3,7 @@ import { CommonError } from '../error';
 
 /**
  * Abstract definition of a database wrapper for Mongo `Db` objects.
- * The instance of derived classes should be contained within a [DatabaseManager]{@link DatabaseManager}
+ * Instances extended from this classes should be contained within a [DatabaseManager]{@link DatabaseManager}
  * @memberof module:Database
  */
 class AbstractDatabase {

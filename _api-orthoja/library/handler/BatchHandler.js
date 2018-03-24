@@ -36,10 +36,10 @@ class BatchHandler extends Handler {
             requests.forEach((request) => {
                 // Wrap the request back into a parcel, so it can be routed again.
                 const newParcel = { ...parcel, message: request };
-                // We need to resend these messages through the router. and get their responses.
+                // Need to resend these messages through the router. and get their responses.
                 promises.push(OrthojaRouter.route(newParcel));
             });
-            // Get the resolves for all the promises once they finished.
+            // Get the resolves for all the promises from the router, once finished.
             Promise.all(promises).then((values) => {
                 resolve(this.responseMessage(values));
             });
