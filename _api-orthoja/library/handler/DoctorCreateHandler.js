@@ -1,10 +1,10 @@
 import Handler from './Handler';
 
 /**
- * Class for handling doctor login requests.
+ * Class for handling doctor creation requests.
  * @memberof module:Handler
  */
-class DoctorLoginHandler extends Handler {
+class DoctorCreateHandler extends Handler {
 
     process(parcel) {
 
@@ -18,10 +18,10 @@ class DoctorLoginHandler extends Handler {
     handle(parcel) {
         return new Promise((resolve) => {
 
-            //this.process(parcel);
+            this.process(parcel);
 
             resolve({
-                message: "Hit the doctor login handler."
+                message: "Hit the doctor create handler."
             });
 
         });
@@ -32,4 +32,4 @@ class DoctorLoginHandler extends Handler {
 // ================================================================================
 // Exports
 // ------------------------------------------------------------
-export default DoctorLoginHandler;
+export default DoctorCreateHandler;

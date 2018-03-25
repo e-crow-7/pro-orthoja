@@ -1,16 +1,39 @@
 import { CommonError } from '../error';
-import AbstractDatabase from './AbstractDatabase';
+import Database from './Database';
 
 /**
  * Creates a wrapper for the Orthoja database.
- * The instance of this class should be contained within a [DatabaseManager]{@link DatabaseManager}.
  * @class OrthojaDatabase
  * @memberof module:Database
  */
-class OrthojaDatabase extends AbstractDatabase {
+class OrthojaDatabase extends Database {
 
-    constructor(database) {
-        super(database);
+    /**
+     * Getter for the database name.
+     * @return {string} The name of the database.
+     */
+    static get name() {
+        return 'orthoja';
+    }
+
+    /**
+     * Getter for the database collections.
+     * @return {string[]} Array of collection names.
+     */
+    static get collections() {
+        return [
+            'doctors',
+            'patients',
+            'sessions'
+        ];
+    }
+
+    /**
+     * Creates a new OrthojaDatabase instance
+     * @param {MongoDB.MongoClient} client Mongo database client.
+     */
+    constructor(client) {
+        super(client, OrthojaDatabase.name);
     }
     
 }
@@ -18,4 +41,4 @@ class OrthojaDatabase extends AbstractDatabase {
 // ================================================================================
 // Exports
 // ------------------------------------------------------------
-export default OrthojaDatabase
+export default OrthojaDatabase;

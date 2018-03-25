@@ -18,6 +18,27 @@
                 "type"
             ],
             "additionalProperties": false
+        },
+        "login_status": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "success",
+                        "fail"
+                    ]
+                },
+                "code": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "type"
+            ],
+            "additionalProperties": false
         }
     }
 }

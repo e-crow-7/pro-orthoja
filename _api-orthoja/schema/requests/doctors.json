@@ -18,15 +18,26 @@
         },
         "create": {
             "properties": {
+                "firstname": {
+
+                },
+                "lastname": {
+
+                },
                 "username": {
-                    "type": "string"
+
                 },
                 "password": {
                     "type": "string"
+                },
+                "email": {
+
                 }
             },
             "required": [
-                "username"
+                "firstname",
+                "lastname",
+                "email"
             ],
             "additionalProperties": false
         },

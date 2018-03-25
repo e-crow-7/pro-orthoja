@@ -24,7 +24,7 @@
             "additionalProperties": false
         },
         "RESPONSE/Doctor_Login": {
-            "$ref": "doctors.json#/definitions/status"
+            "$ref": "doctors.json#/definitions/login_status"
         },
         "RESPONSE/Doctor_Create": {
             "$ref": "doctors.json#/definitions/status"

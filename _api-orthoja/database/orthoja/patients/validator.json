@@ -13,32 +13,13 @@
             "bsonType": "string",
             "description": "Nickname given to the patient."
         },
-        "sessions": {
+        "doctorId": {
             "bsonType": "array",
             "items": {
-                "bsonType": "object",
-                "properties": {
-                    "deviceId": {
-                        "type": "string",
-                        "description": "The device ID."
-                    },
-                    "sessionId": {
-                        "type": "string",
-                        "description": "Generated session ID."
-                    }
-                },
-                "required": [
-                    "deviceId",
-                    "sessionId"
-                ],
-                "additionalProperties": false,
-                "description": "Session for a device."
+                "bsonType": "objectId",
+                "description": "The doctor this patient is associated to."
             },
-            "description": "Sessions per connecting device."
-        },
-        "doctorId": {
-            "bsonType": "objectId",
-            "description": "The doctor this patient is associated to."
+            "description": "List of doctors the patient is linked to. Needs to be sync'd."
         },
         "sex": {
             "bsonType": "string",

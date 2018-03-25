@@ -1,0 +1,10 @@
+{
+    "type": "Doctor_Create",
+    "form": "REQUEST",
+    "payload": {
+        "firstname": "Eric",
+        "lastname": "Crowell",
+        "password": "orthoja",
+        "email": "eric.g.crowell@gmail.com"
+    }
+}

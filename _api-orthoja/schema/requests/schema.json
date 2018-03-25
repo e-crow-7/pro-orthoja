@@ -15,25 +15,17 @@
                     "type": "string",
                     "pattern": "REQUEST"
                 },
-                "payload": {
-                    "type": ["object", "array"]
-                }
-            }
-        },
-        "credentials": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
                 "session": {
                     "type": "string"
+                },
+                "payload": {
+                    "type": ["object", "array"]
                 }
             },
             "required": [
                 "type",
-                "apiKey"
+                "form",
+                "payload"
             ]
         },
         "REQUEST/Batch": {
@@ -107,13 +99,11 @@
         },
         {
             "required": [
-                "credentials",
                 "REQUEST/Patient_Create"
             ]
         },
         {
             "required": [
-                "credentials",
                 "REQUEST/Patient_Delete"
             ]
         }

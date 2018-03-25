@@ -11,7 +11,7 @@
         },
         "username": {
             "bsonType": "string",
-            "description": "Username for login. Follows pattern: 'Dr<lastname>-<{4}_id>'"
+            "description": "Username for login. Follows pattern: 'Dr.<first_initial><lastname>'"
         },
         "password": {
             "bsonType": "string",
@@ -29,29 +29,6 @@
                 "description": "Patient ID."
             },
             "description": "Array of patients ids attached to this doctor. Synchronization with Patient Collection required."
-        },
-        "sessions": {
-            "bsonType": "array",
-            "items": {
-                "bsonType": "object",
-                "properties": {
-                    "deviceId": {
-                        "type": "string",
-                        "description": "The device ID."
-                    },
-                    "sessionId": {
-                        "type": "string",
-                        "description": "Generated session ID."
-                    }
-                },
-                "required": [
-                    "deviceId",
-                    "sessionId"
-                ],
-                "additionalProperties": false,
-                "description": "Session for a device."
-            },
-            "description": "Sessions per connecting device."
         }
     },
     "required": [

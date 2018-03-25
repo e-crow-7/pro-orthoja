@@ -8,9 +8,9 @@ import Ajv from 'ajv';
 
 import { CommonError } from './library/error';
 import { sleep } from './library/common';
-import { DatabaseManager } from './library/database';
+import { DatabaseManager, OrthojaDatabase } from './library/database';
 import { Logger } from './library/logger';
-import { OrthojaRouter, SetupDoctorRoutes } from './library/routing';
+import { OrthojaRouter, SetupRoutes } from './library/routing';
 
 // File system
 import fileSystem, { readdir, readdirSync } from 'fs';
@@ -51,6 +51,10 @@ export default (function () {
     function _initialize() {
         // Create the application as an express application.
         _application = express();
+        // This application trusts the proxy for ip addresses.
+        // DISABLE IF OWNERSHIP OF THE REVERSE PROXY IS UNTRUSTED.
+        // (Since the data can be easily spoofed).
+        _application.enable('trust proxy');
         // Apply middleware to the application
         _application.use(helmet());
         _application.use(bodyParser.json());
@@ -63,17 +67,21 @@ export default (function () {
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
             LOG.info('Connected to Database Service: %s', CONFIG.database.url);
 
+            DatabaseManager.add(OrthojaDatabase);
+
             return _initializeSchema('./schema/requests/', './schema/responses/');
         }).then((requestValidator, responseValidator) => {
             _validator.request = requestValidator;
             _validator.response = responseValidator;
 
+            LOG.info('Loaded validation schemas.');
+
             // Set the router to use the request validator.
             OrthojaRouter.setValidator(_validator.request);
             // Adds doctor routes to the Orthoja Router.
-            SetupDoctorRoutes(OrthojaRouter);
+            SetupRoutes(OrthojaRouter);
 
-            LOG.info('Loaded validation schemas.');
+            LOG.info('Loaded message routes.');
 
             _beginListening(CONFIG.application.port).then(() => {
                 LOG.info("==========================================================================================");
@@ -195,6 +203,11 @@ export default (function () {
 
         // Extract the head and body portions from the request.
         const { headers, body } = request;
+        // Bundle up the parcel.
+        const parcel = {
+            ip: request.ip,
+            message: body
+        }
 
         // Send a response based on the request body.
         _readApiMessages({message: body}, (message) => {

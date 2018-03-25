@@ -1,6 +1,10 @@
 import Mongo, { MongoClient } from 'mongodb';
 import { CommonError } from '../error';
 
+import { Logger } from '../logger';
+
+const LOG = Logger.get();
+
 /**
  * An "static class" for managing databases asycronously.
  * It manages [AbstractDatabase]{@link AbstractDatabase} instances.
@@ -11,19 +15,19 @@ import { CommonError } from '../error';
  */
 const DatabaseManager = (function () {
 
-    var clientInstance = null;
-    var databases = {};
+    var _client = null;
+    var _databases = {};
 
     function _clientInstance() {
-        if(!client) {
+        if(!_client) {
             throw new DatabaseManagerError('MongoClient has not been initialized.');
             return;
         }
-        if(!(client instanceof MongoClient)) {
+        if(!(_client instanceof MongoClient)) {
             throw new DatabaseManagerError('Client is not an instance of MongoClient.');
             return;
         }
-        return client;
+        return _client;
     }
 
     return ({
@@ -42,10 +46,28 @@ const DatabaseManager = (function () {
                         reject(new DatabaseManagerError('Failed to connect to database server using URL \'%s\'.', url));
                         return;
                     }
-                    clientInstance = client;
+                    _client = client;
                     resolve();
                 });
             });
+        },
+
+        /**
+         * 
+         * @function add
+         * @memberof module:Database.DatabaseManager
+         * @access public
+         * @param {module:Database.Database} database The database class (not an instance, the class only)
+         */
+        add: function(database) {
+            if(!_client) {
+                throw new DatabaseManagerError('Cannot add databases before connecting.');
+                return;
+            }
+            // Add the database to the manager's database key: value map.
+            _databases[database.name] = new database(_client);
+
+            LOG.debug('Added new "%s" database.', database.name);
         }
     });
 })();

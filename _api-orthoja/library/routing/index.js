@@ -5,5 +5,5 @@
 
 module.exports = {
     OrthojaRouter: require('./OrthojaRouter').default,
-    SetupDoctorRoutes: require('./SetupRoutes').default.SetupDoctorRoutes
+    SetupRoutes: require('./SetupRoutes').default.SetupRoutes
 }

@@ -1,14 +1,17 @@
 import * as Handlers from "../handler";
 
 /**
- * Adds necessary routes for Doctor operations.
+ * Adds necessary routes for message types and their corresponding handler.
  * Connecting handlers for new message types should be done in this function.
- * @function SetupDoctorRoutes
+ * @function SetupRoutes
  * @memberof module:Routing
  * @param {Object} router The router class to add the routes to.
  */
-const SetupDoctorRoutes = function(router) {
+const SetupRoutes = function(router) {
     router.add('Batch', Handlers.BatchHandler);
+
+    // Doctor request routes
+    router.add('Doctor_Create', Handlers.DoctorCreateHandler);
     router.add('Doctor_Login', Handlers.DoctorLoginHandler);
 }
 
@@ -16,5 +19,5 @@ const SetupDoctorRoutes = function(router) {
 // Exports
 // ------------------------------------------------------------
 export default { 
-    SetupDoctorRoutes: SetupDoctorRoutes
+    SetupRoutes: SetupRoutes
 };
