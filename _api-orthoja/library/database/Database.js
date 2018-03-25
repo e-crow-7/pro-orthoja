@@ -1,7 +1,12 @@
 import Mongo from 'mongodb';
 import { CommonError } from '../error';
+import { Logger } from "../logger";
 
-const databaseFilesPath = '../..';
+import fileSystem from 'fs';
+
+const LOG = Logger.get();
+
+const databaseFilesPath = './database';
 
 /**
  * Abstract definition of a database wrapper for Mongo `Db` objects.
@@ -48,8 +53,85 @@ class Database {
                     databaseName, 
                     collectionName, 
                     'validator.json'
+                ].join('/'),
+                indexingFile: [
+                    databaseFilesPath, 
+                    databaseName, 
+                    collectionName, 
+                    'indexing.json'
                 ].join('/')
             }
+        });
+
+    }
+
+    /**
+     * Updates the database to ensure the collections exist, and are up to date.
+     */
+    _update() {
+        return new Promise((resolve, reject) => {
+
+            // Array of promises to create or update the collection in the database.
+            const collectionPromises = [];
+
+            // Interate through the collections to ensure they exist.
+            this.details["collections"].forEach((collectionDetails) => {
+
+                var validator = {};
+
+                try {
+                    // Load the validation JSON file.
+                    validator = JSON.parse(fileSystem.readFileSync(collectionDetails.validatorFile));
+                    // Load the indexing JSON file.
+                    //const indexing = JSON.parse(fileSystem.readFileSync(collectionDetails.indexFile));
+                } catch(error) {
+                    LOG.error(
+                        'Failed to load files for collection "%s" in database "%s".\n\rFileSytemError: %s.\n\rSkipping collection\'s integrity check.',
+                        collectionDetails.name,
+                        this.details.name,
+                        error.message
+                    );
+                    return;
+                }
+
+                // Attempts to get a collection from the database.
+                this.mongoDb.collection(collectionDetails.name, { strict: true }, (error, collection) =>{
+                    // If the collection is null, create it.
+                    if(!collection) {
+                        collectionPromises.push(
+                            this.mongoDb.createCollection(collectionDetails.name, {
+                                "validator" : {
+                                    "$jsonSchema": validator
+                                }
+                            })
+                        );
+                    }
+                    // If the collection exists, update the options.
+                    else {
+                        collectionPromises.push(
+                            this.mongoDb.command({
+                                "collMod": collectionDetails.name,
+                                "validator" : {
+                                    "$jsonSchema": validator
+                                }
+                            })
+                        );
+                    }
+                });
+            });
+
+            // Finally, get the resolves/rejects from the array of collection promises.
+            Promise.all(collectionPromises).then(
+                (resolveValues) => {
+                    LOG.debug('Resolved!');
+                },
+                (rejectValues) => {
+                    LOG.debug('Rejected...');
+                }
+            ).then(() => {
+                resolve(this);
+            });
+
         });
     }
     

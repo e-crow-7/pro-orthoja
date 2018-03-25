@@ -67,8 +67,10 @@ export default (function () {
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
             LOG.info('Connected to Database Service: %s', CONFIG.database.url);
 
-            DatabaseManager.add(OrthojaDatabase);
-
+            // Add databases
+            return Promise.all([DatabaseManager.add(OrthojaDatabase)]);
+        }).then((databases) => {
+            // Initialize schema.
             return _initializeSchema('./schema/requests/', './schema/responses/');
         }).then((requestValidator, responseValidator) => {
             _validator.request = requestValidator;

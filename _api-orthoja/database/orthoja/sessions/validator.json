@@ -1,44 +1,42 @@
 {
-    "sessions": {
-        "bsonType": "object",
-        "properties": {
-            "_id": {
-                "bsonType": "objectId"
-            },
-            "generatorIp": {
-                "bsonType": "string",
-                "description": "IP address of the client that established the session."
-            },
-            "accountId": {
-                "bsonType": "string",
-                "description": "The id of the account holding the session."
-            },
-            "accountType": {
-                "bsonType": "string",
-                "enum": [
-                    "doctor",
-                    "patient"
-                ],
-                "description": "The type of account the accountId refers to."
-            },
-            "deviceId": {
-                "bsonType": "string",
-                "description": "The device that established the session."
-            },
-            "generateDate": {
-                "bsonType": "string",
-                "pattern": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+Z",
-                "description": "ISO-Date specifying when the session was generated."
-            }
+    "bsonType": "object",
+    "properties": {
+        "_id": {
+            "bsonType": "objectId"
         },
-        "required": [
-            "generatorIp",
-            "accountId",
-            "accountType",
-            "deviceId",
-            "generateDate"
-        ],
-        "additionalProperties": false,
-        "description": "Saved session details."
-    }
+        "generatorIp": {
+            "bsonType": "string",
+            "description": "IP address of the client that established the session."
+        },
+        "accountId": {
+            "bsonType": "string",
+            "description": "The id of the account holding the session."
+        },
+        "accountType": {
+            "bsonType": "string",
+            "enum": [
+                "doctor",
+                "patient"
+            ],
+            "description": "The type of account the accountId refers to."
+        },
+        "deviceId": {
+            "bsonType": "string",
+            "description": "The device that established the session."
+        },
+        "generateDate": {
+            "bsonType": "string",
+            "pattern": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+Z",
+            "description": "ISO-Date specifying when the session was generated."
+        }
+    },
+    "required": [
+        "generatorIp",
+        "accountId",
+        "accountType",
+        "deviceId",
+        "generateDate"
+    ],
+    "additionalProperties": false,
+    "description": "Saved session details."
 }

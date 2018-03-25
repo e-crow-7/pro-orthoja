@@ -1,4 +1,5 @@
 import Handler from './Handler';
+import { DoctorResponses } from "../messages";
 
 /**
  * Class for handling doctor creation requests.
@@ -6,8 +7,16 @@ import Handler from './Handler';
  */
 class DoctorCreateHandler extends Handler {
 
-    process(parcel) {
+    response(payload) {
+        return({
+            type: 'Doctor_Create',
+            form: 'RESPONSE',
+            payload: payload
+        })
+    }
 
+    process(parcel) {
+        return this.response({type: 'fail', code: 0});
     }
 
     /**

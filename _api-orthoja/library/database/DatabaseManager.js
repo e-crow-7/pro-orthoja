@@ -19,11 +19,11 @@ const DatabaseManager = (function () {
     var _databases = {};
 
     function _clientInstance() {
-        if(!_client) {
+        if (!_client) {
             throw new DatabaseManagerError('MongoClient has not been initialized.');
             return;
         }
-        if(!(_client instanceof MongoClient)) {
+        if (!(_client instanceof MongoClient)) {
             throw new DatabaseManagerError('Client is not an instance of MongoClient.');
             return;
         }
@@ -39,10 +39,10 @@ const DatabaseManager = (function () {
          * @param {string} url A reference name for the database.
          * @return {Promise.<Object, Object>} Promise object.
          */
-        connect: function(url) {
-            return new Promise(function(resolve, reject) {
+        connect: function (url) {
+            return new Promise(function (resolve, reject) {
                 MongoClient.connect(url, (error, client) => {
-                    if(error != null) {
+                    if (error != null) {
                         reject(new DatabaseManagerError('Failed to connect to database server using URL \'%s\'.', url));
                         return;
                     }
@@ -58,16 +58,29 @@ const DatabaseManager = (function () {
          * @memberof module:Database.DatabaseManager
          * @access public
          * @param {module:Database.Database} database The database class (not an instance, the class only)
+         * @return {Promise.<Database, Error>} Promises to add a database.
          */
-        add: function(database) {
-            if(!_client) {
-                throw new DatabaseManagerError('Cannot add databases before connecting.');
-                return;
-            }
-            // Add the database to the manager's database key: value map.
-            _databases[database.name] = new database(_client);
+        add: function (database) {
+            return new Promise((resolve, reject) => {
+                if (!_client) {
+                    throw new DatabaseManagerError('Cannot add databases before connecting.');
+                    return;
+                }
+                // Add the database to the manager's database key: value map.
+                _databases[database.name] = new database(_client);
 
-            LOG.debug('Added new "%s" database.', database.name);
+                LOG.debug('Added new "%s" database.', database.name);
+
+                // Ensures the settings for the database is updated when added.
+                _databases[database.name]._update().then(
+                    (database) => {
+                        resolve(database);
+                    },
+                    (error) => {
+                        reject(error);
+                    }
+                );
+            });
         }
     });
 })();
