@@ -204,15 +204,17 @@ export default (function () {
     function _apiPostListener(request, response) {
 
         // Extract the head and body portions from the request.
-        const { headers, body } = request;
+        const { headers, body, ip } = request;
+
         // Bundle up the parcel.
         const parcel = {
-            ip: request.ip,
+            ip: ip,
+            agent: headers['user-agent'],
             message: body
         }
 
         // Send a response based on the request body.
-        _readApiMessages({message: body}, (message) => {
+        _readApiMessages(parcel, (message) => {
             response.send(JSON.stringify(message));
         })
 

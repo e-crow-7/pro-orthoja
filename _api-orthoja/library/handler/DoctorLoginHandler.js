@@ -1,5 +1,11 @@
 import Handler from './Handler';
+import { DatabaseManager, OrthojaDatabase } from '../database';
 import { CODE } from '../error';
+import { comparePasswordSync } from '../common';
+import { SessionManager } from '../session';
+import { Logger } from '../logger';
+
+const LOG = Logger.get();
 
 /**
  * Class for handling doctor login requests.
@@ -23,13 +29,59 @@ class DoctorLoginHandler extends Handler {
         })
     }
 
+    findAccount(username) {
+
+        const orthoja = DatabaseManager.get(OrthojaDatabase.name);
+        const collection = orthoja.collection('doctors');
+
+        return (
+            collection.findDocument({
+                username: username
+            })
+        );
+    }
+
     process(parcel) {
         return new Promise((resolve) => {
-            resolve(
-                this.response({
-                    type: 'fail',
-                    code: CODE.DOCUMENT_NOT_FOUND,
-                })
+
+            // Get the username and password from the message.
+            const { username, password } = parcel.message.payload;
+
+            this.findAccount(username).then(
+                (document) => {
+                    const isMatch = comparePasswordSync(password, document.password);
+                    if (isMatch) {
+                        // Create a session entry.
+                        const session = SessionManager.create(
+                            parcel.ip,
+                            document._id,
+                            'doctor',
+                            parcel.agent
+                        );
+                        resolve(
+                            this.response({
+                                session: session._id,
+                                type: 'success'
+                            })
+                        );
+                        LOG.info('Successful login for Doctor Account "%s". Session ID: %s.', username, session._id);
+                    } else {
+                        resolve(
+                            this.response({
+                                type: 'fail',
+                                code: CODE.DOCUMENT_NOT_FOUND,
+                            })
+                        );
+                    }
+                },
+                (error) => {
+                    resolve(
+                        this.response({
+                            type: 'fail',
+                            code: CODE.DOCUMENT_NOT_FOUND,
+                        })
+                    );
+                }
             );
         });
     }

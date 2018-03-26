@@ -14,3 +14,7 @@ export function sleep(milliseconds) {
 export function hashPasswordSync(password) {
     return bcrypt.hashSync(password, 10);
 }
+
+export function comparePasswordSync(password, hash) {
+    return bcrypt.compareSync(password, hash);
+}

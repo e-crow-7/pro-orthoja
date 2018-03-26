@@ -49,6 +49,25 @@ class Collection {
             );
         });
     }
+
+    findDocument(query) {
+        return new Promise((resolve, reject) => {
+            this.mongoCollection.findOne().then(
+                (result) => {
+                    resolve(result);
+                },
+                (error) => {
+                    LOG.error(
+                        'Failed to query document on "%s".\n\rReason: %s\n\rQuery...\n\r%o', 
+                        this.mongoName, 
+                        error.message,
+                        query
+                    )
+                    reject(error);
+                }
+            )
+        })
+    }
 }
 
 // ================================================================================
