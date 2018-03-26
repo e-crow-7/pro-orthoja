@@ -1,3 +1,10 @@
-{
-    "username": 1
-}
+[
+    { 
+        "keys": {
+            "username": 1
+        },
+        "options": {
+            "unique": true
+        }
+    }
+]

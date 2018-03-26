@@ -1,4 +1,5 @@
 import Handler from './Handler';
+import { CODE } from '../error';
 
 /**
  * Class for handling doctor login requests.
@@ -6,8 +7,31 @@ import Handler from './Handler';
  */
 class DoctorLoginHandler extends Handler {
 
-    process(parcel) {
+    response(payload) {
+        /**
+         * Payload example:
+         * {
+         *    session: <string>
+         *    type: <'success'|'fail'>
+         *    code: <number>
+         * }
+         */
+        return ({
+            type: 'Doctor_Login',
+            form: 'RESPONSE',
+            payload: payload
+        })
+    }
 
+    process(parcel) {
+        return new Promise((resolve) => {
+            resolve(
+                this.response({
+                    type: 'fail',
+                    code: CODE.DOCUMENT_NOT_FOUND,
+                })
+            );
+        });
     }
 
     /**
@@ -18,11 +42,7 @@ class DoctorLoginHandler extends Handler {
     handle(parcel) {
         return new Promise((resolve) => {
 
-            //this.process(parcel);
-
-            resolve({
-                message: "Hit the doctor login handler."
-            });
+            this.process(parcel).then(resolve);
 
         });
     }

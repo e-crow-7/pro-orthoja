@@ -6,5 +6,5 @@
 
 module.exports = {
     DatabaseManager: require('./DatabaseManager').default,
-    OrthojaDatabase: require('./OrthojaDatabase').default
+    OrthojaDatabase: require('./orthoja/OrthojaDatabase').default
 }

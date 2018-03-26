@@ -1,5 +1,11 @@
-import { CommonError } from '../error';
-import Database from './Database';
+import { CommonError } from '../../error';
+import Database from '../Database';
+
+import DoctorsCollection from './DoctorsCollection';
+
+import { Logger } from '../../logger';
+
+const LOG = Logger.get();
 
 /**
  * Creates a wrapper for the Orthoja database.
@@ -34,6 +40,14 @@ class OrthojaDatabase extends Database {
      */
     constructor(client) {
         super(client, OrthojaDatabase.name);
+
+        this._collectionClasses = {
+            doctors: DoctorsCollection,
+            patients: null,
+            sessions: null
+        }
+
+        this._collectionInstances = {};
     }
     
 }

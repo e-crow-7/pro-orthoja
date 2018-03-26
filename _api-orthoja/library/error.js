@@ -24,5 +24,10 @@ export const CODE = {
     BAD_MESSAGE_FORM: 2,
     BAD_MESSAGE_PAYLOAD: 3,
     INVALID: 4,
-    NO_HANDLER: 5
+    NO_HANDLER: 5,
+
+    // Document
+    DOCUMENT_FAILED: 400,
+    DOCUMENT_INVALID: 401,
+    DOCUMENT_NOT_FOUND: 402
 }

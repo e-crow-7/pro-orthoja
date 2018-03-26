@@ -18,6 +18,14 @@ const DatabaseManager = (function () {
     var _client = null;
     var _databases = {};
 
+    /**
+     * Fetches the instance of the client.
+     * @function _clientInstance
+     * @memberof module:Database.DatabaseManager
+     * @access private
+     * @return {MongoClient} The MongoDB Client instance.
+     * @throws {DatabaseManagerError}
+     */
     function _clientInstance() {
         if (!_client) {
             throw new DatabaseManagerError('MongoClient has not been initialized.');
@@ -51,9 +59,8 @@ const DatabaseManager = (function () {
                 });
             });
         },
-
         /**
-         * 
+         * Adds a new database to the manager.
          * @function add
          * @memberof module:Database.DatabaseManager
          * @access public
@@ -81,6 +88,20 @@ const DatabaseManager = (function () {
                     }
                 );
             });
+        },
+        /**
+         * Get a reference to a database from the manager.
+         * @function get
+         * @memberof module:Database.DatabaseManager
+         * @access public
+         * @param {string} name Name of the Database inserted. Can be retrived using static getter "Database.name".
+         * @return {module:Database.Database} Reference to the database instance.
+         */
+        get: function (name) {
+            if(!_databases[name]) {
+                return null;
+            }
+            return _databases[name];
         }
     });
 })();
