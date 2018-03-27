@@ -8,11 +8,14 @@ class LoginPanel extends Component {
 
     static propTypes = {
         translator: PropTypes.func.isRequired,
-        onSignIn: PropTypes.func
+        onSignIn: PropTypes.func,
+        state: PropTypes.string,
+        errorNotification: PropTypes.string
     }
 
     static defaultProps = {
-        onSignIn: () => {}
+        onSignIn: () => {},
+        state: 'idle'
     }
 
     constructor(props) {
@@ -36,7 +39,12 @@ class LoginPanel extends Component {
                         </Panel.Title>
                     </Panel.Heading>
                     <Panel.Body>
-                        <LoginForm translator={this.props.translator} onSignIn={this.signIn} />
+                        <LoginForm
+                            translator={this.props.translator}
+                            onSignIn={this.signIn}
+                            state={this.props.state}
+                            errorNotification={this.props.errorNotification}
+                        />
                     </Panel.Body>
                 </Panel>
             </div>

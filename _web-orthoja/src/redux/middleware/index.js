@@ -1,1 +1,1 @@
-export const batch = require('./batchMiddleware').default;
+export const request = require('./requestMiddleware').default;

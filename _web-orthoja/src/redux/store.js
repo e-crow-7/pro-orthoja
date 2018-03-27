@@ -16,12 +16,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 var middleware = applyMiddleware(
     promiseMiddleware(),
     thunkMiddleware,
-    Middleware.batch
+    Middleware.request
 );
 
 // Combine Reducers
 const reducers = combineReducers({
-    "batch": Reducers.batch,
+    "request": Reducers.request,
+    "account": Reducers.account,
     "locale": localeReducer
 });
 

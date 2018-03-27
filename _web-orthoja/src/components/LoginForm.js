@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Col, Form, FormGroup, FormControl, Button } from 'react-bootstrap';
+import { Col, Form, FormGroup, FormControl, Button, Alert } from 'react-bootstrap';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import ReactLoading from 'react-loading';
 
 import styles from './LoginForm.scss';
+require('./LoginForm.css')
+
+const STATE = {
+    IDLE: 'idle',
+    PENDING: 'pending'
+}
 
 class LoginForm extends Component {
 
     static propTypes = {
         translator: PropTypes.func.isRequired,
-        onSignIn: PropTypes.func
+        onSignIn: PropTypes.func,
+        state: PropTypes.string,
+        errorNotification: PropTypes.string,
     }
 
     static defaultProps = {
-        onSignIn: () => { }
+        onSignIn: () => { },
+        state: STATE.IDLE
     }
 
     constructor(props) {
         super(props);
 
         this.state = {
+            // Account signin information.
             username: '',
-            password: ''
+            password: '',
         }
 
         // Method binding.
@@ -64,6 +76,17 @@ class LoginForm extends Component {
         return (
             <div className={styles.container}>
 
+                {
+                    this.props.errorNotification ?
+                        <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
+                            <h4>Login Error</h4>
+                            <p>
+                                Credentials Invalid.
+                            </p>
+                        </Alert>
+                        : false
+                }
+
                 <Form horizontal>
                     <this.FieldElement
                         id="field-username"
@@ -72,6 +95,7 @@ class LoginForm extends Component {
                         placeholder={this.props.translator('form.login.username')}
                         value={this.state.username}
                         onChange={this.handleUsernameInputChange}
+                        disabled={this.props.state === STATE.PENDING}
                     />
                     <this.FieldElement
                         id="field-password"
@@ -80,10 +104,26 @@ class LoginForm extends Component {
                         placeholder={this.props.translator('form.login.password')}
                         value={this.state.password}
                         onChange={this.handlePasswordInputChange}
+                        disabled={this.props.state === STATE.PENDING}
                     />
-                    <Button type="button" onClick={this.signIn}>
-                        {this.props.translator('form.login.signin')}
-                    </Button>
+                    <ReactCSSTransitionGroup
+                        transitionName="signin-button"
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={500}
+                    >
+                        {
+                            this.props.state === 'idle' ?
+                                <Button type="button" onClick={this.signIn}>
+                                    {this.props.translator('form.login.signin')}
+                                </Button>
+                                :
+                                <ReactLoading
+                                    type={'spin'}
+                                    color={'#222222'}
+                                    height={32} width={32}
+                                />
+                        }
+                    </ReactCSSTransitionGroup>
                 </Form>
             </div>
         )

@@ -1,0 +1,18 @@
+
+.signin-button-enter {
+    opacity: 0.01;
+}
+  
+.signin-button-enter.signin-button-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+  
+.signin-button-leave {
+    opacity: 1;
+}
+  
+.signin-button-leave.signin-button-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}

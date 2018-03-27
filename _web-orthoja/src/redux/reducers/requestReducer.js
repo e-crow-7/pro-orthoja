@@ -1,10 +1,10 @@
 /**
- * @description Redux reducer for handling User data.
+ * @description Redux reducer for handling Requests
  *
  * @author Eric Crowell
  * @version 0.0.0
  */
-import { BATCH_REQUEST, ENUM_STATUS } from '../actions/batchActions';
+import { REQUEST, ENUM_STATUS } from '../actions/requestActions';
 import { PENDING, FULFILLED, REJECTED } from 'redux-promise-middleware';
 
 // ====================================================================================================
@@ -20,21 +20,21 @@ const initialState = {
 // ====================================================================================================
 // ACTION FUNCTIONS
 // --------------------------------------------------------------------------------
-function batchRequestPending(state, action) {
+function requestPending(state, action) {
     return ({
         ...state,
         status: ENUM_STATUS.PENDING
     })
 }
 
-function batchRequestFulfilled(state, action) {
+function requestFulfilled(state, action) {
     return ({
         ...state,
         status: ENUM_STATUS.FULFILLED
     })
 }
 
-function batchRequestRejected(state, action) {
+function requestRejected(state, action) {
     return ({
         ...state,
         status: ENUM_STATUS.REJECTED,
@@ -51,21 +51,19 @@ export default (state = initialState, action) => {
 
     switch (action.type) {
 
-        case `${BATCH_REQUEST}_${PENDING}`:
-            return batchRequestPending(state, action);
+        case `${REQUEST}_${PENDING}`:
+            return requestPending(state, action);
 
-        case `${BATCH_REQUEST}_${FULFILLED}`:
-            return batchRequestFulfilled(state, action);
+        case `${REQUEST}_${FULFILLED}`:
+            return requestFulfilled(state, action);
 
-        case `${BATCH_REQUEST}_${REJECTED}`:
-            return batchRequestRejected(state, action);
+        case `${REQUEST}_${REJECTED}`:
+            return requestRejected(state, action);
 
         default:
             if (state.error.code) {
                 return { ...state, error: { code: null } };
             }
-            break;
-
     }
 
     return state;

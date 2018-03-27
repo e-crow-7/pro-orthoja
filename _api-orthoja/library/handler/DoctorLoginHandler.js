@@ -69,7 +69,7 @@ class DoctorLoginHandler extends Handler {
                         resolve(
                             this.response({
                                 type: 'fail',
-                                code: CODE.DOCUMENT_NOT_FOUND,
+                                code: 'account.credentials',
                             })
                         );
                     }
@@ -78,7 +78,7 @@ class DoctorLoginHandler extends Handler {
                     resolve(
                         this.response({
                             type: 'fail',
-                            code: CODE.DOCUMENT_NOT_FOUND,
+                            code: 'account.credentials',
                         })
                     );
                 }

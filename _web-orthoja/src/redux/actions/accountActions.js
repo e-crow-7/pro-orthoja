@@ -1,8 +1,6 @@
-import * as batchActions from './batchActions';
+import * as requestActions from './requestActions';
 
-export const TYPE = {
-    DOCTOR_LOGIN: 'Doctor_Login'
-}
+export const DOCTOR_LOGIN = 'Doctor_Login';
 
 /**
  * Redux action to request a Doctor Account Login.
@@ -11,17 +9,15 @@ export const TYPE = {
  * @return {Object} The dispatcher object.
  */
 export function doctorLoginRequest(username, password) {
-     // Batch a single user request.
-     const requests = [
-        {
-            type: TYPE.DOCTOR_LOGIN,
-            form: 'REQUEST',
-            payload: {
-                username: username,
-                password: password
-            }
+    // Batch a single user request.
+    const request = {
+        type: DOCTOR_LOGIN,
+        form: 'REQUEST',
+        payload: {
+            username: username,
+            password: password
         }
-    ];
+    }
 
-    return batchActions.sendBatchRequests(requests);
+    return requestActions.sendRequest(request);
 }

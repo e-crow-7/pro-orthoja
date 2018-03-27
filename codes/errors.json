@@ -1,0 +1,31 @@
+{
+    "server": {
+        "connection": "Connection to server failed",
+        "timeout": "Connection to server timed out"
+    },
+    "message": {
+        "format": "Message is invalid",
+        "type": "Message type is invalid",
+        "form": "Message form is invalid",
+        "payload": "Message payload is invalid"
+    },
+    "database": {
+        "connection": "Failed to connect to database",
+        "timeout": "Connection to database timed out",
+        "reject": "Connection to database rejected",
+        "collection": {
+            "create": "Could not create new collection",
+            "get": "Failed to get collection",
+            "document": {
+                "insert": "Failed to insert new document",
+                "find": "Failed to find document",
+                "format": "Document format is invalid"
+            }
+        }
+    },
+    "account": {
+        "credentials": "Invalid credentials",
+        "find": "Account not found",
+        "create": "Failed to create new account"
+    }
+}

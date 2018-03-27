@@ -11,7 +11,9 @@ import styles from './LoginPage.scss';
 
 @connect(
     (store) => ({
-        translator: getTranslate(store.locale)
+        translator: getTranslate(store.locale),
+        account: store.account,
+        request: store.request
     }),
     (dispatcher) => ({
         doctorLoginRequest: (username, password) => (
@@ -29,15 +31,24 @@ class LoginPage extends Component {
     }
 
     login(username, password) {
-        this.props.doctorLoginRequest(username, password);
+        this.props.doctorLoginRequest(username, password).catch(
+            (error) => {
+                console.log('Login Request Error: ', error);
+            }
+        );
     }
 
     render() {
         return(
             <div className={styles.container}>
                 <Title text={'Orthoja'} />
-                <LoginPanel translator={this.props.translator} onSignIn={this.login} />
+                <LoginPanel
+                    translator={this.props.translator}
+                    onSignIn={this.login}
+                    state={this.props.request.status === Actions.request.ENUM_STATUS.PENDING ? 'pending' : 'idle'}
+                />
                 <Footer translator={this.props.translator} />
+                <div>{this.props.account.error.code}</div>
             </div>
         )
     }

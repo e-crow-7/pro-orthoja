@@ -41,7 +41,7 @@ class Handler {
      */
     start(parcel, validator) {
         return new Promise((resolve, reject) => {
-            LOG.debug('Handling message %s.', parcel.message.type);
+            LOG.debug('Handling message "%s" from IP: %s.', parcel.message.type, parcel.ip);
 
             // Validate the payload of the parcel being handled.
             this.validatePayload(parcel, validator).then(
@@ -55,7 +55,7 @@ class Handler {
                         form: ' RESPONSE',
                         payload: {
                             type: 'fail',
-                            code: CODE.BAD_MESSAGE_PAYLOAD
+                            code: 'message.payload'
                         }
                     });
                 }
@@ -94,7 +94,7 @@ class Handler {
                 form: ' RESPONSE',
                 payload: {
                     type: 'fail',
-                    code: CODE.NO_HANDLER
+                    code: 'message.type'
                 }
             });
         });

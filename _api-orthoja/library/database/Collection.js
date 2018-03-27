@@ -44,7 +44,7 @@ class Collection {
                         error.message,
                         properties
                     );
-                    reject(CODE.DOCUMENT_INVALID);
+                    reject();
                 }
             );
         });

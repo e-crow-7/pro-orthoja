@@ -10,5 +10,10 @@
             "user-or-email": "Username or Email",
             "signin": "Sign In"
         }
+    },
+    "error": {
+        "account": {
+            "credentials": "Invalid login credentials"
+        }
     }
 }

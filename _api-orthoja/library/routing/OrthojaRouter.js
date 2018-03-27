@@ -38,7 +38,7 @@ const OrthojaRouter = (function () {
                     resolve(
                         response('Status', {
                             type: 'fail',
-                            code: CODE.BAD_MESSAGE_FORMAT
+                            code: 'message.format'
                         })
                     );
                     return;
@@ -56,7 +56,7 @@ const OrthojaRouter = (function () {
                         resolve(
                             response('Status', {
                                 type: 'fail',
-                                code: CODE.BAD_MESSAGE_FORMAT
+                                code: 'message.format'
                             })
                         );
                     }

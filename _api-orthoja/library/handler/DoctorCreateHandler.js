@@ -67,9 +67,9 @@ class DoctorCreateHandler extends Handler {
                         this.response({ type: 'success' })
                     );
                 },
-                (errorCode) => {
+                () => {
                     resolve(
-                        this.response({ type: 'fail', code: errorCode })
+                        this.response({ type: 'fail', code: 'account.create' })
                     );
                 }
             );
