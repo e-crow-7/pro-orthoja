@@ -1,5 +1,9 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 
+// Packages
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+
 // Middleware
 import thunkMiddleware from 'redux-thunk';
 import promiseMiddleware from 'redux-promise-middleware';
@@ -12,8 +16,12 @@ import * as Reducers from './reducers';
 // Composers
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+// Router history
+export const history = createHistory();
+
 // Apply middleware
 var middleware = applyMiddleware(
+    routerMiddleware(history),
     promiseMiddleware(),
     thunkMiddleware,
     Middleware.request
@@ -23,7 +31,8 @@ var middleware = applyMiddleware(
 const reducers = combineReducers({
     "request": Reducers.request,
     "account": Reducers.account,
-    "locale": localeReducer
+    "locale": localeReducer,
+    "router": routerReducer
 });
 
 // Compose with redux development tools if building in development.

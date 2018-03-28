@@ -1,0 +1,1 @@
+export const DoctorPage = require('./DoctorPage').default;

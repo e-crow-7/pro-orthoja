@@ -8,12 +8,19 @@
             "password": "Password",
             "email": "Email",
             "user-or-email": "Username or Email",
-            "signin": "Sign In"
+            "signin": "Sign In",
+            "error-title": "Login Error"
         }
     },
     "error": {
+        "server": {
+            "connection": "Failed to connect to the account server."
+        },
         "account": {
             "credentials": "Invalid login credentials"
+        },
+        "page": {
+            "find": "Page not found"
         }
     }
 }

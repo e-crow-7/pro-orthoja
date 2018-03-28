@@ -1,18 +1,18 @@
 
-.signin-button-enter {
+.login-errors-enter {
     opacity: 0.01;
 }
   
-.signin-button-enter.signin-button-enter-active {
+.login-errors-enter.login-errors-enter-active {
     opacity: 1;
     transition: opacity 500ms ease-in;
 }
   
-.signin-button-leave {
+.login-errors-leave {
     opacity: 1;
 }
   
-.signin-button-leave.signin-button-leave-active {
+.login-errors-leave.login-errors-leave-active {
     opacity: 0.01;
     transition: opacity 300ms ease-in;
 }

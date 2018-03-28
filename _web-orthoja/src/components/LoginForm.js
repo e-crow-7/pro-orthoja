@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Col, Form, FormGroup, FormControl, Button, Alert } from 'react-bootstrap';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ReactLoading from 'react-loading';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import styles from './LoginForm.scss';
 require('./LoginForm.css')
@@ -76,16 +76,20 @@ class LoginForm extends Component {
         return (
             <div className={styles.container}>
 
-                {
-                    this.props.errorNotification ?
-                        <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
-                            <h4>Login Error</h4>
-                            <p>
-                                Credentials Invalid.
-                            </p>
-                        </Alert>
-                        : false
-                }
+                <CSSTransitionGroup
+                    transitionName="login-errors"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
+                >
+                    {
+                        this.props.errorNotification ?
+                            (<Alert bsStyle="danger">
+                                <h5>{this.props.translator('form.login.error-title')}</h5>
+                                <p>{this.props.errorNotification}</p>
+                            </Alert>)
+                            : false
+                    }
+                </CSSTransitionGroup>
 
                 <Form horizontal>
                     <this.FieldElement
@@ -106,24 +110,29 @@ class LoginForm extends Component {
                         onChange={this.handlePasswordInputChange}
                         disabled={this.props.state === STATE.PENDING}
                     />
-                    <ReactCSSTransitionGroup
-                        transitionName="signin-button"
-                        transitionEnterTimeout={500}
-                        transitionLeaveTimeout={500}
-                    >
-                        {
-                            this.props.state === 'idle' ?
-                                <Button type="button" onClick={this.signIn}>
-                                    {this.props.translator('form.login.signin')}
-                                </Button>
-                                :
-                                <ReactLoading
-                                    type={'spin'}
-                                    color={'#222222'}
-                                    height={32} width={32}
-                                />
-                        }
-                    </ReactCSSTransitionGroup>
+                    <div>
+                        <ReactLoading
+                            style={{
+                                opacity: this.props.state === 'idle' ? 0.0 : 1.0,
+                                display: this.props.state === 'idle' ? 'none' : null,
+                                width: 32,
+                                marginLeft: -16,
+                                height: 32,
+                                position: 'absolute',
+                                top: 0,
+                                left: '50%'
+                            }}
+                            type={'spin'}
+                            color={'#222222'}
+                            height={32} width={32}
+                        />
+                        <Button type="button" onClick={this.signIn}
+                            style={{ opacity: this.props.state === 'idle' ? 1.0 : 0.0 }}
+                        >
+                            {this.props.translator('form.login.signin')}
+                        </Button>
+                    </div>
+
                 </Form>
             </div>
         )

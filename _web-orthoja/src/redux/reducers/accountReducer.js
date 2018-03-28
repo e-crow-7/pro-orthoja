@@ -7,7 +7,7 @@ import { FULFILLED } from 'redux-promise-middleware';
 // --------------------------------------------------------------------------------
 const initialState = {
     session: null,
-    type: null, // Doctor or Patient
+    type: null, // 'doctor' or 'patient'
     error: {
         code: null
     }
