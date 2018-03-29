@@ -13,6 +13,7 @@ const SetupRoutes = function(router) {
     // Doctor request routes
     router.add('Doctor_Create', Handlers.DoctorCreateHandler);
     router.add('Doctor_Login', Handlers.DoctorLoginHandler);
+    router.add('Doctor_Logout', Handlers.DoctorLogoutHandler);
 }
 
 // ================================================================================

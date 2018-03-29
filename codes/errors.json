@@ -25,6 +25,7 @@
     },
     "account": {
         "credentials": "Invalid credentials",
+        "session": "Failed to drop account session",
         "find": "Account not found",
         "create": "Failed to create new account"
     }

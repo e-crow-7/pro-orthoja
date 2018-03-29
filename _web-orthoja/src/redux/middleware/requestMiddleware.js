@@ -1,5 +1,5 @@
 import { REQUEST } from '../actions/requestActions';
-import { FULFILLED } from 'redux-promise-middleware';
+import { FULFILLED, PENDING, REJECTED } from 'redux-promise-middleware';
 
 // Basic middleware function for processing batch requests.
 export default (store) => (next) => (action) => {
@@ -15,6 +15,20 @@ export default (store) => (next) => (action) => {
                 type: `${response.type}/${action.type}`,
                 payload: response.payload
              });
+        }
+        return;
+    }
+
+    if(
+        action.type === `${REQUEST}_${PENDING}`
+    ) {
+        next(action);
+
+        if(action.forward) {
+            next({
+                type: `${action.forward}/${action.type}`,
+                payload: action.payload
+            });
         }
         return;
     }

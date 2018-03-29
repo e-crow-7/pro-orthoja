@@ -12,6 +12,7 @@ import { PENDING, FULFILLED, REJECTED } from 'redux-promise-middleware';
 // --------------------------------------------------------------------------------
 const initialState = {
     status: ENUM_STATUS.IDLE,
+    statusKey: {},
     error: {
         code: null
     }
@@ -21,27 +22,48 @@ const initialState = {
 // ACTION FUNCTIONS
 // --------------------------------------------------------------------------------
 function requestPending(state, action) {
-    return ({
+
+    const newState = {
         ...state,
         status: ENUM_STATUS.PENDING
-    })
+    };
+
+    if(action.key) {
+        newState.statusKey[action.key] = ENUM_STATUS.PENDING;
+    }
+
+    return (newState);
 }
 
 function requestFulfilled(state, action) {
-    return ({
+
+    const newState = {
         ...state,
         status: ENUM_STATUS.FULFILLED
-    })
+    };
+
+    if(action.key) {
+        newState.statusKey[action.key] = ENUM_STATUS.FULFILLED;
+    }
+
+    return (newState);
 }
 
 function requestRejected(state, action) {
-    return ({
+
+    const newState = {
         ...state,
         status: ENUM_STATUS.REJECTED,
         error: {
             code: 'server.connection'
         }
-    })
+    };
+
+    if(action.key) {
+        newState.statusKey[action.key] = ENUM_STATUS.REJECTED;
+    }
+
+    return (newState);
 }
 
 // ====================================================================================================

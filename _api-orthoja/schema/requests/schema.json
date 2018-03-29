@@ -50,6 +50,9 @@
         "REQUEST/Doctor_Login": {
             "$ref": "doctors.json#/definitions/login"
         },
+        "REQUEST/Doctor_Logout": {
+            "$ref": "doctors.json#/definitions/logout"
+        },
         "REQUEST/Doctor_Create": {
             "$ref": "doctors.json#/definitions/create"
         },
@@ -80,6 +83,11 @@
         {
             "required": [
                 "REQUEST/Doctor_Login"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Logout"
             ]
         },
         {

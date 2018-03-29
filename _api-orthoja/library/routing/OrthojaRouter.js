@@ -1,4 +1,7 @@
 import { CommonError, CODE } from '../error';
+import { Logger } from '../logger';
+
+const LOG = Logger.get();
 
 const response = function (type, payload) {
     return ({
@@ -48,8 +51,18 @@ const OrthojaRouter = (function () {
                 _validator({ "CORE": parcel.message }).then(
                     (data) => {
                         const message = data["CORE"];
-                        // Resolve with the hanlder's returned resolved promise.
-                        _routes[message.type].start(parcel, _validator).then(resolve);
+                        if(_routes[message.type]) {
+                            // Resolve with the hanlder's returned resolved promise.
+                            _routes[message.type].start(parcel, _validator).then(resolve);
+                        } else {
+                            LOG.debug('No handler for message type "%s".', message.type);
+                            resolve(
+                                response('Status', {
+                                    type: 'fail',
+                                    code: 'message.format'
+                                })
+                            );
+                        }
                     },
                     // MESSAGE INVALID
                     (error) => {

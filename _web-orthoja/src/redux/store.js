@@ -22,7 +22,7 @@ export const history = createHistory();
 // Apply middleware
 var middleware = applyMiddleware(
     routerMiddleware(history),
-    promiseMiddleware(),
+    Middleware.promise,
     thunkMiddleware,
     Middleware.request
 );

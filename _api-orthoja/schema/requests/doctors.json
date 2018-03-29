@@ -16,6 +16,17 @@
             ],
             "additionalProperties": false
         },
+        "logout": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "session"
+            ],
+            "additionalProperties": false
+        },
         "create": {
             "properties": {
                 "firstname": {

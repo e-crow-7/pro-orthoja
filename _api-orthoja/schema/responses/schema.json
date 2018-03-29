@@ -26,6 +26,9 @@
         "RESPONSE/Doctor_Login": {
             "$ref": "doctors.json#/definitions/login_status"
         },
+        "RESPONSE/Doctor_Logout": {
+            "$ref": "doctors.json#/definitions/status"
+        },
         "RESPONSE/Doctor_Create": {
             "$ref": "doctors.json#/definitions/status"
         },
@@ -46,6 +49,11 @@
         {
             "required": [
                 "RESPONSE/Doctor_Login"
+            ]
+        },
+        {
+            "required": [
+                "RESPONSE/Doctor_Logout"
             ]
         },
         {

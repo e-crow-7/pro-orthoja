@@ -1,5 +1,8 @@
 import Mongo, { ObjectID } from 'mongodb';
 import { CommonError } from '../error';
+import { Logger } from '../logger';
+
+const LOG = Logger.get();
 
 /**
  * An "static class" for managing account sessions.
@@ -19,13 +22,14 @@ const SessionManager = (function () {
     const _accountSessions = {};
 
     // Private methods.
-    var _createSessionDetailsObject = function (id, generaterIp, accountId, accountType, deviceId) {
+    var _createSessionDetailsObject = function (id, generaterIp, accountId, accountType, deviceId, generatedDate) {
         return ({
             _id: id,
             generaterIp: generaterIp,
             accountId: accountId,
             accountType: accountType,
-            deviceId: deviceId
+            deviceId: deviceId,
+            generatedDate: generatedDate
         })
     }
 
@@ -45,13 +49,17 @@ const SessionManager = (function () {
             });
             // If a session already exists, return that id and don't bother making a new one.
             if(sessionFromAccountAndDevice != null) {
+                _sessions[sessionFromAccountAndDevice._id] = sessionFromAccountAndDevice;
                 return sessionFromAccountAndDevice;
             }
 
             // User mongodb to generate the unique id.
             const id = new ObjectID();
             // Generate a new session entry using MongoDB's ObjectID generation.
-            _sessions[id] = _createSessionDetailsObject(id, generaterIp, accountId, accountType, deviceId);
+            _sessions[id] = _createSessionDetailsObject(
+                id, generaterIp, accountId, 
+                accountType, deviceId, new Date().toISOString()
+            );
             // Store the pointer to the session based on the accountId.
             _accountSessions[accountId].push(_sessions[id]);
             // Return with the session when completed.
@@ -59,6 +67,27 @@ const SessionManager = (function () {
         },
         get(id) {
             return _sessions[id];
+        },
+        delete(id) {
+            // Ensure the session exists.
+            if(!_sessions[id]) {
+                throw new SessionManagerError('Failed to delete session id "%s". Session does not exist.', id);
+                return;
+            }
+
+            // Get the account id from the session.
+            const accountId = _sessions[id].accountId;
+
+            // Delete the session object.
+            delete _sessions[id];
+
+            // Delete the object in the account pointer.
+            _accountSessions[accountId].forEach((session, index) => {
+                if(session._id == id) {
+                    _accountSessions[accountId].splice(index, 1);
+                }
+            });
+
         }
     });
 
