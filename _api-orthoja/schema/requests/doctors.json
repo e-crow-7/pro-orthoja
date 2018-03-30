@@ -63,6 +63,17 @@
                 "id"
             ],
             "additionalProperties": false
+        },
+        "account_information": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "session"
+            ],
+            "additionalProperties": false
         }
     }
 }

@@ -9,5 +9,6 @@ module.exports = {
     BatchHandler: require('./BatchHandler').default,
     DoctorCreateHandler: require('./DoctorCreateHandler').default,
     DoctorLoginHandler: require('./DoctorLoginHandler').default,
-    DoctorLogoutHandler: require('./DoctorLogoutHandler').default
+    DoctorLogoutHandler: require('./DoctorLogoutHandler').default,
+    DoctorAccountInformationHandler: require('./DoctorAccountInformationHandler').default
 }

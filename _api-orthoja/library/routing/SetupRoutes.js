@@ -14,6 +14,7 @@ const SetupRoutes = function(router) {
     router.add('Doctor_Create', Handlers.DoctorCreateHandler);
     router.add('Doctor_Login', Handlers.DoctorLoginHandler);
     router.add('Doctor_Logout', Handlers.DoctorLogoutHandler);
+    router.add('Doctor_Account_Information', Handlers.DoctorAccountInformationHandler);
 }
 
 // ================================================================================

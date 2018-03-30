@@ -1,8 +1,12 @@
 // Application configuration.
 import axios from 'axios';
+import { PENDING, FULFILLED, REJECTED } from 'redux-promise-middleware';
 
 // Dispatch Types
 export const REQUEST = 'REQUEST';
+export const REQUEST_PENDING = 'REQUEST_' + PENDING;
+export const REQUEST_FULFILLED = 'REQUEST_' + FULFILLED;
+export const REQUEST_REJECTED = 'REQUEST_' + REJECTED;
 
 export const ENUM_STATUS = {
     IDLE: 0,

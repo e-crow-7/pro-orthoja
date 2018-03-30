@@ -31,8 +31,9 @@ var middleware = applyMiddleware(
 const reducers = combineReducers({
     "request": Reducers.request,
     "account": Reducers.account,
+    "doctor": Reducers.doctor,
     "locale": localeReducer,
-    "router": routerReducer
+    "router": routerReducer,
 });
 
 // Compose with redux development tools if building in development.

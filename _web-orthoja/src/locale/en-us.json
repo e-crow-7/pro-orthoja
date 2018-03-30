@@ -1,4 +1,14 @@
 {
+    "common": {
+        "welcome": "Welcome",
+        "welcome-orthoja": "Welcome to Orthoja",
+        "doctor": "Doctor",
+        "doctor-prefix": "Dr."
+    },
+    "account": {
+        "settings": "Settings",
+        "logout": "Logout"
+    },
     "form": {
         "login": {
             "title": "Login with your Credentials",
@@ -12,9 +22,15 @@
             "error-title": "Login Error"
         }
     },
+    "doctor": {
+        "panel": {
+            "title-patients": "Your Patients",
+            "patients-not-found": "No patients found."
+        }
+    },
     "error": {
         "server": {
-            "connection": "Failed to connect to the account server."
+            "connection": "Failed to connect to the account server"
         },
         "account": {
             "credentials": "Invalid login credentials"
@@ -22,5 +38,9 @@
         "page": {
             "find": "Page not found"
         }
+    },
+    "footer": {
+        "author": "Developed by Eric Crowell",
+        "contact": "Contact"
     }
 }

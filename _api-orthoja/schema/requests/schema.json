@@ -59,6 +59,9 @@
         "REQUEST/Doctor_Delete": {
             "$ref": "doctors.json#/definitions/delete"
         },
+        "REQUEST/Doctor_Account_Information": {
+            "$ref": "doctors.json#/definitions/account_information"
+        },
         "REQUEST/Patient_Login": {
             "$ref": "patients.json#/definitions/create"
         },
@@ -98,6 +101,11 @@
         {
             "required": [
                 "REQUEST/Doctor_Delete"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Account_Information"
             ]
         },
         {

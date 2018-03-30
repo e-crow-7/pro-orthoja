@@ -17,8 +17,8 @@ class Footer extends Component {
             <div className={styles.container}>
                 <span>Orthoja.com &copy;</span>
                 <span>{currentYear}&nbsp;|&nbsp;</span>
-                <span>Developed by Eric Crowell (eCrow Ltd.)&nbsp;|&nbsp;</span>
-                <span>Contact</span>
+                <span>{this.props.translator('footer.author')}&nbsp;(eCrow Ltd.)&nbsp;|&nbsp;</span>
+                <span>{this.props.translator('footer.contact')}</span>
             </div>
         )
     }

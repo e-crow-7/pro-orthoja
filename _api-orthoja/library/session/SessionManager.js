@@ -66,6 +66,9 @@ const SessionManager = (function () {
             return _sessions[id];
         },
         get(id) {
+            if(!_sessions[id]) {
+                throw new SessionManagerError('Failed to get session for id "%s". Session does not exist.', id);
+            }
             return _sessions[id];
         },
         delete(id) {

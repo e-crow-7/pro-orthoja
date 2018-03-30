@@ -39,6 +39,20 @@
                 "type"
             ],
             "additionalProperties": false
+        },
+        "account_information": {
+            "properties": {
+                "information" : {
+                    "type": "object"
+                },
+                "status" : {
+                    "$ref": "#/definitions/status"
+                }
+            },
+            "required": [
+                "information"
+            ],
+            "additionalProperties": false
         }
     }
 }

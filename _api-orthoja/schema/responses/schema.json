@@ -35,6 +35,9 @@
         "RESPONSE/Doctor_Delete": {
             "$ref": "doctors.json#/definitions/status"
         },
+        "RESPONSE/Doctor_Account_Information": {
+            "$ref": "doctors.json#/definitions/account_information"
+        },
         "RESPONSE/Patient_Login": {
             "$ref": "patients.json#/definitions/status"
         },
