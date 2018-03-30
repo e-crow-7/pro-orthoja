@@ -20,7 +20,26 @@
             "user-or-email": "Username or Email",
             "signin": "Sign In",
             "error-title": "Login Error"
-        }
+        },
+        "new-patient": {
+            "username": "Username",
+            "password": "Password",
+            "nickname": "Nickname",
+            "sex": "Sex",
+            "male": "Male",
+            "female": "Female",
+            "none": "Unspecified",
+            "race": "Race",
+            "races": {
+                "american-indian": "American Indian",
+                "asian": "Asian",
+                "black": "Black",
+                "hispanic": "Hispanic",
+                "pacific-islander": "Pacific Islander",
+                "white": "White"
+            }
+        },
+        "optional": "Optional"
     },
     "doctor": {
         "panel": {

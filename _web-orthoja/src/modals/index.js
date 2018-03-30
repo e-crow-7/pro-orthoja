@@ -1,0 +1,1 @@
+export const NewPatientModal = require('./NewPatientModal').default;

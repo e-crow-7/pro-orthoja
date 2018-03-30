@@ -108,6 +108,16 @@ class DoctorPage extends Component {
             return (this.renderRedirect());
         }
 
+        const { firstname, lastname } = this.props.doctor;
+        var patientFormTagPrefix = 'dxz';
+        if(firstname && lastname) {
+            patientFormTagPrefix = (
+                'd' + 
+                this.props.doctor.firstname.charAt(0) + 
+                this.props.doctor.lastname.charAt(0)
+             ).toLowerCase();
+        }
+
         return (
             <div className={styles.container}>
                 <AccountBanner
@@ -126,6 +136,9 @@ class DoctorPage extends Component {
                             {username: "patient4GHE4"},
                             {username: "patient85J6I"}
                         ]
+                    }}
+                    patientForm={{
+                        tag: patientFormTagPrefix
                     }}
                 />
                 <Footer translator={this.props.translator} />
