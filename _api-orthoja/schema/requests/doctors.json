@@ -74,6 +74,54 @@
                 "session"
             ],
             "additionalProperties": false
+        },
+        "create_patient": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "birthdate": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "race": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "session",
+                "username",
+                "password"
+            ],
+            "additionalProperties": false
+        },
+        "get_patients": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "session"
+            ],
+            "additionalProperties": false
         }
     }
 }

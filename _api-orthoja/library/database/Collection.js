@@ -33,9 +33,8 @@ class Collection {
         return new Promise((resolve, reject) => {
             this.mongoCollection.insertOne(properties).then(
                 (result) => {
-                    console.log('DOCUMENT', result);
                     LOG.debug('Inserted new document into "%s".', this.mongoName);
-                    resolve();
+                    resolve(result.ops[0]);
                 },
                 (error) => {
                     LOG.error(
@@ -44,7 +43,7 @@ class Collection {
                         error.message,
                         properties
                     );
-                    reject();
+                    reject(error);
                 }
             );
         });
@@ -52,7 +51,7 @@ class Collection {
 
     findDocument(query) {
         return new Promise((resolve, reject) => {
-            this.mongoCollection.findOne().then(
+            this.mongoCollection.findOne(query).then(
                 (result) => {
                     resolve(result);
                 },
@@ -62,6 +61,50 @@ class Collection {
                         this.mongoName, 
                         error.message,
                         query
+                    )
+                    reject(error);
+                }
+            )
+        })
+    }
+
+    findDocuments(query) {
+        return new Promise((resolve, reject) => {
+
+            const documents = [];
+            const cursor = this.mongoCollection.find(query);
+
+            cursor.forEach((document) => {
+                documents.push(document);
+            }, (error) => {
+                if(error) { 
+                    LOG.error('Failed to find multiple documents on "%s".\n\rReason: %s\n\rQuery...\n\r',
+                        this.mongoName, 
+                        error.message,
+                        query,
+                    );
+                    reject(error);
+                } else {
+                    resolve(documents);
+                }
+            });
+
+        });
+    }
+
+    updateDocument(filter, update) {
+        return new Promise((resolve, reject) => {
+            this.mongoCollection.updateOne(filter, update).then(
+                (result) => {
+                    resolve(result);
+                },
+                (error) => {
+                    LOG.error(
+                        'Failed to update document on "%s".\n\rReason: %s\n\rFilter...\n\r%oUpdate...\n\r%o', 
+                        this.mongoName, 
+                        error.message,
+                        filter,
+                        update
                     )
                     reject(error);
                 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Panel, Button } from 'react-bootstrap';
+import { Panel, Button, Popover, Overlay } from 'react-bootstrap';
 
 import { PatientsList } from '../components';
 import { NewPatientModal } from '../modals';
@@ -10,47 +10,55 @@ class DoctorPatientsPanel extends Component {
 
     static propTypes = {
         translator: PropTypes.func.isRequired,
+        showNewPatientModal: PropTypes.bool,
+        onNewPatientClick: PropTypes.func,
         list: PropTypes.object,
         patientForm: PropTypes.object,
+        errorNotification: PropTypes.string
     }
 
     static defaultProps = {
         list: {},
-        patientForm: {}
+        patientForm: {},
+        showNewPatientModal: false,
+        onNewPatientClick: () => {},
+        errorNotification: null
     }
 
     constructor(props) {
         super(props);
 
-        this.state = {
-            showNewPatientModal: false
-        }
-
         // Method Bindings
-        this.showModal = this.showModal.bind(this);
-        this.hideModal = this.hideModal.bind(this);
         this.DashboardElement = this.DashboardElement.bind(this);
     }
 
-    showModal() {
-        this.setState({
-            showNewPatientModal: true
-        })
-    }
+    DashboardElement({ ...props }) {
 
-    hideModal() {
-        this.setState({
-            showNewPatientModal: false
-        })
-    }
+        const buttonNewPatient = (
+            <Button onClick={ () => { this.props.onNewPatientClick(true) } }>
+                <FontAwesome name="user-plus" />&nbsp;
+                <span>{this.props.translator('doctor.panel.dashboard.create-patient')}</span>
+            </Button>
+        )
 
-    DashboardElement({...props}) {
+        const popoverCreatePatient = (
+            <Popover
+                id="popover-create-patient"
+                title={this.props.translator('tips.get-started')}
+                placement="right"
+                positionLeft={165}
+                positionTop={-32}
+                className="glowing-notice"
+                style={{zIndex: 1, width: '150px'}}
+            >
+                {this.props.translator('tips.create-patient')}
+            </Popover>
+        );
+
         return (
-            <div {...props} style={{paddingBottom: '10px', textAlign: 'left'}}>
-                <Button onClick={this.showModal}>
-                    <FontAwesome name="user-plus" />&nbsp;
-                    <span>Create New Patient</span>
-                </Button>
+            <div {...props} style={{ paddingBottom: '10px', textAlign: 'left' }}>
+                {this.props.list.patients.length <= 0 ? popoverCreatePatient : false}
+                {buttonNewPatient}
             </div>
         )
     }
@@ -61,8 +69,9 @@ class DoctorPatientsPanel extends Component {
                 <NewPatientModal
                     translator={this.props.translator}
                     patientForm={this.props.patientForm}
-                    onCancel={this.hideModal}
-                    show={this.state.showNewPatientModal}
+                    onCancel={ () => { this.props.onNewPatientClick(false) } }
+                    show={this.props.showNewPatientModal}
+                    errorNotification={this.props.errorNotification}
                 />
                 <Panel style={this.props.style}>
                     <Panel.Heading>

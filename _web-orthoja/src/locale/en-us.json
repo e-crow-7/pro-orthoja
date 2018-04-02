@@ -43,6 +43,9 @@
     },
     "doctor": {
         "panel": {
+            "dashboard": {
+                "create-patient": "Create New Patient"
+            },
             "title-patients": "Your Patients",
             "patients-not-found": "No patients found."
         }
@@ -56,10 +59,18 @@
         },
         "page": {
             "find": "Page not found"
+        },
+        "generic": {
+            "title": "Error",
+            "connection": "Service connection failed"
         }
     },
     "footer": {
         "author": "Developed by Eric Crowell",
         "contact": "Contact"
+    },
+    "tips": {
+        "get-started": "Get Started",
+        "create-patient": "Create a patient account"
     }
 }

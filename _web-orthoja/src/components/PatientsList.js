@@ -53,9 +53,10 @@ class PatientsList extends Component {
 
     renderPatientItems() {
         if(this.props.patients.length > 0) {
-            const patientElements = this.props.patients.map((value, index) => {
+            const patientElements = this.props.patients.slice(0).reverse().map((value, index) => {
+                const inverseIndex = this.props.patients.length - index;
                 return (
-                    <this.PatientItemElement username={value.username} key={index} index={index} />
+                    <this.PatientItemElement username={value.username} key={index} index={inverseIndex} />
                 );
             });
             return (

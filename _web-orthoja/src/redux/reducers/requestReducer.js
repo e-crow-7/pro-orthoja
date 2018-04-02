@@ -28,8 +28,8 @@ function requestPending(state, action) {
         status: ENUM_STATUS.PENDING
     };
 
-    if(action.key) {
-        newState.statusKey[action.key] = ENUM_STATUS.PENDING;
+    if(action.meta.key) {
+        newState.statusKey[action.meta.key] = ENUM_STATUS.PENDING;
     }
 
     return (newState);
@@ -42,8 +42,8 @@ function requestFulfilled(state, action) {
         status: ENUM_STATUS.FULFILLED
     };
 
-    if(action.key) {
-        newState.statusKey[action.key] = ENUM_STATUS.FULFILLED;
+    if(action.meta.key) {
+        newState.statusKey[action.meta.key] = ENUM_STATUS.FULFILLED;
     }
 
     return (newState);
@@ -59,8 +59,8 @@ function requestRejected(state, action) {
         }
     };
 
-    if(action.key) {
-        newState.statusKey[action.key] = ENUM_STATUS.REJECTED;
+    if(action.meta.key) {
+        newState.statusKey[action.meta.key] = ENUM_STATUS.REJECTED;
     }
 
     return (newState);

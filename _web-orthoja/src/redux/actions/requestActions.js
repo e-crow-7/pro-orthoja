@@ -24,8 +24,10 @@ export function sendRequest(request, key, forward) {
 
     return ({
         type: REQUEST,
-        key: key || null,
-        forward: forward || null,
+        meta: {
+            key: key || null,
+            forward: forward || null
+        },
         payload: axios({
             method: 'post',
             url: 'http://localhost:3100',

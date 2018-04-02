@@ -7,14 +7,14 @@ import { ObjectID } from 'mongodb';
 const LOG = Logger.get();
 
 /**
- * Class for handling doctor account information requests.
+ * Class for handling doctor patient retrieval requests.
  * @memberof module:Handler
  */
-class DoctorAccountInformationHandler extends Handler {
+class DoctorGetPatientsHandler extends Handler {
 
     response(payload) {
         return ({
-            type: 'Doctor_Account_Information',
+            type: 'Doctor_Get_Patients',
             form: 'RESPONSE',
             payload: payload
         })
@@ -22,7 +22,7 @@ class DoctorAccountInformationHandler extends Handler {
 
     failResponse(code) {
         return this.response({
-            information: null,
+            patients: null,
             status: {
                 type: 'fail',
                 code: code
@@ -30,24 +30,61 @@ class DoctorAccountInformationHandler extends Handler {
         });
     }
 
-    successResponse(information) {
+    successResponse(patients) {
         return this.response({
-            information: information,
+            patients: patients,
             status: {
                 type: 'success'
             }
         });
     }
 
-    getInformation(accountId) {
+    getPatientIds(accountId) {
         return new Promise((resolve, reject) => {
             const orthoja = DatabaseManager.get(OrthojaDatabase.name);
             const collection = orthoja.collection('doctors');
 
             collection.findDocument({ _id: accountId }).then(
                 (document) => {
-                    if (document._id) {
-                        resolve(document);
+                    if (document.patientIds) {
+                        resolve(document.patientIds);
+                    } else {
+                        reject();
+                    }
+                },
+                (error) => {
+                    reject();
+                }
+            );
+        });
+    }
+
+    getPatientsInformation(patientIds) {
+        return new Promise((resolve, reject) => {
+            const orthoja = DatabaseManager.get(OrthojaDatabase.name);
+            const collection = orthoja.collection('patients');
+
+            const query = {
+                "_id": {
+                    "$in": patientIds
+                }
+            }
+
+            collection.findDocuments(query).then(
+                (documents) => {
+                    if (Array.isArray(documents)) {
+                        const patientDocuments = documents.map((document) => {
+                            return ({
+                                username: document.username,
+                                nickname: document.nickname || null,
+                                birthdate: document.birthdate || null,
+                                sex: document.sex || null,
+                                race: document.race || null,
+                                country: document.country || null,
+                                region: document.region || null
+                            })
+                        });
+                        resolve(patientDocuments);
                     } else {
                         reject();
                     }
@@ -74,20 +111,17 @@ class DoctorAccountInformationHandler extends Handler {
                 return;
             }
 
-            this.getInformation(session.accountId).then(
-                (document) => {
-                    resolve(
-                        this.successResponse({
-                            firstname: document.firstname,
-                            lastname: document.lastname,
-                            username: document.username,
-                            email: document.email,
-                            createdDate: document.createdDate
-                        })
-                    );
-                },
+            this.getPatientIds(session.accountId).then(
+                this.getPatientsInformation,
                 () => {
                     resolve(this.failResponse('account.find'));
+                }
+            ).then(
+                (patientDocuments) => {
+                    resolve(this.successResponse(patientDocuments));
+                },
+                () => {
+                    resolve(this.failResponse('patients.find'));
                 }
             );
 
@@ -112,4 +146,4 @@ class DoctorAccountInformationHandler extends Handler {
 // ================================================================================
 // Exports
 // ------------------------------------------------------------
-export default DoctorAccountInformationHandler;
+export default DoctorGetPatientsHandler;

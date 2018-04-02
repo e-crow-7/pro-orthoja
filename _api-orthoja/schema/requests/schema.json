@@ -62,8 +62,14 @@
         "REQUEST/Doctor_Account_Information": {
             "$ref": "doctors.json#/definitions/account_information"
         },
+        "REQUEST/Doctor_Create_Patient": {
+            "$ref": "doctors.json#/definitions/create_patient"
+        },
+        "REQUEST/Doctor_Get_Patients": {
+            "$ref": "doctors.json#/definitions/get_patients"
+        },
         "REQUEST/Patient_Login": {
-            "$ref": "patients.json#/definitions/create"
+            "$ref": "patients.json#/definitions/login"
         },
         "REQUEST/Patient_Create": {
             "$ref": "patients.json#/definitions/create"
@@ -106,6 +112,16 @@
         {
             "required": [
                 "REQUEST/Doctor_Account_Information"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Create_Patient"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Get_Patients"
             ]
         },
         {

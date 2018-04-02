@@ -16,12 +16,12 @@ class NewPatientForm extends Component {
     static propTypes = {
         translator: PropTypes.func.isRequired,
         tag: PropTypes.string,
-        onStateChange: PropTypes.func,
+        onDataChange: PropTypes.func,
     }
 
     static defaultProps = {
         tag: 'dxz',
-        onStateChange: () => {}
+        onDataChange: () => {}
     }
 
     constructor(props) {
@@ -48,6 +48,10 @@ class NewPatientForm extends Component {
         this.refreshPassword = this.refreshPassword.bind(this);
     }
 
+    componentDidMount() {
+        this.props.onDataChange(this.dataChangePrepare(this.state));
+    }
+
     componentWillReceiveProps(nextProps) {
         if (this.props.tag != nextProps.tag) {
             this.setState({
@@ -59,8 +63,21 @@ class NewPatientForm extends Component {
     componentWillUpdate(nextProps, nextState) {
         if(this.state !== nextState) {
             // When the state changes, update the callback
-            this.props.onStateChange(nextState);
+            this.props.onDataChange(this.dataChangePrepare(nextState));
         }
+    }
+
+    dataChangePrepare(data) {
+        return({
+            username: data.username,
+            password: data.password,
+            nickname: data.nickname,
+            birthdate: data.birthdate ? data.birthdate.format("YYYY-MM-DD[T]HH:mm:ss.SSS[Z]") : '',
+            sex: data.sex,
+            race: data.race,
+            country: data.country,
+            region: data.region
+        });
     }
 
     generateUniqueUsername(tag) {
@@ -147,7 +164,7 @@ class NewPatientForm extends Component {
                     <FormControl {...props} componentClass="select" placeholder="">
                         {options.map((value, index) => {
                             return (
-                                <option value={value.value}>{value.title}</option>
+                                <option value={value.value} key={index}>{value.title}</option>
                             );
                         })}
                     </FormControl>

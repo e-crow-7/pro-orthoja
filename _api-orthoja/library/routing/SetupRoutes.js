@@ -15,6 +15,11 @@ const SetupRoutes = function(router) {
     router.add('Doctor_Login', Handlers.DoctorLoginHandler);
     router.add('Doctor_Logout', Handlers.DoctorLogoutHandler);
     router.add('Doctor_Account_Information', Handlers.DoctorAccountInformationHandler);
+    router.add('Doctor_Create_Patient', Handlers.DoctorCreatePatientHandler);
+    router.add('Doctor_Get_Patients', Handlers.DoctorGetPatientsHandler);
+
+    // Patient request routes
+    router.add('Patient_Create', Handlers.PatientCreateHandler);
 }
 
 // ================================================================================

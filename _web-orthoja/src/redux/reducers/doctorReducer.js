@@ -1,5 +1,5 @@
 import { REQUEST_FULFILLED } from '../actions/requestActions';
-import { ACCOUNT_INFORMATION } from '../actions/doctorActions';
+import { ACCOUNT_INFORMATION, CREATE_PATIENT, GET_PATIENTS } from '../actions/doctorActions';
 
 // ====================================================================================================
 // INITIAL REDUCER STATE
@@ -9,7 +9,13 @@ const initialState = {
     lastname: null,
     username: null,
     email: null,
-    patients: []
+    patients: [],
+
+    status: {
+        from: null,
+        type: null,
+        code: null
+    }
 };
 
 // ====================================================================================================
@@ -32,6 +38,42 @@ function setInformation(state, action) {
         return state;
     }
 }
+
+function setPatientCreateStatus(state, action) {
+
+    const { type, code } = action.payload;
+
+    if(type) {
+
+        return({
+            ...state,
+            status: {
+                from: action.type,
+                type: type,
+                code: code
+            }
+        })
+
+    } else {
+        return state;
+    }
+}
+
+function getPatients(state, action) {
+
+    const { patients, status } = action.payload;
+
+    if(patients) {
+
+        return({
+            ...state,
+            patients: patients
+        })
+
+    } else {
+        return state;
+    }
+}
 // ====================================================================================================
 // REDUCER
 // --------------------------------------------------------------------------------
@@ -43,6 +85,18 @@ export default (state = initialState, action) => {
 
         case `${ACCOUNT_INFORMATION}/${REQUEST_FULFILLED}`:
             return setInformation(state, action);
+
+        case `${CREATE_PATIENT}/${REQUEST_FULFILLED}`:
+            return setPatientCreateStatus(state, action);
+
+        case `${GET_PATIENTS}/${REQUEST_FULFILLED}`:
+            return getPatients(state, action);
+        
+        default:
+            if (state.status.from || state.status.type) {
+                return { ...state, status: { from: null, type: null, code: null } };
+            }
+            break;
 
     }
 

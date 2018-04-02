@@ -16,7 +16,8 @@ import styles from './DoctorPage.scss';
     (store) => ({
         translator: getTranslate(store.locale),
         account: store.account,
-        doctor: store.doctor
+        doctor: store.doctor,
+        request: store.request
     }),
     (dispatcher) => ({
         logoutRequest: (session) => (
@@ -27,6 +28,12 @@ import styles from './DoctorPage.scss';
         ),
         getAccountInformation: (session) => (
             dispatcher(Actions.doctor.accountInformationRequest(session))
+        ),
+        createPatient: (data) => (
+            dispatcher(Actions.doctor.createPatient(data))
+        ),
+        getPatients: (session) => (
+            dispatcher(Actions.doctor.getPatientsRequest(session))
         ),
         push: (location) => (
             dispatcher(push(location))
@@ -39,11 +46,20 @@ class DoctorPage extends Component {
     constructor(props) {
         super(props);
 
+        this.newPatientFormData = {};
+
+        this.state = {
+            showNewPatientModal: false
+        }
+
         // Method bindings.
         this.authenticate = this.authenticate.bind(this);
         this.logout = this.logout.bind(this);
         this.checkSession = this.checkSession.bind(this);
         this.doctorFullName = this.doctorFullName.bind(this);
+
+        this.showNewPatientModal = this.showNewPatientModal.bind(this);
+        this.hideNewPatientModal = this.hideNewPatientModal.bind(this);
     }
 
     componentWillMount() {
@@ -51,14 +67,29 @@ class DoctorPage extends Component {
     }
 
     componentDidMount() {
-        // Get the account information if a session exists (which it should).
+        // Get information if a session exists (which it should be if this component is mounted).
         if (this.props.account.session) {
-            this.props.getAccountInformation(this.props.account.session);
+            this.props.getAccountInformation(this.props.account.session).then((result) => {
+                const { status } = result.value.data.payload;
+                console.log(status);
+            });
+            this.props.getPatients(this.props.account.session);
         }
     }
 
     componentDidUpdate() {
         this.checkSession();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { status } = nextProps.doctor;
+        if(this.props.doctor.status.type !== status.type) {
+            if (status.type == 'success') {
+                if(status.from == 'Doctor_Create_Patient/REQUEST_FULFILLED') {
+                    this.hideNewPatientModal();
+                }
+            }
+        }
     }
 
     checkSession() {
@@ -85,6 +116,15 @@ class DoctorPage extends Component {
         this.props.setSession(null, null);
     }
 
+    createPatient(data) {
+        this.props.createPatient({
+            session: this.props.account.session,
+            ...data
+        }).then(() => {
+            this.props.getPatients(this.props.account.session);
+        });
+    }
+
     renderRedirect() {
         return (
             <Redirect to={{
@@ -100,6 +140,18 @@ class DoctorPage extends Component {
             return 'Dr. ' + firstname + ' ' + lastname;
         }
         return '-';
+    }
+
+    showNewPatientModal() {
+        this.setState({
+            showNewPatientModal: true
+        })
+    }
+
+    hideNewPatientModal() {
+        this.setState({
+            showNewPatientModal: false
+        })
     }
 
     render() {
@@ -118,6 +170,8 @@ class DoctorPage extends Component {
              ).toLowerCase();
         }
 
+        const errorCode = this.props.request.error.code || this.props.doctor.status.code;
+
         return (
             <div className={styles.container}>
                 <AccountBanner
@@ -131,15 +185,28 @@ class DoctorPage extends Component {
                 <DoctorPatientsPanel
                     translator={this.props.translator}
                     list={{
-                        patients: [
-                            {username: "patient2A4G4"},
-                            {username: "patient4GHE4"},
-                            {username: "patient85J6I"}
-                        ]
+                        patients: this.props.doctor.patients
                     }}
                     patientForm={{
-                        tag: patientFormTagPrefix
+                        tag: patientFormTagPrefix,
+                        onDataChange: (data) => {
+                            this.newPatientFormData = data;
+                        },
+                        onSubmit: () => {
+                            this.createPatient(this.newPatientFormData);
+                        },
+                        requestStatus: this.props.request.statusKey['create_patient'] === Actions.request.ENUM_STATUS.PENDING ? 'pending' : 'idle'
                     }}
+                    onNewPatientClick={(show) => {
+                        console.log('Clicked! ', show)
+                        if(show) {
+                            this.showNewPatientModal();
+                        } else {
+                            this.hideNewPatientModal();
+                        }
+                    }}
+                    showNewPatientModal={this.state.showNewPatientModal}
+                    errorNotification={errorCode}
                 />
                 <Footer translator={this.props.translator} />
             </div>

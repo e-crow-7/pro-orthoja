@@ -67,7 +67,8 @@ const SessionManager = (function () {
         },
         get(id) {
             if(!_sessions[id]) {
-                throw new SessionManagerError('Failed to get session for id "%s". Session does not exist.', id);
+                //throw new SessionManagerError('Failed to get session for id "%s". Session does not exist.', id);
+                return null;
             }
             return _sessions[id];
         },
@@ -75,7 +76,7 @@ const SessionManager = (function () {
             // Ensure the session exists.
             if(!_sessions[id]) {
                 throw new SessionManagerError('Failed to delete session id "%s". Session does not exist.', id);
-                return;
+                return null;
             }
 
             // Get the account id from the session.

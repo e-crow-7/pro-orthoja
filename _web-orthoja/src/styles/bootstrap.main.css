@@ -5944,3 +5944,11 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+.glowing-notice {
+    animation:pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { box-shadow: 0px 0px 5px 0px #666; }
+  to { box-shadow: 0px 0px 15px 2px #666; }
+}

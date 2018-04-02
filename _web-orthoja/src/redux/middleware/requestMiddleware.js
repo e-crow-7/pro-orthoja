@@ -6,32 +6,28 @@ export default (store) => (next) => (action) => {
     if(
         action.type === `${REQUEST}_${FULFILLED}`
     ) {
-        next(action);
-
         const response = action.payload.data;
 
         if(response.type && response.form) {
-            next({
+            next(action);
+            return next({
                 type: `${response.type}/${action.type}`,
                 payload: response.payload
              });
         }
-        return;
     }
 
     if(
         action.type === `${REQUEST}_${PENDING}`
     ) {
-        next(action);
-
         if(action.forward) {
-            next({
+            next(action);
+            return next({
                 type: `${action.forward}/${action.type}`,
                 payload: action.payload
             });
         }
-        return;
     }
 
-    next(action);
+    return next(action);
 }

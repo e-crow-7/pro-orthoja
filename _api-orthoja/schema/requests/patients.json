@@ -23,10 +23,29 @@
                 },
                 "password": {
                     "type": "string"
+                },
+                "nickname": {
+                    "type": "string"
+                },
+                "birthdate": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "race": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "region": {
+                    "type": "string"
                 }
             },
             "required": [
-                "username"
+                "username",
+                "password"
             ],
             "additionalProperties": false
         },
