@@ -4,3 +4,4 @@ export const Footer = require('./Footer').default;
 export const AccountBanner = require('./AccountBanner').default;
 export const PatientsList = require('./PatientsList').default;
 export const NewPatientForm = require('./NewPatientForm').default;
+export const ConfirmModal = require('./ConfirmModal').default;

@@ -324,6 +324,7 @@ class NewPatientForm extends Component {
                                     onChange={(newMoment) => {
                                         this.setState({ birthdate: newMoment });
                                     }}
+                                    placeholderText="01/01/1976"
                                 />
                             </Col>
                         </FormGroup>

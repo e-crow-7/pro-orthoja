@@ -9,6 +9,13 @@
         "settings": "Settings",
         "logout": "Logout"
     },
+    "modal": {
+        "title-delete-patients": "Delete Patients",
+        "body-delete-patients": "Are you sure you want to delete the following patients?",
+        "confirm": "Confirm",
+        "delete": "Delete",
+        "cancel": "Cancel"
+    },
     "form": {
         "login": {
             "title": "Login with your Credentials",
@@ -44,7 +51,9 @@
     "doctor": {
         "panel": {
             "dashboard": {
-                "create-patient": "Create New Patient"
+                "create-patient": "Create New Patient",
+                "more": "More",
+                "delete": "Delete"
             },
             "title-patients": "Your Patients",
             "patients-not-found": "No patients found."

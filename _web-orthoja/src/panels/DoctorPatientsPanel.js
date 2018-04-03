@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import { Panel, Button, Popover, Overlay } from 'react-bootstrap';
+import { Panel, Button, Popover, Overlay, Grid, Row, Col, DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { PatientsList } from '../components';
 import { NewPatientModal } from '../modals';
@@ -14,15 +14,19 @@ class DoctorPatientsPanel extends Component {
         onNewPatientClick: PropTypes.func,
         list: PropTypes.object,
         patientForm: PropTypes.object,
-        errorNotification: PropTypes.string
+        errorNotification: PropTypes.string,
+        enableDeleteButton: PropTypes.bool,
+        onDeleteButtonClick: PropTypes.func
     }
 
     static defaultProps = {
         list: {},
         patientForm: {},
         showNewPatientModal: false,
-        onNewPatientClick: () => {},
-        errorNotification: null
+        onNewPatientClick: () => { },
+        errorNotification: null,
+        enableDeleteButton: false,
+        onDeleteButtonClick: () => {}
     }
 
     constructor(props) {
@@ -35,8 +39,8 @@ class DoctorPatientsPanel extends Component {
     DashboardElement({ ...props }) {
 
         const buttonNewPatient = (
-            <Button onClick={ () => { this.props.onNewPatientClick(true) } }>
-                <FontAwesome name="user-plus" />&nbsp;
+            <Button onClick={() => { this.props.onNewPatientClick(true) }}>
+                <span><FontAwesome name="user-plus" />&nbsp;</span>
                 <span>{this.props.translator('doctor.panel.dashboard.create-patient')}</span>
             </Button>
         )
@@ -49,16 +53,27 @@ class DoctorPatientsPanel extends Component {
                 positionLeft={165}
                 positionTop={-32}
                 className="glowing-notice"
-                style={{zIndex: 1, width: '150px'}}
+                style={{ zIndex: 1, width: '150px' }}
             >
                 {this.props.translator('tips.create-patient')}
             </Popover>
         );
 
+        const buttonPatientDelete = (
+            <Button onClick={this.props.onDeleteButtonClick} disabled={!this.props.enableDeleteButton}>
+                <span><FontAwesome name="trash" /></span>
+            </Button>
+        )
+
         return (
-            <div {...props} style={{ paddingBottom: '10px', textAlign: 'left' }}>
-                {this.props.list.patients.length <= 0 ? popoverCreatePatient : false}
-                {buttonNewPatient}
+            <div {...props} style={{ paddingBottom: '10px' }}>
+                <div style={{ width: 'auto', float: 'left' }}>
+                    {this.props.list.patients.length <= 0 ? popoverCreatePatient : false}
+                    {buttonNewPatient}
+                </div>
+                <div style={{ width: 'auto', float: 'right' }}>
+                    {buttonPatientDelete}
+                </div>
             </div>
         )
     }
@@ -69,7 +84,7 @@ class DoctorPatientsPanel extends Component {
                 <NewPatientModal
                     translator={this.props.translator}
                     patientForm={this.props.patientForm}
-                    onCancel={ () => { this.props.onNewPatientClick(false) } }
+                    onCancel={() => { this.props.onNewPatientClick(false) }}
                     show={this.props.showNewPatientModal}
                     errorNotification={this.props.errorNotification}
                 />

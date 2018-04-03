@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { withCookies } from 'react-cookie';
 import { getTranslate } from 'react-localize-redux';
 
-import { AccountBanner, Footer } from '../../components';
+import { AccountBanner, Footer, ConfirmModal } from '../../components';
 import { DoctorPatientsPanel } from '../../panels';
 
 import * as Actions from '../../redux/actions';
@@ -49,7 +49,9 @@ class DoctorPage extends Component {
         this.newPatientFormData = {};
 
         this.state = {
-            showNewPatientModal: false
+            showNewPatientModal: false,
+            selectedPatientListItems: [],
+            showDeletePatientsConfirmation: false
         }
 
         // Method bindings.
@@ -60,6 +62,8 @@ class DoctorPage extends Component {
 
         this.showNewPatientModal = this.showNewPatientModal.bind(this);
         this.hideNewPatientModal = this.hideNewPatientModal.bind(this);
+
+        this.deletePatients = this.deletePatients.bind(this);
     }
 
     componentWillMount() {
@@ -154,7 +158,13 @@ class DoctorPage extends Component {
         })
     }
 
+    deletePatients() {
+
+    }
+
     render() {
+
+        const t = this.props.translator;
 
         if (!this.authenticate()) {
             return (this.renderRedirect());
@@ -174,6 +184,7 @@ class DoctorPage extends Component {
 
         return (
             <div className={styles.container}>
+
                 <AccountBanner
                     translator={this.props.translator}
                     accountName={this.doctorFullName()}
@@ -185,7 +196,13 @@ class DoctorPage extends Component {
                 <DoctorPatientsPanel
                     translator={this.props.translator}
                     list={{
-                        patients: this.props.doctor.patients
+                        patients: this.props.doctor.patients,
+                        onSelectItem: (selectedItems) => {
+                            console.log("items change: ", selectedItems);
+                            this.setState({
+                                selectedPatientListItems: selectedItems
+                            });
+                        }
                     }}
                     patientForm={{
                         tag: patientFormTagPrefix,
@@ -207,8 +224,44 @@ class DoctorPage extends Component {
                     }}
                     showNewPatientModal={this.state.showNewPatientModal}
                     errorNotification={errorCode}
+                    enableDeleteButton={
+                        this.state.selectedPatientListItems.length > 0
+                    }
+                    onDeleteButtonClick={()=> {
+                        this.setState({
+                            showDeletePatientsConfirmation: true
+                        });
+                    }}
                 />
                 <Footer translator={this.props.translator} />
+                <ConfirmModal 
+                    id="confirm-delete"
+                    show={this.state.showDeletePatientsConfirmation}
+                    confirmType="danger"
+                    title={t('modal.title-delete-patients')}
+                    confirmText={t('modal.delete')}
+                    cancelText={t('modal.cancel')}
+
+                    onConfirm={this.deletePatients}
+                    onCancel={() => {
+                        this.setState({
+                            showDeletePatientsConfirmation: false
+                        });
+                    }}
+                >
+                    <p>{t('modal.body-delete-patients')}</p>
+                    <p>{this.state.selectedPatientListItems.map((value, index) => {
+                        return (
+                            <div key={index}>
+                                <span>{value.username}</span>
+                                {value.nickname ? 
+                                    <span>&nbsp;(<i>{value.nickname}</i>)</span> :
+                                    false
+                                }
+                            </div>
+                        )
+                    })}</p>
+                </ConfirmModal>
             </div>
         );
     }

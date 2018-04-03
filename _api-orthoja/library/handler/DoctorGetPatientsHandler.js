@@ -78,10 +78,14 @@ class DoctorGetPatientsHandler extends Handler {
                                 username: document.username,
                                 nickname: document.nickname || null,
                                 birthdate: document.birthdate || null,
+                                createdDate: document.createdDate || null,
+                                modifiedDate: document.modifiedDate || null,
+                                startDate: document.modifiedDate || null,
                                 sex: document.sex || null,
                                 race: document.race || null,
                                 country: document.country || null,
-                                region: document.region || null
+                                region: document.region || null,
+                                startDate: document.modifiedDate || null,
                             })
                         });
                         resolve(patientDocuments);

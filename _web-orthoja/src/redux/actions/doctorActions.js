@@ -3,6 +3,7 @@ import * as requestActions from './requestActions';
 export const ACCOUNT_INFORMATION = 'Doctor_Account_Information';
 export const CREATE_PATIENT = 'Doctor_Create_Patient';
 export const GET_PATIENTS = 'Doctor_Get_Patients';
+export const DELETE_PATIENTS = 'Doctor_Delete_Patients';
 
 /**
  * Redux action to request account information for the doctor account.
@@ -57,7 +58,19 @@ export function getPatientsRequest(session) {
         }
     }
 
-    console.log('REQUESTING PATIENTS!!!');
-
     return requestActions.sendRequest(request, 'get_patients');
+}
+
+export function deletePatientsRequest(session, patientUsernames) {
+    // Batch a single user request.
+    const request = {
+        type: DELETE_PATIENTS,
+        form: 'REQUEST',
+        payload: {
+            session: session,
+            patients: patientUsernames
+        }
+    }
+
+    return requestActions.sendRequest(request, 'delete_patients');
 }

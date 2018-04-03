@@ -69,6 +69,10 @@
             "pattern": "\\d{4}-[01]\\d-[0-3]\\dT[0-2]\\d:[0-5]\\d:[0-5]\\d\\.\\d+Z",
             "description": "ISO-Date specifying when the patient started his/her inputs."
         },
+        "active": {
+            "bsonType": "bool",
+            "description": "If the account is active (the paitent has logged in)."
+        },
         "dailies": {
             "bsonType": "array",
             "items": {
