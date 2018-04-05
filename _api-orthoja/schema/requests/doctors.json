@@ -122,6 +122,23 @@
                 "session"
             ],
             "additionalProperties": false
+        },
+        "delete_patients": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "usernames": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "session"
+            ],
+            "additionalProperties": false
         }
     }
 }

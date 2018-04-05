@@ -4,6 +4,7 @@ export const ACCOUNT_INFORMATION = 'Doctor_Account_Information';
 export const CREATE_PATIENT = 'Doctor_Create_Patient';
 export const GET_PATIENTS = 'Doctor_Get_Patients';
 export const DELETE_PATIENTS = 'Doctor_Delete_Patients';
+export const GET_PATIENT_DAILIES = 'Doctor_Get_Patient_Dailies';
 
 /**
  * Redux action to request account information for the doctor account.
@@ -68,9 +69,23 @@ export function deletePatientsRequest(session, patientUsernames) {
         form: 'REQUEST',
         payload: {
             session: session,
-            patients: patientUsernames
+            usernames: patientUsernames
         }
     }
 
     return requestActions.sendRequest(request, 'delete_patients');
+}
+
+export function getPatientDailiesRequest(session, patientUsername) {
+    // Batch a single user request.
+    const request = {
+        type: GET_PATIENT_DAILIES,
+        form: 'REQUEST',
+        payload: {
+            session: session,
+            username: patientUsername
+        }
+    }
+
+    return requestActions.sendRequest(request, 'get_patient_dailies');
 }

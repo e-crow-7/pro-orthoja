@@ -111,6 +111,19 @@ class Collection {
             )
         })
     }
+
+    deleteDocuments(filter) {
+        return new Promise((resolve, reject) => {
+            this.mongoCollection.deleteMany(filter).then(
+                (result) => {
+                    resolve(result);
+                },
+                (error) => {
+                    reject(error);
+                }
+            )
+        })
+    }
 }
 
 // ================================================================================

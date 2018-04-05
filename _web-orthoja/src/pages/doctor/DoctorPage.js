@@ -5,7 +5,7 @@ import { push } from 'react-router-redux';
 import { withCookies } from 'react-cookie';
 import { getTranslate } from 'react-localize-redux';
 
-import { AccountBanner, Footer, ConfirmModal } from '../../components';
+import { AccountBanner, Footer, ConfirmModal, PatientDailiesManager } from '../../components';
 import { DoctorPatientsPanel } from '../../panels';
 
 import * as Actions from '../../redux/actions';
@@ -35,6 +35,9 @@ import styles from './DoctorPage.scss';
         getPatients: (session) => (
             dispatcher(Actions.doctor.getPatientsRequest(session))
         ),
+        deletePatients: (session, usernames) => (
+            dispatcher(Actions.doctor.deletePatientsRequest(session, usernames))
+        ),
         push: (location) => (
             dispatcher(push(location))
         )
@@ -62,6 +65,8 @@ class DoctorPage extends Component {
 
         this.showNewPatientModal = this.showNewPatientModal.bind(this);
         this.hideNewPatientModal = this.hideNewPatientModal.bind(this);
+        this.hideDeletePatientsModal = this.hideDeletePatientsModal.bind(this);
+        this.showDeletePatientsModal = this.showDeletePatientsModal.bind(this);
 
         this.deletePatients = this.deletePatients.bind(this);
     }
@@ -158,8 +163,35 @@ class DoctorPage extends Component {
         })
     }
 
-    deletePatients() {
+    hideDeletePatientsModal() {
+        this.setState({
+            showDeletePatientsConfirmation: false
+        });
+    }
 
+    showDeletePatientsModal() {
+        this.setState({
+            showDeletePatientsConfirmation: true
+        });
+    }
+
+    deletePatients() {
+        const patientUsernames = this.state.selectedPatientListItems.map((patient) => {
+            return patient.username;
+        })
+        this.props.deletePatients(this.props.account.session, patientUsernames).then(
+            (result) => {
+                this.hideDeletePatientsModal();
+                this.props.getPatients(this.props.account.session);
+            },
+            (error) => {
+                this.hideDeletePatientsModal();
+                this.props.getPatients(this.props.account.session);
+            }
+        );
+        this.setState({
+            selectedPatientListItems: []
+        });
     }
 
     render() {

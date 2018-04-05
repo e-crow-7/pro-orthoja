@@ -12,13 +12,15 @@ class PatientsList extends Component {
     static propTypes = {
         patients: PropTypes.array,
         emptyText: PropTypes.string,
-        onSelectItem: PropTypes.func
+        onSelectItem: PropTypes.func,
+        onPatientClick: PropTypes.func
     }
 
     static defaultProps = {
         patients: [],
         emptyText: 'Nothing here.',
-        onSelectItem: () => {}
+        onSelectItem: () => {},
+        onPatientClick: () => {}
     }
 
     constructor(props) {
@@ -38,6 +40,18 @@ class PatientsList extends Component {
         this.onSelectItemsFormatting = this.onSelectItemsFormatting.bind(this);
     }
 
+    componentWillUpdate(nextProps) {
+        Object.keys(this.state.selectedItems).forEach((key) => {
+            if (!nextProps.patients[key]) {
+                this.setState((prevState) => {
+                    const newState = {...prevState};
+                    delete newState.selectedItems[key];
+                    return newState;
+                });
+            }
+        });
+    }
+
     EmptyTextElement({ text, ...props }) {
         return (
             <div className={styles.info}>{text}</div>
@@ -54,13 +68,13 @@ class PatientsList extends Component {
     }
 
     clickedItem(index) {
-        console.log('selected:', index);
+        this.props.onPatientClick(this.props.patients[index]);
     }
 
     selectedItem(index) {
-        if(this.state.selectedItems[index]) {
+        if (this.state.selectedItems[index]) {
             this.setState((prevState) => {
-                const newState = {...prevState};
+                const newState = { ...prevState };
                 delete newState.selectedItems[index];
                 newState.selectedAll = false;
                 this.onSelectItemsFormatting(newState.selectedItems);
@@ -68,9 +82,9 @@ class PatientsList extends Component {
             });
         } else {
             this.setState((prevState) => {
-                const newState = {...prevState};
+                const newState = { ...prevState };
                 newState.selectedItems[index] = true;
-                if(Object.keys(newState.selectedItems).length == this.props.patients.length) {
+                if (Object.keys(newState.selectedItems).length == this.props.patients.length) {
                     newState.selectedAll = true;
                 }
                 this.onSelectItemsFormatting(newState.selectedItems);
@@ -81,9 +95,9 @@ class PatientsList extends Component {
 
     selectAll() {
         const count = this.props.patients.length;
-        if(this.state.selectedAll) {
+        if (this.state.selectedAll) {
             this.setState((prevState) => {
-                const newState = {...prevState};
+                const newState = { ...prevState };
                 newState.selectedItems = {};
                 newState.selectedAll = false;
                 this.onSelectItemsFormatting(newState.selectedItems);
@@ -91,8 +105,8 @@ class PatientsList extends Component {
             });
         } else {
             this.setState((prevState) => {
-                const newState = {...prevState};
-                for(var i = 0; i < count; i++) {
+                const newState = { ...prevState };
+                for (var i = 0; i < count; i++) {
                     newState.selectedItems[i] = true;
                 }
                 newState.selectedAll = true;
@@ -112,15 +126,15 @@ class PatientsList extends Component {
     PatientItemElement({ data, index, onClick, onSelect, selected, ...props }) {
         return (
             <tr className={selected ? styles.rowSelected : null}>
-                <td onClick={() => {onSelect(index);}}>
+                <td onClick={() => { onSelect(index); }}>
                     {selected ?
                         <FontAwesome name="check-circle" style={{ color: '#d7d7d7' }} /> :
                         <FontAwesome name="circle" style={{ color: '#d7d7d7' }} />
                     }
                 </td>
-                <td 
+                <td
                     className={styles.columnAlignLeft + ' ' + styles.columnClickable}
-                    onClick={() => {onClick(index);}}
+                    onClick={() => { onClick(index); }}
                 >
                     {data.username}
                 </td>
