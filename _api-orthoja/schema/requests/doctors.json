@@ -139,6 +139,52 @@
                 "session"
             ],
             "additionalProperties": false
+        },
+        "get_patient_dailies": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "session",
+                "username"
+            ],
+            "additionalProperties": false
+        },
+        "create_patient_daily": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "daily": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "type"
+                    ]
+                }
+            },
+            "required": [
+                "session",
+                "username",
+                "daily"
+            ],
+            "additionalProperties": false
         }
     }
 }

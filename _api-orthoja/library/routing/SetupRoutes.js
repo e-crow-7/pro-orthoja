@@ -18,6 +18,8 @@ const SetupRoutes = function(router) {
     router.add('Doctor_Create_Patient', Handlers.DoctorCreatePatientHandler);
     router.add('Doctor_Get_Patients', Handlers.DoctorGetPatientsHandler);
     router.add('Doctor_Delete_Patients', Handlers.DoctorDeletePatientsHandler);
+    router.add('Doctor_Get_Patient_Dailies', Handlers.DoctorGetPatientDailiesHandler);
+    router.add('Doctor_Create_Patient_Daily', Handlers.DoctorCreatePatientDailyHandler);
 
     // Patient request routes
     router.add('Patient_Create', Handlers.PatientCreateHandler);

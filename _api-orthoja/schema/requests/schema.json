@@ -71,6 +71,12 @@
         "REQUEST/Doctor_Delete_Patients": {
             "$ref": "doctors.json#/definitions/delete_patients"
         },
+        "REQUEST/Doctor_Get_Patient_Dailies": {
+            "$ref": "doctors.json#/definitions/get_patient_dailies"
+        },
+        "REQUEST/Doctor_Create_Patient_Daily": {
+            "$ref": "doctors.json#/definitions/create_patient_daily"
+        },
         "REQUEST/Patient_Login": {
             "$ref": "patients.json#/definitions/login"
         },
@@ -130,6 +136,16 @@
         {
             "required": [
                 "REQUEST/Doctor_Delete_Patients"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Get_Patient_Dailies"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Create_Patient_Daily"
             ]
         },
         {

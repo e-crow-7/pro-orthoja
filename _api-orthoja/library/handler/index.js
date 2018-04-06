@@ -15,6 +15,8 @@ module.exports = {
     DoctorCreatePatientHandler: require('./DoctorCreatePatientHandler').default,
     DoctorGetPatientsHandler: require('./DoctorGetPatientsHandler').default,
     DoctorDeletePatientsHandler: require('./DoctorDeletePatientsHandler').default,
+    DoctorGetPatientDailiesHandler: require('./DoctorGetPatientDailiesHandler').default,
+    DoctorCreatePatientDailyHandler: require('./DoctorCreatePatientDailyHandler').default,
 
     PatientCreateHandler: require('./PatientCreateHandler').default
 }

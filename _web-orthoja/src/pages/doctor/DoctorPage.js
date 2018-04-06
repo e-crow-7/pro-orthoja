@@ -282,7 +282,7 @@ class DoctorPage extends Component {
                     }}
                 >
                     <p>{t('modal.body-delete-patients')}</p>
-                    <p>{this.state.selectedPatientListItems.map((value, index) => {
+                    <div>{this.state.selectedPatientListItems.map((value, index) => {
                         return (
                             <div key={index}>
                                 <span>{value.username}</span>
@@ -292,7 +292,7 @@ class DoctorPage extends Component {
                                 }
                             </div>
                         )
-                    })}</p>
+                    })}</div>
                 </ConfirmModal>
             </div>
         );

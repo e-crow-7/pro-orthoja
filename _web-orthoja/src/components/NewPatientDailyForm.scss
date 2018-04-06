@@ -1,0 +1,9 @@
+@import '../styles/PrimaryTheme.scss';
+
+.container {
+    font-family: $body-font-family;
+
+    input {
+        font-family: $console-font-family;
+    }
+}
