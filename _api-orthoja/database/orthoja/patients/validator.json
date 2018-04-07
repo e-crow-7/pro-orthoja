@@ -1,7 +1,7 @@
 {
     "bsonType": "object",
     "properties": {
-        "_id" : {
+        "_id": {
             "bsonType": "objectId"
         },
         "username": {
@@ -78,6 +78,9 @@
             "items": {
                 "bsonType": "object",
                 "properties": {
+                    "_id": {
+                        "bsonType": "objectId"
+                    },
                     "name": {
                         "bsonType": "string",
                         "description": "Name for the daily. Allows translatable strings."
@@ -97,6 +100,9 @@
                         "items": {
                             "bsonType": "object",
                             "properties": {
+                                "_id": {
+                                    "bsonType": "objectId"
+                                },
                                 "name": {
                                     "bsonType": "string",
                                     "description": "Name for the input. Allows translatable strings."
@@ -149,8 +155,8 @@
                         ],
                         "additionalProperties": false
                     },
-                    "data" : {
-                        "bsonType" : "array",
+                    "data": {
+                        "bsonType": "array",
                         "description": "Array of input data."
                     }
                 },

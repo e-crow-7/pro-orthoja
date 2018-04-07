@@ -38,14 +38,40 @@ class DoctorCreatePatientDailyHandler extends Handler {
         });
     }
 
+    patientFilter(username) {
+        return({
+            username: username
+        })
+    }
+
+    patientUpdate(daily) {
+        return({
+            "$push": {
+                "dailies": {"_id": ObjectID(), ...daily}
+            }
+        })
+    }
+
     process(parcel) {
         return new Promise((resolve) => {
 
             const orthoja = DatabaseManager.get(OrthojaDatabase.name);
             const collection = orthoja.collection('patients');
 
-            resolve(this.failResponse('implementation'));
+            // Extract the patient's username and daily from the payload.
+            const { username, daily }  = parcel.message.payload;
 
+            collection.updateDocument(
+                this.patientFilter(username),
+                this.patientUpdate(daily)
+            ).then(
+                () => {
+                    resolve(this.successResponse('account.update'));
+                },
+                () => {
+                    resolve(this.failResponse('account.update'));
+                }
+            );
         });
     }
 
