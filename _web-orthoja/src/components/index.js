@@ -3,6 +3,7 @@ export const LoginForm = require('./LoginForm').default;
 export const Footer = require('./Footer').default;
 export const AccountBanner = require('./AccountBanner').default;
 export const PatientsList = require('./PatientsList').default;
+export const PatientDailyList = require('./PatiantDailiesList').default;
 export const NewPatientForm = require('./NewPatientForm').default;
 export const ConfirmModal = require('./ConfirmModal').default;
 export const PatientDailiesManager = require('./PatientDailiesManager').default;

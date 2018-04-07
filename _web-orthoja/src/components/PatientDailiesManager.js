@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
 
 import NewPatientDailyForm from './NewPatientDailyForm';
+import PatientDailiesList from './PatiantDailiesList';
 import ReactLoading from 'react-loading';
 import { Modal, Label, Well, Grid, Row, Col, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
@@ -233,7 +234,7 @@ class PatientDailiesManager extends Component {
 
         return (
             <Well style={{ marginTop: '10px' }}>
-                {dailies ? false : noDailiesElement}
+                {dailies ? <PatientDailiesList dailies={dailies} /> : noDailiesElement}
                 <this.loadingOverlayElement show={this.state.isLoadingDailies} />
             </Well>
         );
@@ -264,7 +265,7 @@ class PatientDailiesManager extends Component {
                     </Button>
                     <Button 
                         onClick={this.submitNewDaily}
-                        bsStyle={this.props.confirmType}
+                        bsStyle="primary"
                     >
                         Create
                     </Button>

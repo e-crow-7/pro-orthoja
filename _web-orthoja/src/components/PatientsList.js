@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import _ from 'lodash';
 import { Well, Table, Checkbox } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
