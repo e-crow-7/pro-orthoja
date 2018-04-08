@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Panel, Carousel, Button, Popover, Overlay, DropdownButton, MenuItem, Breadcrumb } from 'react-bootstrap';
 
-import { PatientsList, PatientDailiesManager } from '../components';
+import { PatientsList, PatientDailiesManager, PatientInputsManager } from '../components';
 import { NewPatientModal } from '../modals';
 import FontAwesome from 'react-fontawesome';
 
@@ -35,7 +35,8 @@ class DoctorPatientsPanel extends Component {
         // State
         this.state = {
             navigationStack: [],
-            currentSelectedPatientData: null
+            currentSelectedPatientData: null,
+            currentSelectedDailyData: null
         }
 
         // Method Bindings
@@ -44,6 +45,7 @@ class DoctorPatientsPanel extends Component {
         this.navigatePush = this.navigatePush.bind(this);
         this.navigateBackTo = this.navigateBackTo.bind(this);
         this.setCurrentPatient = this.setCurrentPatient.bind(this);
+        this.setCurrentDaily = this.setCurrentDaily.bind(this);
     }
 
     DashboardElement({ ...props }) {
@@ -98,6 +100,18 @@ class DoctorPatientsPanel extends Component {
         }
     }
 
+    setCurrentDaily(daily) {
+        if (!this.state.currentSelectedDailyData) {
+            this.setState({
+                currentSelectedDailyData: daily
+            })
+            this.navigatePush({
+                title: daily.name,
+                carouselIndex: 2
+            });
+        }
+    }
+
     navigatePush(data) {
         this.setState((prevState) => {
             const newState = { ...prevState };
@@ -115,8 +129,11 @@ class DoctorPatientsPanel extends Component {
         this.setState((prevState) => {
             const newState = { ...prevState };
             newState.navigationStack.splice(index, newState.navigationStack.length);
-            if (index === 0) {
+            if (index <= 0) {
                 newState.currentSelectedPatientData = null;
+            }
+            if (index <= 1) {
+                newState.currentSelectedDailyData = null;
             }
             return newState;
         });
@@ -194,8 +211,17 @@ class DoctorPatientsPanel extends Component {
                                 <this.PatientsManagerElement />
                             </Carousel.Item>
                             <Carousel.Item>
-                                <PatientDailiesManager patientData={this.state.currentSelectedPatientData} />
+                                <PatientDailiesManager
+                                    patientData={this.state.currentSelectedPatientData}
+                                    onDailySelect={this.setCurrentDaily}
+                                    />
                             </Carousel.Item>
+                            <Carousel.Item>
+                                <PatientInputsManager
+                                    patientData={this.state.currentSelectedPatientData}
+                                    dailyData={this.state.currentSelectedDailyData}
+                                />
+                            </Carousel.Item>  
                         </Carousel>
                     </Panel.Body>
                 </Panel>

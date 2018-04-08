@@ -6,6 +6,8 @@ export const GET_PATIENTS = 'Doctor_Get_Patients';
 export const DELETE_PATIENTS = 'Doctor_Delete_Patients';
 export const GET_PATIENT_DAILIES = 'Doctor_Get_Patient_Dailies';
 export const CREATE_PATIENT_DAILY = 'Doctor_Create_Patient_Daily';
+export const GET_PATIENT_DAILY_INPUTS = 'Doctor_Get_Patient_Daily_Inputs';
+export const CREATE_PATIENT_DAILY_INPUT = 'Doctor_Create_Patient_Daily_Input';
 
 /**
  * Redux action to request account information for the doctor account.
@@ -105,4 +107,36 @@ export function createPatientDailyRequest(session, patientUsername, daily) {
     }
 
     return requestActions.sendRequest(request, 'create_patient_daily');
+}
+
+export function getPatientDailyInputsRequest(session, patientUsername, dailyId) {
+    // Batch a single user request.
+    const request = {
+        type: GET_PATIENT_DAILY_INPUTS,
+        form: 'REQUEST',
+        payload: {
+            session: session,
+            username: patientUsername,
+            dailyId: dailyId
+        }
+    }
+
+    return requestActions.sendRequest(request, 'get_patient_daily_inputs');
+}
+
+export function createPatientDailyInputRequest(session, patientUsername, dailyId, input) {
+
+    // Batch a single user request.
+    const request = {
+        type: CREATE_PATIENT_DAILY_INPUT,
+        form: 'REQUEST',
+        payload: {
+            session: session,
+            username: patientUsername,
+            dailyId: dailyId,
+            input: input
+        }
+    }
+
+    return requestActions.sendRequest(request, 'create_patient_daily_input');
 }

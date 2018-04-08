@@ -7,4 +7,5 @@ export const PatientDailyList = require('./PatiantDailiesList').default;
 export const NewPatientForm = require('./NewPatientForm').default;
 export const ConfirmModal = require('./ConfirmModal').default;
 export const PatientDailiesManager = require('./PatientDailiesManager').default;
+export const PatientInputsManager = require('./PatientInputsManager').default;
 export const NewDailyPatientForm = require('./NewPatientDailyForm').default;

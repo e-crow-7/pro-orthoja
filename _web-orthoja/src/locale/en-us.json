@@ -81,5 +81,27 @@
     "tips": {
         "get-started": "Get Started",
         "create-patient": "Create a patient account"
+    },
+    "daily": {
+        "adjustment": {
+            "defualt": "Adjustment",
+            "tibia-fibia": "Tibia & Fibia Adjustment",
+            "femur": "Femur Adjustment",
+            "radius-ulna": "Radius & Ulna Adjustment",
+            "humerus": "Humerus Adjustment"
+        },
+        "pain": {
+            "default": "Overall Pain"
+        },
+        "medication": {
+            "default": "Medication"
+        },
+        "exercise": {
+            "default": "Exercise"
+        },
+        "sagittal": {
+            "left": "Left",
+            "right": "Right"
+        }
     }
 }

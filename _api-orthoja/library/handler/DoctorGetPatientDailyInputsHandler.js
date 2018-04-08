@@ -1,0 +1,74 @@
+import Handler from './Handler';
+import { DatabaseManager, OrthojaDatabase } from '../database';
+import { SessionManager } from '../session';
+import { Logger } from '../logger';
+import { ObjectID } from 'mongodb';
+
+const LOG = Logger.get();
+
+/**
+ * Class for handling getting a doctor's patient's inputs for a daily.
+ * @memberof module:Handler
+ */
+class DoctorGetPatientDailyInputsHandler extends Handler {
+
+    response(payload) {
+        return ({
+            type: 'Doctor_Get_Patient_Daily_Inputs',
+            form: 'RESPONSE',
+            payload: payload
+        })
+    }
+
+    failResponse(code) {
+        return this.response({
+            patients: null,
+            status: {
+                type: 'fail',
+                code: code
+            }
+        });
+    }
+
+    successResponse(dailies) {
+        return this.response({
+            dailies: dailies || [],
+            status: {
+                type: 'success'
+            }
+        });
+    }
+
+    process(parcel) {
+        return new Promise((resolve) => {
+
+            /*const orthoja = DatabaseManager.get(OrthojaDatabase.name);
+            const collection = orthoja.collection('patients');
+
+            const username = parcel.message.payload.username;*/
+
+            console.log(parcel.message);
+            resolve(this.failResponse('account.testing'));
+
+        });
+    }
+
+    /**
+     * Handles the given parcel data and returns a response message.
+     * @param {Object} parcel The object containing details of the recieved request package.
+     * @return {Promise<message>} Resolve: message object.
+     */
+    handle(parcel) {
+        return new Promise((resolve) => {
+
+            this.process(parcel).then(resolve);
+
+        });
+    }
+
+}
+
+// ================================================================================
+// Exports
+// ------------------------------------------------------------
+export default DoctorGetPatientDailyInputsHandler;

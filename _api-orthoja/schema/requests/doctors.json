@@ -185,6 +185,25 @@
                 "daily"
             ],
             "additionalProperties": false
+        },
+        "get_patient_daily_inputs": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "dailyId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "session",
+                "username",
+                "dailyId"
+            ],
+            "additionalProperties": false
         }
     }
 }

@@ -29,7 +29,8 @@ import * as Actions from '../redux/actions'
 class PatientDailiesManager extends Component {
 
     static propTypes = {
-        patientData: PropTypes.object.required
+        patientData: PropTypes.object.required,
+        onDailySelect: PropTypes.func
     }
 
     static defaultProps = {
@@ -43,7 +44,8 @@ class PatientDailiesManager extends Component {
             patientDailies: null,
             isLoadingDailies: false,
             displayCreateDailyModal: false,
-            newDialyFormData: null
+            newDialyFormData: null,
+            onDailySelect: () => {}
         }
 
         // Method bindings.
@@ -234,7 +236,15 @@ class PatientDailiesManager extends Component {
 
         return (
             <Well style={{ marginTop: '10px' }}>
-                {dailies ? <PatientDailiesList dailies={dailies} /> : noDailiesElement}
+                {dailies ? 
+                    <PatientDailiesList
+                        dailies={dailies}
+                        translator={this.props.translator}
+                        onDailyClick={(daily) => {
+                            this.props.onDailySelect(daily);
+                        }}
+                    /> :
+                    noDailiesElement}
                 <this.loadingOverlayElement show={this.state.isLoadingDailies} />
             </Well>
         );
