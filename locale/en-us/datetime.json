@@ -1,0 +1,102 @@
+{
+    "$key": "Date",
+    "$plural": "Dates",
+    "day": {
+        "$key": "Day",
+        "$plural": "Days",
+        "monday": {
+            "$key": "Monday"
+        },
+        "tuesday": {
+            "$key": "Tuesday"
+        },
+        "wednesday": {
+            "$key": "Wednesday"
+        },
+        "thursday": {
+            "$key": "Thursday"
+        },
+        "friday": {
+            "$key": "Monday"
+        },
+        "saturday": {
+            "$key": "Saturday"
+        },
+        "sunday": {
+            "$key": "Sunday"
+        }
+    },
+    "week": {
+        "$key": "Week",
+        "$plural": "Weeks"
+    },
+    "month": {
+        "$key": "Month",
+        "$plural": "Months",
+        "january": {
+            "$key": "January"
+        },
+        "february": {
+            "$key": "February"
+        },
+        "march": {
+            "$key": "March"
+        },
+        "april": {
+            "$key": "April"
+        },
+        "may": {
+            "$key": "May"
+        },
+        "june": {
+            "$key": "June"
+        },
+        "july": {
+            "$key": "July"
+        },
+        "august": {
+            "$key": "August"
+        },
+        "september": {
+            "$key": "September"
+        },
+        "october": {
+            "$key": "October"
+        },
+        "november": {
+            "$key": "November"
+        },
+        "december": {
+            "$key": "December"
+        }
+    },
+    "year": {
+        "$key": "Year",
+        "$plural": "Years"
+    },
+    "hour": {
+        "$key": "Hour",
+        "$plural": "Hours"
+    },
+    "minute": {
+        "$key": "Minute",
+        "$plural": "Minutes"
+    },
+    "second": {
+        "$key": "Second",
+        "$plural": "Seconds"
+    },
+    "millisecond": {
+        "$key": "Millisecond",
+        "$plural": "Milliseconds"
+    },
+    "today": {
+        "$key": "Today"
+    },
+    "yesterday": {
+        "$key": "Yesterday"
+    },
+    "tomorrow": {
+        "$key": "Tomorrow"
+    }
+}

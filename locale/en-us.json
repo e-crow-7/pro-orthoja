@@ -1,0 +1,653 @@
+{
+    "input": {
+        "$key": "Input",
+        "$plural": "Inputs",
+        "$description": "Informational input",
+        "$error": {
+            "common": {
+                "$key": "Input Error",
+                "$description": "Error with input"
+            },
+            "required": {
+                "$key": "Input Required",
+                "$description": "Input is required"
+            }
+        },
+        "form": {
+            "$key": "Form",
+            "$plural": "Forms",
+            "$description": "Form of submittable inputs",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Form",
+                    "$description": "Form is invalid"
+                }
+            }
+        },
+        "text": {
+            "$key": "Text Input",
+            "$description": "Textual input",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Text",
+                    "$description": "Must only contain valid characters"
+                },
+                "long": {
+                    "$key": "Long Text",
+                    "$description": "Contains too many characters"
+                },
+                "short": {
+                    "$key": "Short Text",
+                    "$description": "Does not contain enough characters"
+                }
+            }
+        },
+        "number": {
+            "$key": "Number Input",
+            "$description": "Numerical input",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Number",
+                    "$description": "Is invalid"
+                },
+                "large": {
+                    "$key": "Large Number",
+                    "$description": "Value is too large"
+                },
+                "small": {
+                    "$key": "Small Number",
+                    "$description": "Value is too small"
+                }
+            }
+        },
+        "latin-alphanumeric": {
+            "$key": "Latin Alphanumeric",
+            "$description": "Input for latin characters and arabic numberals",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Alphanumeric Input",
+                    "$description": "Input can only contain latin characters and arabic numberals"
+                }
+            }
+        },
+        "latin-alphabetic": {
+            "$key": "Latin Alphabetic",
+            "$description": "Input for only latin alphabetic characters",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Alphabetic Input",
+                    "$description": "Input can only contain characters from the latin alphabet"
+                }
+            }
+        },
+        "arabic-numberic": {
+            "$key": "Arabic Numberic",
+            "$description": "Input for arabic numberals",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Arabic Numberic Input",
+                    "$description": "Input can only contain arabic numberals"
+                }
+            }
+        },
+        "select": {
+            "$key": "Select",
+            "$plural": "Selections",
+            "$description": "Select from a list of options",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Selection",
+                    "$description": "Selected value is not a valid option"
+                },
+                "few": {
+                    "$key": "Few Selections",
+                    "$description": "More options must be selected"
+                },
+                "many": {
+                    "$key": "Many Selection",
+                    "$description": "Less options must be selected"
+                }
+            },
+            "radio": {
+                "$key": "Radio",
+                "$description": "Radio list of options"
+            },
+            "checkbox": {
+                "$key": "Checkbox",
+                "$description": "Checkbox list of options"
+            }
+        },
+        "date": {
+            "$key": "Date",
+            "$plural": "Dates",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Date",
+                    "$description": "The inputted date is not valid"
+                },
+                "historic": {
+                    "$key": "Historic Date",
+                    "$description": "Date is too historic"
+                },
+                "subsequent": {
+                    "$key": "Subsequent Date",
+                    "$description": "Date is too subsequent"
+                },
+                "past": {
+                    "$key": "Past Date",
+                    "$description": "Date cannot be in the past"
+                },
+                "future": {
+                    "$key": "Future Date",
+                    "$description": "Date cannot be in the future"
+                },
+                "today": {
+                    "$key": "Current Date",
+                    "$description": "Date cannot be today"
+                }
+            }
+        },
+        "email": {
+            "$key": "Email",
+            "$plural": "Emails",
+            "$description": "Electronic mailing address",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Email",
+                    "$description": "Not a valid email address"
+                }
+            }
+        },
+        "phone": {
+            "$key": "Phone",
+            "$plural": "Phones",
+            "$description": "Phone number",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid Phone Number",
+                    "$description": "Not a valid phone number"
+                },
+                "area": {
+                    "$key": "Invalid Area Code",
+                    "$description": "Not a valid area code"
+                },
+                "country": {
+                    "$key": "Invalid Country Code",
+                    "$description": "Not a valid country code"
+                }
+            }
+        },
+        "file": {
+            "$key": "File",
+            "$plural": "Files",
+            "$error": {
+                "invalid": {
+                    "$key": "Invalid File",
+                    "$description": "File is not valid"
+                }
+            },
+            "image": {
+                "$key": "Image",
+                "$plural": "Images"
+            }
+        }
+    },
+    "database": {
+        "$key": "Database",
+        "$plural": "Databases",
+        "$description": "Persistent data storage",
+        "$error": {
+            "find": {
+                "$key": "Find Failure",
+                "$description": "Could not find entry"
+            },
+            "delete": {
+                "$key": "Deletion Failure",
+                "$description": "Could not delete entry"
+            },
+            "create": {
+                "$key": "Create Failure",
+                "$description": "Could not create new entry"
+            },
+            "update": {
+                "$key": "Update Failure",
+                "$description": "Could not update entry"
+            }
+        }
+    },
+    "session": {
+        "$key": "Session",
+        "$plural": "Sessions",
+        "$description": "Service session",
+        "$error": {
+            "invalid": {
+                "$key": "Invalid Session",
+                "$description": "Session is not valid"
+            }
+        }
+    },
+    "action": {
+        "$key": "Action",
+        "$plural": "Actions",
+        "login": {
+            "$key": "Login",
+            "$description": "Request to be logged in",
+            "$pending": "Logging in",
+            "$fulfilled": "Logged in",
+            "$rejected": "Failed to login"
+        },
+        "logout": {
+            "$key": "Logout",
+            "$description": "Request to be logged out",
+            "$pending": "Logging out",
+            "$fulfilled": "Logged out",
+            "$rejected": "Failed to logout"
+        },
+        "establish": {
+            "$key": "Establish",
+            "$description": "Make establishment",
+            "$pending": "Establishing",
+            "$fulfilled": "Established",
+            "$rejected": "Could not be established"
+        },
+        "terminate": {
+            "$key": "Terminate",
+            "$description": "Request termination",
+            "$pending": "Terminating",
+            "$fulfilled": "Terminated",
+            "$rejected": "Failed to terminate"
+        },
+        "create": {
+            "$key": "Create",
+            "$description": "Perform creation",
+            "$pending": "Creating",
+            "$fulfilled": "Created",
+            "$rejected": "Failed to create"
+        },
+        "delete": {
+            "$key": "Delete",
+            "$description": "Perform deletion",
+            "$pending": "Deleting",
+            "$fulfilled": "Deleted",
+            "$rejected": "Failed to delete"
+        },
+        "confirm": {
+            "$key": "Confirm",
+            "$description": "State confirmation",
+            "$pending": "Confirming",
+            "$fulfilled": "Confirmed",
+            "$rejected": "Failed to state confirmation"
+        },
+        "reject": {
+            "$key": "Confirm",
+            "$description": "State rejection",
+            "$pending": "Rejecting",
+            "$fulfilled": "Rejected",
+            "$rejected": "Failed to reject"
+        },
+        "cancel": {
+            "$key": "Cancel",
+            "$description": "Perform cancelation",
+            "$pending": "Canceling",
+            "$fulfilled": "Canceled",
+            "$rejected": "Could not cancel"
+        },
+        "load": {
+            "$key": "Load",
+            "$description": "Begin load",
+            "$pending": "Loading",
+            "$fulfilled": "Loaded",
+            "$rejected": "Failed to load"
+        },
+        "download": {
+            "$key": "Download",
+            "$description": "Start download",
+            "$pending": "Downloading",
+            "$fulfilled": "Downloaded",
+            "$rejected": "Failed to download"
+        },
+        "search": {
+            "$key": "Search",
+            "$description": "Start search",
+            "$pending": "Searching",
+            "$fulfilled": "Searched",
+            "$rejected": "Search failure"
+        },
+        "filter": {
+            "$key": "Filter",
+            "$description": "Apply filter",
+            "$pending": "Filtering",
+            "$fulfilled": "Filtered",
+            "$rejected": "Failed to filter"
+        },
+        "send": {
+            "$key": "Send",
+            "$description": "Start sending",
+            "$pending": "Sending",
+            "$fulfilled": "Sent",
+            "$rejected": "Failed to send"
+        }
+    },
+    "account": {
+        "$key": "Account",
+        "$plural": "Accounts",
+        "$description": "Account information",
+        "username": {
+            "$key": "Username",
+            "$description": "Username for account credentials"
+        },
+        "password": {
+            "$key": "Password",
+            "$description": "Password for account credentials"
+        },
+        "pin": {
+            "$key": "Pin",
+            "$description": "Pin number for account credentials"
+        },
+        "displayname": {
+            "$key": "Display name",
+            "$description": "Publicly shown name"
+        },
+        "securityquestion": {
+            "$key": "Security question",
+            "$description": "Security question for account recovery"
+        },
+        "remember": {
+            "$key": "Remember",
+            "$description": "Remember account"
+        }
+    },
+    "date": {
+        "$key": "Date",
+        "$plural": "Dates",
+        "day": {
+            "$key": "Day",
+            "$plural": "Days",
+            "monday": {
+                "$key": "Monday"
+            },
+            "tuesday": {
+                "$key": "Tuesday"
+            },
+            "wednesday": {
+                "$key": "Wednesday"
+            },
+            "thursday": {
+                "$key": "Thursday"
+            },
+            "friday": {
+                "$key": "Monday"
+            },
+            "saturday": {
+                "$key": "Saturday"
+            },
+            "sunday": {
+                "$key": "Sunday"
+            }
+        },
+        "week": {
+            "$key": "Week",
+            "$plural": "Weeks"
+        },
+        "Month": {
+            "$key": "Month",
+            "$plural": "Months",
+            "january": {
+                "$key": "January"
+            },
+            "february": {
+                "$key": "February"
+            },
+            "march": {
+                "$key": "March"
+            },
+            "april": {
+                "$key": "April"
+            },
+            "may": {
+                "$key": "May"
+            },
+            "june": {
+                "$key": "June"
+            },
+            "july": {
+                "$key": "July"
+            },
+            "august": {
+                "$key": "August"
+            },
+            "september": {
+                "$key": "September"
+            },
+            "october": {
+                "$key": "October"
+            },
+            "november": {
+                "$key": "November"
+            },
+            "december": {
+                "$key": "December"
+            }
+        },
+        "year": {
+            "$key": "Year",
+            "$plural": "Years"
+        },
+        "hour": {
+            "$key": "Hour",
+            "$plural": "Hours"
+        },
+        "minute": {
+            "$key": "Minute",
+            "$plural": "Minutes"
+        },
+        "second": {
+            "$key": "Second",
+            "$plural": "Seconds"
+        },
+        "millisecond": {
+            "$key": "Millisecond",
+            "$plural": "Milliseconds"
+        }
+    },
+    "person": {
+        "$key": "Person",
+        "$plural": "People",
+        "identity": {
+            "$key": "Identity",
+            "$plural": "Identities",
+            "$description": "Personally identifiable information",
+            "fullname": {
+                "$key": "Fullname"
+            },
+            "givenname": {
+                "$key": "Firstname"
+            },
+            "familyname": {
+                "$key": "Lastname"
+            },
+            "additionalname": {
+                "$key": "Middlename"
+            },
+            "alias": {
+                "$key": "Alias"
+            },
+            "gender": {
+                "$key": "Gender",
+                "$description": "Male or female gender",
+                "male": {
+                    "$key": "Male",
+                    "$description": "Has a penis"
+                },
+                "female": {
+                    "$key": "Female",
+                    "$description": "Has a vagina"
+                }
+            },
+            "birthdate": {
+                "$key": "Date of Birth"
+            },
+            "deathdate": {
+                "$key": "Date of Death"
+            },
+            "birthplace": {
+                "$key": "Place of Birth"
+            },
+            "nationality": {
+                "$key": "Nationality"
+            },
+            "height": {
+                "$key": "Height"
+            },
+            "weight": {
+                "$key": "Weight"
+            },
+            "race": {
+                "$key": "Race",
+                "american-indian": {
+                    "$key": "Native American",
+                    "$description": "Originating from North and South America (including Central America) with tribal affiliation"
+                },
+                "asian": {
+                    "$key": "Asian",
+                    "$description": "Originating from the Far East, Southeast Asia, or the Indian subcontinent"
+                },
+                "black": {
+                    "$key": "Black",
+                    "$description": "Originating from black racial groups of Africa"
+                },
+                "hispanic": {
+                    "$key": "Hispanic",
+                    "$description": "Orgins from Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture"
+                },
+                "pacific-islander": {
+                    "$key": "Pacific Islander",
+                    "$description": "Originating from Hawaii, Guam, Samoa, or other Pacific Islands"
+                },
+                "white": {
+                    "$key": "White",
+                    "$description": "Original peoples of Europe, the Middle East, or North Africa"
+                }
+            }
+        },
+        "relation": {
+            "$key": "Relation",
+            "$plural": "Relations",
+            "greatgrandparent": {
+                "$key": "Great-grandparent",
+                "$plural": "Great-grandparents"
+            },
+            "greatgrandfather": {
+                "$key": "Great-grandfather",
+                "$plural": "Great-grandfathers"
+            },
+            "greatgrandmother": {
+                "$key": "Great-grandmother",
+                "$plural": "Great-grandmothers"
+            },
+            "grandparent": {
+                "$key": "Grandparent",
+                "$plural": "Grandparents"
+            },
+            "grandfather": {
+                "$key": "Grandfather",
+                "$plural": "Great-grandfathers"
+            },
+            "grandmother": {
+                "$key": "Grandmother",
+                "$plural": "Great-grandmothers"
+            },
+            "uncle": {
+                "$key": "Uncle",
+                "$plural": "Uncles"
+            },
+            "aunt": {
+                "$key": "Aunt",
+                "$plural": "Aunts"
+            },
+            "cousin": {
+                "$key": "Cousin",
+                "$plural": "Cousins"
+            },
+            "parent": {
+                "$key": "Parent",
+                "$plural": "Parents"
+            },
+            "father": {
+                "$key": "Father",
+                "$plural": "Fathers"
+            },
+            "mother": {
+                "$key": "Mother",
+                "$plural": "Mothers"
+            },
+            "spouse": {
+                "$key": "Spouse",
+                "$plural": "Spouses"
+            },
+            "husband": {
+                "$key": "Husband",
+                "$plural": "Husbands"
+            },
+            "wife": {
+                "$key": "Wife",
+                "$plural": "Wives"
+            },
+            "significant-other": {
+                "$key": "Significant Other",
+                "$plural": "Significant Others"
+            },
+            "boyfriend": {
+                "$key": "Boyfriend",
+                "$plural": "Boyfriends"
+            },
+            "girlfriend": {
+                "$key": "Girlfriend",
+                "$plural": "Girlfriends"
+            },
+            "sibling": {
+                "$key": "Sibling",
+                "$plural": "Siblings"
+            },
+            "brother": {
+                "$key": "Brother",
+                "$plural": "Brothers"
+            },
+            "sister": {
+                "$key": "Sister",
+                "$plural": "Sisters"
+            },
+            "child": {
+                "$key": "Child",
+                "$plural": "Children"
+            },
+            "son": {
+                "$key": "Son",
+                "$plural": "Sons"
+            },
+            "daughter": {
+                "$key": "Daughter",
+                "$plural": "Daughters"
+            }
+        },
+        "contact": {
+            "$key": "Contact",
+            "$plural": "Contacts",
+            "email": {
+                "$key": "Email",
+                "$plural": "Emails",
+                "$description": "Personal email"
+            },
+            "phone": {
+                "$key": "Phone",
+                "$plural": "Phones",
+                "$description": "Phone number"
+            },
+            "address": {
+                "$key": "Address",
+                "$plural": "Addresses",
+                "$description": "Mailing address"
+            }
+        }
+    }
+}

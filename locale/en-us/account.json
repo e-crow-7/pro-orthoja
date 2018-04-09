@@ -1,0 +1,29 @@
+{
+    "$key": "Account",
+    "$plural": "Accounts",
+    "$description": "Account information",
+    "username": {
+        "$key": "Username",
+        "$description": "Username for account credentials"
+    },
+    "password": {
+        "$key": "Password",
+        "$description": "Password for account credentials"
+    },
+    "pin": {
+        "$key": "Pin",
+        "$description": "Pin number for account credentials"
+    },
+    "displayname": {
+        "$key": "Display name",
+        "$description": "Publicly shown name"
+    },
+    "securityquestion": {
+        "$key": "Security question",
+        "$description": "Security question for account recovery"
+    },
+    "remember": {
+        "$key": "Remember",
+        "$description": "Remember account"
+    }
+}

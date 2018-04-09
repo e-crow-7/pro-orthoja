@@ -1,0 +1,15 @@
+{
+    "$key": "Application",
+    "$plural": "Applications",
+    "$error": {
+        "disabled_javascript": {
+            "$key": "Javascript Disabled",
+            "$description": "Javascript is required to run this application"
+        }
+    },
+    "setting": {
+        "$key": "Setting",
+        "$plural": "Settings",
+        "$description": "The settings for the application"
+    }
+}

@@ -1,0 +1,70 @@
+{
+    "$key": "Service",
+    "$plural": "Services",
+    "$error": {
+        "connection": {
+            "$key": "Service Connection",
+            "$description": "Could not establish a connection"
+        },
+        "timeout": {
+            "$key": "Service Timout",
+            "$description": "Failed to receive a reply"
+        }
+    },
+    "api": {
+        "$key": "API",
+        "$description": "Application Programming Interface",
+        "$error": {
+            "message": {
+                "$key": "Invalid Message",
+                "$description": "Received message is invalid"
+            },
+            "handler": {
+                "$key": "No Handler",
+                "$description": "Service has no handler for the message"
+            },
+            "session": {
+                "$key": "Invalid Session",
+                "$description": "Session is invalid"
+            },
+            "key": {
+                "$key": "Invalid Key",
+                "$description": "Key is not valid"
+            }
+        }
+    },
+    "database": {
+        "$key": "Database",
+        "$plural": "Databases",
+        "$description": "Persistent data storage",
+        "$error": {
+            "find": {
+                "$key": "Find Failure",
+                "$description": "Could not find entry"
+            },
+            "delete": {
+                "$key": "Deletion Failure",
+                "$description": "Could not delete entry"
+            },
+            "create": {
+                "$key": "Create Failure",
+                "$description": "Could not create new entry"
+            },
+            "update": {
+                "$key": "Update Failure",
+                "$description": "Could not update entry"
+            }
+        }
+    },
+    "session": {
+        "$key": "Session",
+        "$plural": "Sessions",
+        "$description": "Service session",
+        "$error": {
+            "invalid": {
+                "$key": "Invalid Session",
+                "$description": "Session is not valid"
+            }
+        }
+    }
+}

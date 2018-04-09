@@ -1,0 +1,116 @@
+{
+    "$key": "Action",
+    "$plural": "Actions",
+    "login": {
+        "$key": "Login",
+        "$description": "Request to be logged in",
+        "$pending": "Logging in",
+        "$fulfilled": "Logged in",
+        "$rejected": "Failed to login"
+    },
+    "logout": {
+        "$key": "Logout",
+        "$description": "Request to be logged out",
+        "$pending": "Logging out",
+        "$fulfilled": "Logged out",
+        "$rejected": "Failed to logout"
+    },
+    "establish": {
+        "$key": "Establish",
+        "$description": "Make establishment",
+        "$pending": "Establishing",
+        "$fulfilled": "Established",
+        "$rejected": "Could not be established"
+    },
+    "terminate": {
+        "$key": "Terminate",
+        "$description": "Request termination",
+        "$pending": "Terminating",
+        "$fulfilled": "Terminated",
+        "$rejected": "Failed to terminate"
+    },
+    "create": {
+        "$key": "Create",
+        "$description": "Perform creation",
+        "$pending": "Creating",
+        "$fulfilled": "Created",
+        "$rejected": "Failed to create"
+    },
+    "delete": {
+        "$key": "Delete",
+        "$description": "Perform deletion",
+        "$pending": "Deleting",
+        "$fulfilled": "Deleted",
+        "$rejected": "Failed to delete"
+    },
+    "confirm": {
+        "$key": "Confirm",
+        "$description": "State confirmation",
+        "$pending": "Confirming",
+        "$fulfilled": "Confirmed",
+        "$rejected": "Failed to state confirmation"
+    },
+    "reject": {
+        "$key": "Confirm",
+        "$description": "State rejection",
+        "$pending": "Rejecting",
+        "$fulfilled": "Rejected",
+        "$rejected": "Failed to reject"
+    },
+    "cancel": {
+        "$key": "Cancel",
+        "$description": "Perform cancelation",
+        "$pending": "Canceling",
+        "$fulfilled": "Canceled",
+        "$rejected": "Could not cancel"
+    },
+    "load": {
+        "$key": "Load",
+        "$description": "Begin load",
+        "$pending": "Loading",
+        "$fulfilled": "Loaded",
+        "$rejected": "Failed to load"
+    },
+    "download": {
+        "$key": "Download",
+        "$description": "Start download",
+        "$pending": "Downloading",
+        "$fulfilled": "Downloaded",
+        "$rejected": "Failed to download"
+    },
+    "search": {
+        "$key": "Search",
+        "$description": "Start search",
+        "$pending": "Searching",
+        "$fulfilled": "Searched",
+        "$rejected": "Search failure"
+    },
+    "filter": {
+        "$key": "Filter",
+        "$description": "Apply filter",
+        "$pending": "Filtering",
+        "$fulfilled": "Filtered",
+        "$rejected": "Failed to filter"
+    },
+    "send": {
+        "$key": "Send",
+        "$description": "Start sending",
+        "$pending": "Sending",
+        "$fulfilled": "Sent",
+        "$rejected": "Failed to send"
+    },
+    "edit": {
+        "$key": "Edit",
+        "$description": "Begin editing",
+        "$pending": "Editing",
+        "$fulfilled": "Edited",
+        "$rejected": "Failed to edit"
+    },
+    "save": {
+        "$key": "Save",
+        "$description": "Perform save",
+        "$pending": "Saving",
+        "$fulfilled": "Saved",
+        "$rejected": "Failed to save"
+    }
+}

@@ -1,0 +1,200 @@
+{
+    "$key": "Person",
+    "$plural": "People",
+    "identity": {
+        "$key": "Identity",
+        "$plural": "Identities",
+        "$description": "Personally identifiable information",
+        "fullname": {
+            "$key": "Fullname"
+        },
+        "givenname": {
+            "$key": "Firstname"
+        },
+        "familyname": {
+            "$key": "Lastname"
+        },
+        "additionalname": {
+            "$key": "Middlename"
+        },
+        "alias": {
+            "$key": "Alias"
+        },
+        "gender": {
+            "$key": "Gender",
+            "$description": "Male or female gender",
+            "male": {
+                "$key": "Male",
+                "$description": "Has a penis"
+            },
+            "female": {
+                "$key": "Female",
+                "$description": "Has a vagina"
+            }
+        },
+        "birthdate": {
+            "$key": "Date of Birth"
+        },
+        "deathdate": {
+            "$key": "Date of Death"
+        },
+        "birthplace": {
+            "$key": "Place of Birth"
+        },
+        "nationality": {
+            "$key": "Nationality"
+        },
+        "height": {
+            "$key": "Height"
+        },
+        "weight": {
+            "$key": "Weight"
+        },
+        "race": {
+            "$key": "Race",
+            "american-indian": {
+                "$key": "Native American",
+                "$description": "Originating from North and South America (including Central America) with tribal affiliation"
+            },
+            "asian": {
+                "$key": "Asian",
+                "$description": "Originating from the Far East, Southeast Asia, or the Indian subcontinent"
+            },
+            "black": {
+                "$key": "Black",
+                "$description": "Originating from black racial groups of Africa"
+            },
+            "hispanic": {
+                "$key": "Hispanic",
+                "$description": "Orgins from Cuban, Mexican, Puerto Rican, South or Central American, or other Spanish culture"
+            },
+            "pacific-islander": {
+                "$key": "Pacific Islander",
+                "$description": "Originating from Hawaii, Guam, Samoa, or other Pacific Islands"
+            },
+            "white": {
+                "$key": "White",
+                "$description": "Original peoples of Europe, the Middle East, or North Africa"
+            }
+        }
+    },
+    "relation": {
+        "$key": "Relation",
+        "$plural": "Relations",
+        "greatgrandparent": {
+            "$key": "Great-grandparent",
+            "$plural": "Great-grandparents"
+        },
+        "greatgrandfather": {
+            "$key": "Great-grandfather",
+            "$plural": "Great-grandfathers"
+        },
+        "greatgrandmother": {
+            "$key": "Great-grandmother",
+            "$plural": "Great-grandmothers"
+        },
+        "grandparent": {
+            "$key": "Grandparent",
+            "$plural": "Grandparents"
+        },
+        "grandfather": {
+            "$key": "Grandfather",
+            "$plural": "Great-grandfathers"
+        },
+        "grandmother": {
+            "$key": "Grandmother",
+            "$plural": "Great-grandmothers"
+        },
+        "uncle": {
+            "$key": "Uncle",
+            "$plural": "Uncles"
+        },
+        "aunt": {
+            "$key": "Aunt",
+            "$plural": "Aunts"
+        },
+        "cousin": {
+            "$key": "Cousin",
+            "$plural": "Cousins"
+        },
+        "parent": {
+            "$key": "Parent",
+            "$plural": "Parents"
+        },
+        "father": {
+            "$key": "Father",
+            "$plural": "Fathers"
+        },
+        "mother": {
+            "$key": "Mother",
+            "$plural": "Mothers"
+        },
+        "spouse": {
+            "$key": "Spouse",
+            "$plural": "Spouses"
+        },
+        "husband": {
+            "$key": "Husband",
+            "$plural": "Husbands"
+        },
+        "wife": {
+            "$key": "Wife",
+            "$plural": "Wives"
+        },
+        "significant_other": {
+            "$key": "Significant Other",
+            "$plural": "Significant Others"
+        },
+        "boyfriend": {
+            "$key": "Boyfriend",
+            "$plural": "Boyfriends"
+        },
+        "girlfriend": {
+            "$key": "Girlfriend",
+            "$plural": "Girlfriends"
+        },
+        "sibling": {
+            "$key": "Sibling",
+            "$plural": "Siblings"
+        },
+        "brother": {
+            "$key": "Brother",
+            "$plural": "Brothers"
+        },
+        "sister": {
+            "$key": "Sister",
+            "$plural": "Sisters"
+        },
+        "child": {
+            "$key": "Child",
+            "$plural": "Children"
+        },
+        "son": {
+            "$key": "Son",
+            "$plural": "Sons"
+        },
+        "daughter": {
+            "$key": "Daughter",
+            "$plural": "Daughters"
+        }
+    },
+    "contact": {
+        "$key": "Contact",
+        "$plural": "Contacts",
+        "email": {
+            "$key": "Email",
+            "$plural": "Emails",
+            "$description": "Personal email"
+        },
+        "phone": {
+            "$key": "Phone",
+            "$plural": "Phones",
+            "$description": "Phone number"
+        },
+        "address": {
+            "$key": "Address",
+            "$plural": "Addresses",
+            "$description": "Mailing address"
+        }
+    }
+}
