@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getTranslate } from 'react-localize-redux';
 
 import NewPatientDailyForm from './NewPatientDailyForm';
-import PatientDailiesList from './PatiantDailiesList';
+import PatientDailiesList from './PatientDailiesList';
 import ReactLoading from 'react-loading';
 import { Modal, Label, Well, Grid, Row, Col, Button } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';

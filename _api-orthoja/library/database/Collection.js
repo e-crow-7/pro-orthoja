@@ -49,9 +49,12 @@ class Collection {
         });
     }
 
-    findDocument(query) {
+    findDocument(query, projection) {
         return new Promise((resolve, reject) => {
-            this.mongoCollection.findOne(query).then(
+            const options = {
+                projection: projection
+            }
+            this.mongoCollection.findOne(query, options).then(
                 (result) => {
                     resolve(result);
                 },

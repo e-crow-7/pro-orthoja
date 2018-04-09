@@ -30,9 +30,9 @@ class DoctorGetPatientDailyInputsHandler extends Handler {
         });
     }
 
-    successResponse(dailies) {
+    successResponse(inputs) {
         return this.response({
-            dailies: dailies || [],
+            inputs: inputs || [],
             status: {
                 type: 'success'
             }
@@ -42,13 +42,35 @@ class DoctorGetPatientDailyInputsHandler extends Handler {
     process(parcel) {
         return new Promise((resolve) => {
 
-            /*const orthoja = DatabaseManager.get(OrthojaDatabase.name);
+            const orthoja = DatabaseManager.get(OrthojaDatabase.name);
             const collection = orthoja.collection('patients');
 
-            const username = parcel.message.payload.username;*/
+            // Exptract information from the payload
+            const { username, dailyId } = parcel.message.payload;
 
-            console.log(parcel.message);
-            resolve(this.failResponse('account.testing'));
+            collection.findDocument({
+                "username": username,
+                "dailies": {
+                    "$elemMatch" : {
+                        "_id": ObjectID(dailyId)
+                    }
+                }
+            },
+            {
+                "dailies.$": true
+            }
+            ).then(
+                (document) => {
+                    if(!document) {
+                        resolve(this.failResponse('patient.daily.find'));
+                        return;
+                    }
+                    resolve(this.successResponse(document.dailies[0].inputs));
+                },
+                (error) => {
+                    resolve(this.failResponse('patient.daily.find'));
+                }
+            );
 
         });
     }

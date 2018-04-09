@@ -46,6 +46,15 @@
                 "white": "White"
             }
         },
+        "new-input": {
+            "name": "Name",
+            "position": "Position",
+            "unit": "Unit",
+            "increment": "Increment",
+            "min": "Minimum",
+            "max": "Maximum",
+            "default": "Default"
+        },
         "optional": "Optional"
     },
     "doctor": {
