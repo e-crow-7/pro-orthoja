@@ -57,12 +57,6 @@ export default (function () {
         _application.enable('trust proxy');
         // Apply middleware to the application
         _application.use(helmet());
-        _application.use(bodyParser.json());
-
-        // Setup listeners.
-        _application.post('/', _apiPostListener);
-        _application.get('/', _apiGetListener);
-
         // Add headers
         _application.use(function (req, res, next) {
 
@@ -82,6 +76,11 @@ export default (function () {
             // Pass to next layer of middleware
             next();
         });
+        _application.use(bodyParser.json());
+
+        // Setup listeners.
+        _application.post('/', _apiPostListener);
+        _application.get('/', _apiGetListener);
 
         // First establish connection to the database.
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
@@ -228,7 +227,7 @@ export default (function () {
 
         // Bundle up the parcel.
         const parcel = {
-            ip: ip,
+            ip: headers['x-real-ip'],
             agent: headers['user-agent'],
             message: body
         }
