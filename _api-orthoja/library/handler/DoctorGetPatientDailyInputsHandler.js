@@ -48,7 +48,8 @@ class DoctorGetPatientDailyInputsHandler extends Handler {
             // Exptract information from the payload
             const { username, dailyId } = parcel.message.payload;
 
-            collection.findDocument({
+            collection.findDocument(
+            {
                 "username": username,
                 "dailies": {
                     "$elemMatch" : {

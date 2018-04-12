@@ -80,6 +80,9 @@
         "REQUEST/Doctor_Get_Patient_Daily_Inputs": {
             "$ref": "doctors.json#/definitions/get_patient_daily_inputs"
         },
+        "REQUEST/Doctor_Create_Patient_Daily_Input": {
+            "$ref": "doctors.json#/definitions/create_patient_daily_input"
+        },
         "REQUEST/Patient_Login": {
             "$ref": "patients.json#/definitions/login"
         },
@@ -154,6 +157,11 @@
         {
             "required": [
                 "REQUEST/Doctor_Get_Patient_Daily_Inputs"
+            ]
+        },
+        {
+            "required": [
+                "REQUEST/Doctor_Create_Patient_Daily_Input"
             ]
         },
         {

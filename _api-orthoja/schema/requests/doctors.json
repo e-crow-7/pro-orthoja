@@ -204,6 +204,55 @@
                 "dailyId"
             ],
             "additionalProperties": false
+        },
+        "create_patient_daily_input": {
+            "properties": {
+                "session": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "dailyId": {
+                    "type": "string"
+                },
+                "input": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "string"
+                        },
+                        "unit": {
+                            "type": "string"
+                        },
+                        "increment": {
+                            "type": "number"
+                        },
+                        "min": {
+                            "type": "number"
+                        },
+                        "max": {
+                            "type": "number"
+                        },
+                        "default": {
+                            "type": ["number", "string"]
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "type"
+                    ]
+                }
+            },
+            "required": [
+                "session",
+                "username",
+                "dailyId"
+            ],
+            "additionalProperties": false
         }
     }
 }

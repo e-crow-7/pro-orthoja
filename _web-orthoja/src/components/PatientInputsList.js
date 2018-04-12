@@ -113,7 +113,7 @@ class PatientInputsList extends Component {
 
     render() {
 
-        const dailyItems = this.props.inputs.map((input, index) => {
+        const inputItems = this.props.inputs.map((input, index) => {
             return (
                 <this.itemElement input={input} index={index} key={index} />
             );
@@ -132,7 +132,7 @@ class PatientInputsList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {dailyItems}
+                        {inputItems}
                     </tbody>
                 </Table>
             </div>

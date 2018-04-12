@@ -34,12 +34,6 @@ class NewInputForm extends Component {
         this.AdditionalFieldsElement = this.AdditionalFieldsElement.bind(this);
     }
 
-    /*componentDidUpdate(prevProps, prevState) {
-        if(prevState.type !== this.state.type) {
-            onStateChange
-        }
-    }*/
-
     setState(updater) {
         super.setState(updater, () => {
             this.props.onStateChange(this.state);

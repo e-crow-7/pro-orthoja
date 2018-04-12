@@ -22,7 +22,7 @@ import * as Actions from '../redux/actions'
             dispatcher(Actions.doctor.getPatientDailyInputsRequest(session, patientUsername, dailyId))
         ),
         createInput: (session, patientUsername, dailyId, input) => (
-            dispatcher(Actions.doctor.createPatientDailyInputRequest(session, dailyId, input))
+            dispatcher(Actions.doctor.createPatientDailyInputRequest(session, patientUsername, dailyId, input))
         ),
     })
 )
@@ -44,7 +44,8 @@ class PatientInputsManager extends Component {
         this.state = {
             inputs: null,
             isLoadingInputs: false,
-            displayCreateInputModal: false
+            displayCreateInputModal: false,
+            newInputFormData: null
         }
 
         // Method bindings
@@ -52,6 +53,7 @@ class PatientInputsManager extends Component {
         this.dashboardElement = this.dashboardElement.bind(this);
         this.newInputFormModalElement = this.newInputFormModalElement.bind(this);
         this.inputsElement = this.inputsElement.bind(this);
+        this.createInput = this.createInput.bind(this);
     }
 
     componentDidUpdate(prevProps) {
@@ -81,6 +83,44 @@ class PatientInputsManager extends Component {
                 this.setState({
                     isLoadingInputs: false
                 });
+            }
+        );
+    }
+
+    formatInputObject(input) {
+        const newinput = {};
+
+        newinput["type"] = input.type;
+        newinput["name"] = input.name;
+
+        if(input.position && input.position.length > 0) {
+            newinput["name"] = `${newinput["name"]} (${newinput["position"]})`
+        }
+
+        newinput["unit"] = input.unit || '';
+        newinput["increment"] = parseFloat(input.increment);
+        newinput["min"] = parseFloat(input.min);
+        newinput["max"] = parseFloat(input.max);
+        newinput["default"] = input.default;
+
+        return newinput;
+    }
+
+    createInput() {
+        this.props.createInput(
+            this.props.account.session,
+            this.props.patientData.username,
+            this.props.dailyData._id,
+            this.formatInputObject(this.state.newInputFormData)
+        ).then(
+            () => {
+                this.getInputs();
+                this.setState({
+                    displayCreateInputModal: false
+                });
+            },
+            () => {
+                this.getInputs();
             }
         );
     }
@@ -141,9 +181,9 @@ class PatientInputsManager extends Component {
                     <NewInputForm 
                         translator={this.props.translator}
                         onStateChange={(state) => {
-                            /*this.setState({
-                                newDialyFormData: state
-                            });*/
+                            this.setState({
+                                newInputFormData: state
+                            });
                         }} 
                     />
                 </Modal.Body>
@@ -157,7 +197,7 @@ class PatientInputsManager extends Component {
                         Cancel
                     </Button>
                     <Button 
-                        onClick={null}
+                        onClick={this.createInput}
                         bsStyle="primary"
                     >
                         Create

@@ -112,5 +112,30 @@
             "left": "Left",
             "right": "Right"
         }
+    },
+    "input": {
+        "strut": {
+            "default": "Strut"
+        },
+        "pain": {
+            "default": "Pain Scale"
+        },
+        "pills": {
+            "default": "Pill Intake"
+        },
+        "exercise": {
+            "default": "Exercise Time"
+        }
+    },
+    "unit": {
+        "length": {
+            "millimeters": "mm"
+        },
+        "time": {
+            "minutes": "mins"
+        },
+        "substance": {
+            "pills": "pills"
+        }
     }
 }
