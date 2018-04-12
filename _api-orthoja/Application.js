@@ -215,6 +215,10 @@ export default (function () {
 
         // Send a response based on the request body.
         _readApiMessages(parcel, (message) => {
+            response.set({
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+              })
             response.send(JSON.stringify(message));
         })
 
