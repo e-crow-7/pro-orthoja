@@ -125,20 +125,14 @@
                                 },
                                 "increment": {
                                     "bsonType": "double",
-                                    "minimum": -9223372036854775807,
-                                    "maximum": 9223372036854775806,
                                     "description": "How much to increment the value (numeric only)"
                                 },
                                 "min": {
                                     "bsonType": "double",
-                                    "minimum": -9223372036854775807,
-                                    "maximum": 9223372036854775806,
                                     "description": "Minimum value (numeric only)"
                                 },
                                 "max": {
                                     "bsonType": "double",
-                                    "minimum": -9223372036854775807,
-                                    "maximum": 9223372036854775806,
                                     "description": "Maximum value (numeric only)"
                                 },
                                 "default": {
@@ -146,8 +140,6 @@
                                         "double",
                                         "string"
                                     ],
-                                    "minimum": -9223372036854775807,
-                                    "maximum": 9223372036854775806,
                                     "description": "The default value for the input."
                                 }
                             },

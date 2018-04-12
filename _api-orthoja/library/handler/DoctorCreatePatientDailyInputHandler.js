@@ -60,7 +60,7 @@ class DoctorCreatePatientDailyInputHandler extends Handler {
                     "increment": Double(input["increment"]),
                     "min": Double(input["min"]),
                     "max": Double(input["max"]),
-                    "default": input["default"]
+                    "default": Double(input["default"])
                 }
             }
         })
