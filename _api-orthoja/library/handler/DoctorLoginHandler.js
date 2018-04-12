@@ -50,10 +50,12 @@ class DoctorLoginHandler extends Handler {
             this.findAccount(username).then(
                 (document) => {
                     if(!document) {
-                        this.response({
-                            type: 'fail',
-                            code: 'account.credentials',
-                        });
+                        resolve(
+                            this.response({
+                                type: 'fail',
+                                code: 'account.credentials',
+                            })
+                        );
                         return;
                     }
                     const isMatch = comparePasswordSync(password, document.password);
