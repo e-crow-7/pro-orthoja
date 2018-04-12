@@ -63,6 +63,26 @@ export default (function () {
         _application.post('/', _apiPostListener);
         _application.get('/', _apiGetListener);
 
+        // Add headers
+        _application.use(function (req, res, next) {
+
+            // Website you wish to allow to connect
+            res.setHeader('Access-Control-Allow-Origin', '*');
+
+            // Request methods you wish to allow
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+            // Request headers you wish to allow
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+            // Set to true if you need the website to include cookies in the requests sent
+            // to the API (e.g. in case you use sessions)
+            res.setHeader('Access-Control-Allow-Credentials', true);
+
+            // Pass to next layer of middleware
+            next();
+        });
+
         // First establish connection to the database.
         _initializeDatabaseServiceConnection(CONFIG.database.url, CONFIG.database.timeout).then(() => {
             LOG.info('Connected to Database Service: %s', CONFIG.database.url);
@@ -215,12 +235,6 @@ export default (function () {
 
         // Send a response based on the request body.
         _readApiMessages(parcel, (message) => {
-            response.set({
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-              })
             response.send(JSON.stringify(message));
         })
 
